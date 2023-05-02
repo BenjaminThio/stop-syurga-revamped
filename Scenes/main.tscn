@@ -1,0 +1,632 @@
+[gd_scene load_steps=40 format=3 uid="uid://5dyp3jj05jyf"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_7kmeb"]
+[ext_resource type="Texture2D" uid="uid://c30bytot8d5sc" path="res://Sprites/Uncategorized/battlefield.png" id="1_ksf4q"]
+[ext_resource type="Script" path="res://Scripts/battlefield.gd" id="2_4wb0e"]
+[ext_resource type="Texture2D" uid="uid://d25jolk10dh81" path="res://Sprites/Uncategorized/rope.png" id="3_w0vpv"]
+[ext_resource type="PackedScene" uid="uid://ce331k5k2onbo" path="res://Instances/player.tscn" id="3_xtc3i"]
+[ext_resource type="Script" path="res://Scripts/battlefield_collision.gd" id="4_d1xm4"]
+[ext_resource type="Script" path="res://Scripts/actions.gd" id="5_qnnb1"]
+[ext_resource type="PackedScene" uid="uid://dffbgyqo4y526" path="res://Instances/bone.tscn" id="6_2q53b"]
+[ext_resource type="Texture2D" uid="uid://cvq5vhmd35rqj" path="res://Sprites/Actions/fight.png" id="8_mbvjo"]
+[ext_resource type="Texture2D" uid="uid://cvjyjh5xsclis" path="res://Sprites/Actions/fight_hovered.png" id="9_a3ogc"]
+[ext_resource type="Script" path="res://Scripts/villian.gd" id="9_squfb"]
+[ext_resource type="Texture2D" uid="uid://d2n6xuybdhtfw" path="res://Sprites/Actions/act.png" id="10_3x2iy"]
+[ext_resource type="Texture2D" uid="uid://ixbrgxcxhv3i" path="res://Sprites/Actions/act_hovered.png" id="11_u113a"]
+[ext_resource type="Texture2D" uid="uid://rw406vpavma6" path="res://Sprites/Actions/item.png" id="12_rn3ju"]
+[ext_resource type="Texture2D" uid="uid://erphoawbup6k" path="res://Sprites/Actions/item_hovered.png" id="13_klsi0"]
+[ext_resource type="Texture2D" uid="uid://bpmtgpugeiipu" path="res://Sprites/Actions/mercy.png" id="14_5f5a0"]
+[ext_resource type="Texture2D" uid="uid://j0ich4b1s41s" path="res://Sprites/Actions/mercy_hovered.png" id="15_fi60e"]
+[ext_resource type="Script" path="res://Scripts/act.gd" id="15_rvtki"]
+[ext_resource type="FontFile" uid="uid://0ni3xtjq5btw" path="res://Fonts/Mars_Needs_Cunnilingus.ttf" id="18_304wy"]
+[ext_resource type="Texture2D" uid="uid://bru36cl6prpor" path="res://Sprites/Uncategorized/villian.png" id="18_xocnk"]
+[ext_resource type="FontFile" uid="uid://ca6ob2ibtlxc2" path="res://Fonts/ut-hp-font.ttf" id="19_fsdbe"]
+[ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villian_shield.png" id="19_ht1rv"]
+[ext_resource type="Script" path="res://Scripts/health_bar.gd" id="20_5ykt5"]
+[ext_resource type="Script" path="res://Scripts/camera_manager.gd" id="25_qqqxs"]
+[ext_resource type="Script" path="res://Scripts/mercy.gd" id="25_tpfve"]
+[ext_resource type="AudioStream" uid="uid://dkiccegwitodo" path="res://Musics/CORE.ogg" id="26_5wap5"]
+
+[sub_resource type="Animation" id="Animation_lhkxk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackGroup1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-552, 48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Diaphysis1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-144, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Diaphysis2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(144, -40)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Diaphysis3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-144, 60)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Diaphysis4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(144, 60)]
+}
+
+[sub_resource type="Animation" id="Animation_ec63c"]
+resource_name = "attack1"
+length = 23.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackGroup1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9.5, 19.5, 23),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-552, 48), Vector2(552, 48), Vector2(-552, 48), Vector2(-552, 48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Diaphysis1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7, 10, 14.6, 20, 22, 23),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-144, -40), Vector2(-32, -40), Vector2(-144, -40), Vector2(-24, -40), Vector2(144, -40), Vector2(-64, -40), Vector2(-144, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Diaphysis2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.5, 5, 9, 14.6, 16.5, 19, 20, 22, 23),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(144, -40), Vector2(144, -40), Vector2(72, -40), Vector2(144, -40), Vector2(64, -40), Vector2(-64, -40), Vector2(-144, -40), Vector2(-144, -40), Vector2(64, -40), Vector2(144, -40)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Diaphysis3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 21, 23),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-144, 60), Vector2(-144, 60), Vector2(144, 60)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Diaphysis4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 21, 23),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(144, 60), Vector2(144, 60), Vector2(-144, 60)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j53kr"]
+_data = {
+"RESET": SubResource("Animation_lhkxk"),
+"attack1": SubResource("Animation_ec63c")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqj0j"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0keq4"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bqx4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_mbvjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_a3ogc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7sskc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_3x2iy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_u113a")
+}],
+"loop": true,
+"name": &"act",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tb17t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_rn3ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_klsi0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lhffn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_5f5a0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_fi60e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yst2b"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekhi5"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mc31a"]
+radius = 112.0
+
+[sub_resource type="Environment" id="Environment_cvy5a"]
+background_mode = 3
+
+[node name="Main" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_7kmeb")
+
+[node name="Canvas" type="Control" parent="." groups=["canvas"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Battlefield" type="NinePatchRect" parent="Canvas" groups=["battlefield"]]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.667
+anchor_right = 0.5
+anchor_bottom = 0.667
+offset_left = -384.0
+offset_top = -96.216
+offset_right = 384.0
+offset_bottom = 95.784
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(384, 96)
+texture = ExtResource("1_ksf4q")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+script = ExtResource("2_4wb0e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Canvas/Battlefield"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Canvas/Battlefield/StaticBody2D"]
+position = Vector2(-8, -6.65383)
+polygon = PackedVector2Array(8, 6.65384, 8, 198.654, 776, 198.654, 776, 6.654, 768, 14.654, 768, 190.654, 16, 190.654, 16, 14.6538, 768, 14.654, 776, 6.654)
+script = ExtResource("4_d1xm4")
+
+[node name="Ropes" type="Node2D" parent="Canvas/Battlefield" groups=["ropes"]]
+visible = false
+position = Vector2(96, 96)
+
+[node name="Rope1" type="Sprite2D" parent="Canvas/Battlefield/Ropes"]
+position = Vector2(0, -52)
+scale = Vector2(0.129317, 0.117647)
+texture = ExtResource("3_w0vpv")
+
+[node name="Rope2" type="Sprite2D" parent="Canvas/Battlefield/Ropes"]
+scale = Vector2(0.129317, 0.117647)
+texture = ExtResource("3_w0vpv")
+
+[node name="Rope3" type="Sprite2D" parent="Canvas/Battlefield/Ropes"]
+position = Vector2(0, 52)
+scale = Vector2(0.129317, 0.117647)
+texture = ExtResource("3_w0vpv")
+
+[node name="Attack1" type="Node2D" parent="Canvas/Battlefield"]
+position = Vector2(136, 96)
+
+[node name="AttackGroup1" type="Node2D" parent="Canvas/Battlefield/Attack1"]
+position = Vector2(-552, 48)
+metadata/_edit_group_ = true
+
+[node name="AttackSubgroup1" type="Node2D" parent="Canvas/Battlefield/Attack1/AttackGroup1"]
+position = Vector2(304, 0)
+
+[node name="Diaphysis1" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(-104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis2" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(-88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis3" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(-72, 16)
+scale = Vector2(1.33333, 0.363636)
+
+[node name="Diaphysis4" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(-56, 12)
+scale = Vector2(1.33333, 0.454545)
+
+[node name="Diaphysis5" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(-40, 8)
+scale = Vector2(1.33333, 0.545455)
+
+[node name="Diaphysis6" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(-24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis7" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(-7.99997, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis8" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(8.00003, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis9" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis10" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(40, 7.99997)
+scale = Vector2(1.33334, 0.545454)
+
+[node name="Diaphysis11" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(56, 12)
+scale = Vector2(1.33334, 0.454545)
+
+[node name="Diaphysis12" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(72, 16)
+scale = Vector2(1.33334, 0.363636)
+
+[node name="Diaphysis13" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis14" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup1" instance=ExtResource("6_2q53b")]
+position = Vector2(104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="AttackSubgroup2" type="Node2D" parent="Canvas/Battlefield/Attack1/AttackGroup1"]
+
+[node name="Diaphysis1" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(-104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis2" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(-88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis3" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(-72, 16)
+scale = Vector2(1.33333, 0.363636)
+
+[node name="Diaphysis4" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(-56, 12)
+scale = Vector2(1.33333, 0.454545)
+
+[node name="Diaphysis5" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(-40, 8)
+scale = Vector2(1.33333, 0.545455)
+
+[node name="Diaphysis6" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(-24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis7" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(-7.99997, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis8" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(8.00003, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis9" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis10" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(40, 7.99997)
+scale = Vector2(1.33334, 0.545454)
+
+[node name="Diaphysis11" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(56, 12)
+scale = Vector2(1.33334, 0.454545)
+
+[node name="Diaphysis12" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(72, 16)
+scale = Vector2(1.33334, 0.363636)
+
+[node name="Diaphysis13" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis14" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup2" instance=ExtResource("6_2q53b")]
+position = Vector2(104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="AttackSubgroup3" type="Node2D" parent="Canvas/Battlefield/Attack1/AttackGroup1"]
+position = Vector2(-304, 0)
+
+[node name="Diaphysis1" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(-104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis2" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(-88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis3" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(-72, 16)
+scale = Vector2(1.33333, 0.363636)
+
+[node name="Diaphysis4" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(-56, 12)
+scale = Vector2(1.33333, 0.454545)
+
+[node name="Diaphysis5" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(-40, 8)
+scale = Vector2(1.33333, 0.545455)
+
+[node name="Diaphysis6" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(-24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis7" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(-7.99997, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis8" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(8.00003, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis9" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis10" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(40, 7.99997)
+scale = Vector2(1.33334, 0.545454)
+
+[node name="Diaphysis11" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(56, 12)
+scale = Vector2(1.33334, 0.454545)
+
+[node name="Diaphysis12" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(72, 16)
+scale = Vector2(1.33334, 0.363636)
+
+[node name="Diaphysis13" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis14" parent="Canvas/Battlefield/Attack1/AttackGroup1/AttackSubgroup3" instance=ExtResource("6_2q53b")]
+position = Vector2(104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis1" parent="Canvas/Battlefield/Attack1" instance=ExtResource("6_2q53b")]
+position = Vector2(-144, -40)
+scale = Vector2(1.16667, 0.909091)
+
+[node name="Diaphysis2" parent="Canvas/Battlefield/Attack1" instance=ExtResource("6_2q53b")]
+position = Vector2(144, -40)
+scale = Vector2(1.16667, 0.909091)
+
+[node name="Diaphysis3" parent="Canvas/Battlefield/Attack1" instance=ExtResource("6_2q53b")]
+position = Vector2(-144, 60)
+scale = Vector2(1.16667, 0.363636)
+
+[node name="Diaphysis4" parent="Canvas/Battlefield/Attack1" instance=ExtResource("6_2q53b")]
+position = Vector2(144, 60)
+scale = Vector2(1.16667, 0.363637)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Canvas/Battlefield/Attack1"]
+autoplay = "attack1"
+libraries = {
+"": SubResource("AnimationLibrary_j53kr")
+}
+
+[node name="Container" type="HBoxContainer" parent="Canvas"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 536.0
+offset_right = 960.0
+offset_bottom = 563.0
+metadata/_edit_group_ = true
+
+[node name="Name" type="Label" parent="Canvas/Container"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_304wy")
+theme_override_font_sizes/font_size = 24
+text = "Benjamin"
+vertical_alignment = 1
+
+[node name="Level" type="Label" parent="Canvas/Container"]
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_304wy")
+theme_override_font_sizes/font_size = 24
+text = "LV 19"
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="Canvas/Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_fsdbe")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="Canvas/Container" groups=["health_bar"]]
+custom_minimum_size = Vector2(200, 24)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fqj0j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0keq4")
+max_value = 20.0
+value = 20.0
+show_percentage = false
+script = ExtResource("20_5ykt5")
+
+[node name="HealthLabel" type="Label" parent="Canvas/Container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_304wy")
+theme_override_font_sizes/font_size = 24
+text = "90 / 90"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="Node2D" parent="." groups=["actions"]]
+process_mode = 3
+position = Vector2(576, 597)
+script = ExtResource("5_qnnb1")
+
+[node name="Fight" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(-363.055, -1)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_bqx4b")
+offset = Vector2(39, 0)
+
+[node name="Act" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(-155.055, -0.999999)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_7sskc")
+animation = &"act"
+frame_progress = 0.44673
+offset = Vector2(39, 0)
+
+[node name="ActManager" type="Node" parent="Actions/Act"]
+script = ExtResource("15_rvtki")
+
+[node name="Item" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(52.9454, -0.999999)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_tb17t")
+offset = Vector2(39, 0)
+
+[node name="Mercy" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(260.945, -0.999999)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_lhffn")
+offset = Vector2(39, 0)
+
+[node name="MercyManager" type="Node" parent="Actions/Mercy"]
+script = ExtResource("25_tpfve")
+
+[node name="Player" parent="." instance=ExtResource("3_xtc3i")]
+position = Vector2(213, 596)
+
+[node name="Villian" type="Area2D" parent="." groups=["villian"]]
+position = Vector2(576, 160)
+script = ExtResource("9_squfb")
+
+[node name="Yi Fan" type="Sprite2D" parent="Villian"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("18_xocnk")
+
+[node name="Shield" type="Sprite2D" parent="Villian/Yi Fan"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("19_ht1rv")
+
+[node name="Health Bar" type="ProgressBar" parent="Villian"]
+visible = false
+offset_left = -384.0
+offset_top = 96.0
+offset_right = 384.0
+offset_bottom = 123.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yst2b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ekhi5")
+max_value = 10000.0
+value = 10000.0
+show_percentage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Villian"]
+visible = false
+shape = SubResource("CircleShape2D_mc31a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 325)
+script = ExtResource("25_qqqxs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cvy5a")
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_5wap5")
+
+[connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield" method="_on_resized"]
+[connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield/StaticBody2D/CollisionPolygon2D" method="_on_battlefield_resized"]
+[connection signal="area_entered" from="Villian" to="Villian" method="_on_villian_shield_area_entered"]

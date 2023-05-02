@@ -1,0 +1,286 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg78juxl2rb7l"]
+
+[ext_resource type="PackedScene" uid="uid://dffbgyqo4y526" path="res://Instances/bone.tscn" id="1_aj35c"]
+
+[sub_resource type="Animation" id="Animation_lhkxk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackGroup1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-552, 48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Diaphysis1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-144, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Diaphysis2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(144, -40)]
+}
+
+[sub_resource type="Animation" id="Animation_ec63c"]
+resource_name = "attack1"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackGroup1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9.5, 19.5, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-552, 48), Vector2(552, 48), Vector2(-552, 48), Vector2(-552, 48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Diaphysis1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7, 10, 14.6, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-144, -40), Vector2(-32, -40), Vector2(-144, -40), Vector2(-24, -40), Vector2(144, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Diaphysis2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.5, 5, 9, 14.6, 16.5, 19, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(144, -40), Vector2(144, -40), Vector2(72, -40), Vector2(144, -40), Vector2(64, -40), Vector2(-64, -40), Vector2(-144, -40), Vector2(-144, -40)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j53kr"]
+_data = {
+"RESET": SubResource("Animation_lhkxk"),
+"attack1": SubResource("Animation_ec63c")
+}
+
+[node name="Attack1" type="Node2D"]
+position = Vector2(136, 96)
+
+[node name="AttackGroup1" type="Node2D" parent="."]
+position = Vector2(-552, 48)
+metadata/_edit_group_ = true
+
+[node name="AttackSubgroup1" type="Node2D" parent="AttackGroup1"]
+position = Vector2(304, 0)
+
+[node name="Diaphysis1" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(-104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis2" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(-88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis3" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(-72, 16)
+scale = Vector2(1.33333, 0.363636)
+
+[node name="Diaphysis4" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(-56, 12)
+scale = Vector2(1.33333, 0.454545)
+
+[node name="Diaphysis5" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(-40, 8)
+scale = Vector2(1.33333, 0.545455)
+
+[node name="Diaphysis6" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(-24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis7" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(-7.99997, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis8" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(8.00003, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis9" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis10" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(40, 7.99997)
+scale = Vector2(1.33334, 0.545454)
+
+[node name="Diaphysis11" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(56, 12)
+scale = Vector2(1.33334, 0.454545)
+
+[node name="Diaphysis12" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(72, 16)
+scale = Vector2(1.33334, 0.363636)
+
+[node name="Diaphysis13" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis14" parent="AttackGroup1/AttackSubgroup1" instance=ExtResource("1_aj35c")]
+position = Vector2(104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="AttackSubgroup2" type="Node2D" parent="AttackGroup1"]
+
+[node name="Diaphysis1" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(-104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis2" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(-88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis3" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(-72, 16)
+scale = Vector2(1.33333, 0.363636)
+
+[node name="Diaphysis4" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(-56, 12)
+scale = Vector2(1.33333, 0.454545)
+
+[node name="Diaphysis5" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(-40, 8)
+scale = Vector2(1.33333, 0.545455)
+
+[node name="Diaphysis6" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(-24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis7" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(-7.99997, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis8" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(8.00003, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis9" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis10" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(40, 7.99997)
+scale = Vector2(1.33334, 0.545454)
+
+[node name="Diaphysis11" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(56, 12)
+scale = Vector2(1.33334, 0.454545)
+
+[node name="Diaphysis12" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(72, 16)
+scale = Vector2(1.33334, 0.363636)
+
+[node name="Diaphysis13" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis14" parent="AttackGroup1/AttackSubgroup2" instance=ExtResource("1_aj35c")]
+position = Vector2(104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="AttackSubgroup3" type="Node2D" parent="AttackGroup1"]
+position = Vector2(-304, 0)
+
+[node name="Diaphysis1" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(-104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis2" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(-88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis3" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(-72, 16)
+scale = Vector2(1.33333, 0.363636)
+
+[node name="Diaphysis4" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(-56, 12)
+scale = Vector2(1.33333, 0.454545)
+
+[node name="Diaphysis5" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(-40, 8)
+scale = Vector2(1.33333, 0.545455)
+
+[node name="Diaphysis6" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(-24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis7" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(-7.99997, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis8" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(8.00003, 0)
+scale = Vector2(1.33333, 0.727273)
+
+[node name="Diaphysis9" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(24, 4)
+scale = Vector2(1.33333, 0.636364)
+
+[node name="Diaphysis10" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(40, 7.99997)
+scale = Vector2(1.33334, 0.545454)
+
+[node name="Diaphysis11" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(56, 12)
+scale = Vector2(1.33334, 0.454545)
+
+[node name="Diaphysis12" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(72, 16)
+scale = Vector2(1.33334, 0.363636)
+
+[node name="Diaphysis13" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(88, 20)
+scale = Vector2(1.33333, 0.272727)
+
+[node name="Diaphysis14" parent="AttackGroup1/AttackSubgroup3" instance=ExtResource("1_aj35c")]
+position = Vector2(104, 26.5)
+scale = Vector2(1.33333, 0.125)
+
+[node name="Diaphysis1" parent="." instance=ExtResource("1_aj35c")]
+position = Vector2(-144, -40)
+scale = Vector2(1.16667, 0.909091)
+
+[node name="Diaphysis2" parent="." instance=ExtResource("1_aj35c")]
+position = Vector2(144, -40)
+scale = Vector2(1.16667, 0.909091)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "attack1"
+libraries = {
+"": SubResource("AnimationLibrary_j53kr")
+}

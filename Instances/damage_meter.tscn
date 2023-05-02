@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3rjqnhx7s6lm"]
+
+[ext_resource type="Script" path="res://Scripts/damage_meter.gd" id="1_56rfo"]
+[ext_resource type="Texture2D" uid="uid://bhgacrms1n14i" path="res://Sprites/Uncategorized/damage_meter.png" id="2_gbhxo"]
+[ext_resource type="Texture2D" uid="uid://k6mjy64ufg4f" path="res://Sprites/Uncategorized/slider1.png" id="3_7xl3l"]
+[ext_resource type="Texture2D" uid="uid://lvbwkockhrar" path="res://Sprites/Uncategorized/slider2.png" id="4_joes5"]
+
+[sub_resource type="Animation" id="Animation_1208l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.33333, 1.32174)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3yy1y"]
+resource_name = "damage_meter_appear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.278388, 1.32174), Vector2(1.33333, 1.32174)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k8mgh"]
+_data = {
+"RESET": SubResource("Animation_1208l"),
+"damage_meter_appear": SubResource("Animation_3yy1y")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_btnka"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("3_7xl3l")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_joes5")
+}],
+"loop": true,
+"name": &"slider_flashing",
+"speed": 5.0
+}]
+
+[node name="DamageMeter" type="Node2D"]
+position = Vector2(576, 432)
+script = ExtResource("1_56rfo")
+metadata/_edit_group_ = true
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(1.33333, 1.32174)
+texture = ExtResource("2_gbhxo")
+
+[node name="Start" type="Marker2D" parent="Background"]
+position = Vector2(-274.5, 0)
+scale = Vector2(1.03125, 1.0403)
+
+[node name="End" type="Marker2D" parent="Background"]
+position = Vector2(274.5, 0)
+scale = Vector2(1.03125, 1.0403)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+"": SubResource("AnimationLibrary_k8mgh")
+}
+
+[node name="Slider" type="AnimatedSprite2D" parent="."]
+position = Vector2(-366, 0)
+scale = Vector2(1.42857, 1.375)
+sprite_frames = SubResource("SpriteFrames_btnka")
+animation = &"slider_flashing"

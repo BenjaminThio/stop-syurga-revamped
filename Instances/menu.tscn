@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3o70w1548x62"]
+
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="1_34riu"]
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_jt5vx"]
+
+[node name="Menu" type="VBoxContainer"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 724.0
+offset_bottom = 168.0
+theme_override_constants/separation = 15
+script = ExtResource("1_jt5vx")
+metadata/_edit_group_ = true
+
+[node name="Row1" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 2
+
+[node name="Option1" type="Label" parent="Row1"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_34riu")
+theme_override_font_sizes/font_size = 27
+
+[node name="Option2" type="Label" parent="Row1"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_34riu")
+theme_override_font_sizes/font_size = 27
+
+[node name="Row2" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 2
+
+[node name="Option3" type="Label" parent="Row2"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_34riu")
+theme_override_font_sizes/font_size = 27
+
+[node name="Option4" type="Label" parent="Row2"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_34riu")
+theme_override_font_sizes/font_size = 27
+
+[node name="Row3" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 2
+
+[node name="Option5" type="Label" parent="Row3"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_34riu")
+theme_override_font_sizes/font_size = 27
+
+[node name="Option6" type="Label" parent="Row3"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_34riu")
+theme_override_font_sizes/font_size = 27

@@ -1,0 +1,17 @@
+res://Scenes/main.tscn
+res://Scripts/weapon.gd
+res://Scripts/villian.gd
+res://Scenes/test.tscn
+res://Scripts/test.gd
+res://Scripts/player.gd
+res://Scripts/mercy.gd
+res://Scripts/menu.gd
+res://Scripts/main.gd
+res://Scripts/item.gd
+res://Scripts/damage_meter.gd
+res://Scripts/custom_menu.gd
+res://Scripts/coordinate.gd
+res://Scripts/bone.gd
+res://Scripts/battlefield_collision.gd
+res://Scripts/battlefield.gd
+res://Scripts/act.gd

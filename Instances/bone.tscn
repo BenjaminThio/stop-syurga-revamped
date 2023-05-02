@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://dffbgyqo4y526"]
+
+[ext_resource type="Texture2D" uid="uid://yh8kc2f1hpaq" path="res://Sprites/Bones/Bone Center.png" id="1_ht2me"]
+[ext_resource type="Script" path="res://Scripts/bone.gd" id="2_rqmnf"]
+[ext_resource type="Texture2D" uid="uid://c3h678thv73gg" path="res://Sprites/Bones/epiphysis_bottom.png" id="3_ik3rt"]
+[ext_resource type="Texture2D" uid="uid://1n6yuep1h7qc" path="res://Sprites/Bones/epiphysis_top.png" id="4_nx3mk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gg2yj"]
+size = Vector2(5, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddnmc"]
+size = Vector2(10, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwjcc"]
+size = Vector2(10, 6)
+
+[node name="Diaphysis" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(1.16667, 0.181818)
+texture = ExtResource("1_ht2me")
+script = ExtResource("2_rqmnf")
+fixed_scale = 1.33
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+position = Vector2(-8.9407e-08, -1.3113e-06)
+scale = Vector2(1.2, 7.33333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.66893e-06, 9.11951e-06)
+shape = SubResource("RectangleShape2D_gg2yj")
+
+[node name="EpiphysisTop" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -44)
+scale = Vector2(1.14, 7.31501)
+texture = ExtResource("3_ik3rt")
+offset = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="EpiphysisTop"]
+show_behind_parent = true
+position = Vector2(-4.7187e-07, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EpiphysisTop/Area2D"]
+shape = SubResource("RectangleShape2D_ddnmc")
+
+[node name="EpiphysisBottom" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 44)
+scale = Vector2(1.14, 7.31501)
+texture = ExtResource("4_nx3mk")
+offset = Vector2(0, 3)
+
+[node name="Area2D" type="Area2D" parent="EpiphysisBottom"]
+show_behind_parent = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EpiphysisBottom/Area2D"]
+position = Vector2(3.22859e-07, 3)
+shape = SubResource("RectangleShape2D_jwjcc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_player_collide"]
+[connection signal="body_entered" from="EpiphysisTop/Area2D" to="." method="_on_player_collide"]
+[connection signal="body_entered" from="EpiphysisBottom/Area2D" to="." method="_on_player_collide"]

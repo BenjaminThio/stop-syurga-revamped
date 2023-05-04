@@ -12,12 +12,7 @@ func _ready() -> void:
 	for action in get_children():
 		actions.append(action.name.to_lower())
 	
-	var description_label: Node = preload("res://Instances/description.tscn").instantiate()
-	get_tree().get_first_node_in_group("battlefield").add_child(description_label)
-	
-	update_player_position()
-	
-	generate_description()
+	take_action()
 
 func _process(_delta) -> void:
 	if State.current_state != State.TAKING_ACTION:
@@ -37,39 +32,51 @@ func _process(_delta) -> void:
 		update_player_position()
 	elif Input.is_action_just_pressed("accept"):
 		if not focus:
-			owner.play_sound_effect("select")
-			focus_action()
+			match actions[action_index]:
+				State.ITEM:
+					if db.items.size() > 0:
+						confirm_action()
+				State.FIGHT, State.ACT, State.MERCY:
+					owner.play_sound_effect("select")
+					focus_action()
 		elif focus:
-			owner.play_sound_effect("select")
-			State.change_state(actions[action_index])
-			confirmed_action = true
-			match State.current_state:
-				State.FIGHT:
-					var damage_meter: Node = preload("res://Instances/damage_meter.tscn").instantiate()
-					var canvas: Control = get_tree().get_first_node_in_group("canvas")
-					
-					canvas.add_child(damage_meter)
-					damage_meter.slide_slider()
-				State.ACT, State.ITEM, State.MERCY:
-					var menu: Node = preload("res://Instances/menu.tscn").instantiate()
-					var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
-					
-					battlefield.add_child(menu)
-					await time.sleep(0.001)
-					menu.update_player_position()
-			
-			var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
-			
-			description_label.queue_free()
-	elif Input.is_action_just_pressed("cancel") and focus:
+			confirm_action()
+	elif Input.is_action_just_pressed("cancel"):
 		owner.play_sound_effect("squeak")
-		if confirmed_action:
-			focus_action()
-			confirmed_action = false
-		else:
-			focus = false
+		if focus or confirmed_action:
+			if focus and confirmed_action:
+				focus_action()
+				confirmed_action = false
+				return
+			elif focus and not confirmed_action:
+				focus = false
+			elif not focus and confirmed_action:
+				confirmed_action = false
 			update_player_position()
 			generate_description()
+
+func confirm_action() -> void:
+	owner.play_sound_effect("select")
+	State.change_state(actions[action_index])
+	confirmed_action = true
+	match State.current_state:
+		State.FIGHT:
+			var damage_meter: Node = preload("res://Instances/damage_meter.tscn").instantiate()
+			var canvas: Control = get_tree().get_first_node_in_group("canvas")
+			
+			canvas.add_child(damage_meter)
+			damage_meter.slide_slider()
+		State.ACT, State.ITEM, State.MERCY:
+			var menu: Node = preload("res://Instances/menu.tscn").instantiate()
+			var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
+			
+			battlefield.add_child(menu)
+			await time.sleep(0.001)
+			menu.update_player_position()
+	
+	var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
+	
+	description_label.queue_free()
 
 func focus_action() -> void:
 	var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
@@ -80,6 +87,20 @@ func focus_action() -> void:
 	description_label.text = "\t* {villian_name}".format({"villian_name": get_tree().get_first_node_in_group("villian").get_child(0).name})
 	get_tree().get_first_node_in_group("player").global_position = Vector2(description_label.global_position.x + description_label.pivot_offset.x, description_label.global_position.y + description_label.pivot_offset.y)
 	description_label.self_modulate = Color.YELLOW
+
+func take_action(required_transition: bool = false) -> void:
+	if get_tree().get_first_node_in_group("description_label") == null:
+		var description_label: Node = preload("res://Instances/description.tscn").instantiate()
+	
+		get_tree().get_first_node_in_group("battlefield").add_child(description_label)
+	
+	update_player_position()
+	
+	var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
+	
+	await battlefield.set_property(Vector2(768, 192), Vector2(192, 336), required_transition)
+	
+	generate_description()
 
 func generate_description() -> void:
 	var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
@@ -93,7 +114,7 @@ func generate_description() -> void:
 	typing_sound_effect.play()
 	
 	for character in "* {description}".format({"description": description}):
-		if not focus and coroutine_id == current_coroutine_id:
+		if not focus and not confirmed_action and coroutine_id == current_coroutine_id:
 			description_label.text += character
 		else:
 			return
@@ -108,3 +129,8 @@ func update_player_position() -> void:
 func turn_off() -> void:
 	for action_button in get_children():
 		action_button.frame = 0
+
+func reset() -> void:
+	action_index = 0
+	focus = false
+	confirmed_action = false

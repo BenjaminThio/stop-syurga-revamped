@@ -3,14 +3,11 @@ extends NinePatchRect
 
 var transition_time: float = 0.5
 
-func _ready() -> void:
-	#set_property(Vector2(272, 192), Vector2(440, 336), true)
-	set_property(Vector2(768, 192), Vector2(192, 336))
-
 func set_property(new_size: Vector2, new_position: Vector2, require_tween: bool = false) -> void:
 	if require_tween:
 		create_tween().tween_property(self, "size", new_size, transition_time)
 		create_tween().tween_property(self, "position", new_position, transition_time)
+		await time.sleep(transition_time)
 	else:
 		size = new_size
 		position = new_position

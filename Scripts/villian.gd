@@ -13,7 +13,6 @@ var defence: int
 @onready var health_bar: ProgressBar = $"Health Bar"
 
 func _ready() -> void:
-	move()
 	health_bar.max_value = health
 	update_health_bar(false)
 
@@ -95,11 +94,30 @@ func shake(target: Node2D = get_child(0), times: int = 15, default_delay_time: f
 		await time.sleep(delay_time)
 	target.position.x = 0
 
-var moves: Array[String] = os.listdir("res://Instances/Attacks/")
+var attacks_path: String = "res://Instances/Attacks/"
+var attacks: Array[String] = os.listdir(attacks_path)
 
-func move() -> void:
-	print(moves)
-
+func attack() -> void:
+	var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
+	var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
+	var attack_move = load(attacks_path + random.choice(attacks)).instantiate()
+	var attack_animation: AnimationPlayer = attack_move.get_child(attack_move.get_child_count() - 1)
+	var actions: Node2D = get_tree().get_first_node_in_group("actions")
+	
+	player.change_form("blue")
+	
+	await time.sleep(1)
+	
+	battlefield.add_child(attack_move)
+	
+	await time.sleep(attack_animation.get_current_animation_length())
+	
+	attack_move.queue_free()
+	
+	State.change_state(State.TAKING_ACTION)
+	
+	actions.take_action(true)
+	
 """
 @onready var villian_sprite: Sprite2D = get_child(0)
 @onready var origin_x: float = villian_sprite.position.x

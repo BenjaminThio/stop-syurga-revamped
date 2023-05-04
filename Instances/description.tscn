@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://c0gypcfb5ld6r"]
 
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="1_4sg2g"]
 [ext_resource type="AudioStream" uid="uid://burfvqjjq8ggg" path="res://Sounds/Typing.ogg" id="2_sj42s"]
@@ -11,7 +11,6 @@ offset_bottom = 168.0
 pivot_offset = Vector2(27, 18)
 theme_override_fonts/normal_font = ExtResource("1_4sg2g")
 theme_override_font_sizes/normal_font_size = 27
-text = "Hello World!!!"
 
 [node name="Typing Sound Effect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_sj42s")

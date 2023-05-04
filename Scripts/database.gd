@@ -1,6 +1,6 @@
 extends Node
 
-var humanName: String = "Test"
+var human_name: String = "Test"
 var level: int = 1
 var max_health: float = 20.0
 var health: float = 3.0

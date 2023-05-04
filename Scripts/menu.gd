@@ -74,11 +74,13 @@ func _process(_delta) -> void:
 			var health_bar: ProgressBar = get_tree().get_first_node_in_group("health_bar")
 			
 			item.fulfill_effect(health_bar)
-		
+			db.items.pop_at((page_index * 4) + (player_coord.y * 2) + player_coord.x)
+			
 		get_tree().get_root().get_node("Main").play_sound_effect("select")
 		player.hide()
 		action_buttons.turn_off()
 		State.change_state(State.COMBATING)
+		action_buttons.reset()
 		self.queue_free()
 
 func move_up() -> void:
@@ -129,6 +131,8 @@ func render_menu() -> void:
 			
 			if option != "":
 				option_label.text = "* {option}".format({"option": option.capitalize()})
+			else:
+				option_label.text = option
 			
 	if menu.paged:
 		var last_row: HBoxContainer = get_child(get_child_count() - 1)
@@ -141,7 +145,12 @@ func get_option(row_index: int, option_index: int) -> String:
 	var option: String
 	
 	if menu.paged:
-		option = menu.options[page_index][row_index][option_index].item_name
+		var new_option = menu.options[page_index][row_index][option_index]
+		
+		if new_option != null:
+			option = new_option.item_name
+		else:
+			option = ""
 	else:
 		option = menu.options[row_index][option_index]
 	

@@ -10,18 +10,16 @@ const COLORS: Dictionary = {
 	"yellow": Color.YELLOW
 }
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-var color_index: int = 0
 var color: String = "red"
 var rope_index: int = 1
 var immunity_time: float = 1.8
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var animated_sprite: AnimatedSprite2D = $Sprite2D
 @onready var shield: Node2D = $Shield
 @onready var shoot_point: Marker2D = $Marker2D
 
 func _ready() -> void:
-	color = COLORS.keys()[color_index]
-	sprite.self_modulate = COLORS[color]
+	animated_sprite.self_modulate = COLORS[color]
 	shield.hide()
 	get_tree().get_first_node_in_group("ropes").hide()
 	if color == "yellow":
@@ -35,30 +33,6 @@ func _ready() -> void:
 func _physics_process(_delta) -> void:
 	if State.current_state != State.COMBATING:
 		return
-	
-	if Input.is_action_just_pressed("shift"):
-		if color_index + 1 >= COLORS.size():
-			color_index = 0
-		else:
-			color_index += 1
-		color = COLORS.keys()[color_index]
-		sprite.self_modulate = COLORS[color]
-		shield.hide()
-		get_tree().get_first_node_in_group("ropes").hide()
-		if color == "yellow":
-			var tween: Tween = create_tween()
-			tween.tween_property(self, "rotation_degrees", 180, 0.3)
-		else:
-			var tween: Tween = create_tween()
-			tween.tween_property(self, "rotation_degrees", 0, 0.3)
-		if color == "green":
-			shield.show()
-		elif color == "purple":
-			get_tree().get_first_node_in_group("ropes").show()
-		velocity = Vector2.ZERO
-		var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
-		global_position = Vector2(battlefield.global_position.x + battlefield.pivot_offset.x, battlefield.global_position.y + battlefield.pivot_offset.y)
-		ghost_effect()
 	
 	if color == "red":
 		Move("omnidirectional")
@@ -138,13 +112,17 @@ func immunity(sec: float, flashing_time: int = 3) -> void:
 		is_immuning = false
 
 func ghost_effect() -> void:
-	var ghost: Sprite2D = sprite.duplicate()
+	var ghost: Sprite2D = Sprite2D.new()
+	var sprite_frames: SpriteFrames = animated_sprite.get_sprite_frames()
+	var animation_names: PackedStringArray = sprite_frames.get_animation_names()
 	
+	ghost.texture = sprite_frames.get_frame_texture(animation_names[0], 0)
+	ghost.global_scale = animated_sprite.global_scale
+	ghost.self_modulate = COLORS[color]
 	add_child(ghost)
 	create_tween().tween_property(ghost, "scale", ghost.scale * 2, 0.5)
 	create_tween().tween_property(ghost, "self_modulate:a", 0, 0.5)
-	await time.sleep(0.5)
-	ghost.queue_free()
+	await time.sleep(0.5, ghost.queue_free)
 
 func respawn() -> void:
 	var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
@@ -152,6 +130,26 @@ func respawn() -> void:
 	
 	global_position = spawn_point
 	show()
+
+func change_form(newColor: String):
+	color = newColor
+	animated_sprite.self_modulate = COLORS[color]
+	shield.hide()
+	get_tree().get_first_node_in_group("ropes").hide()
+	if color == "yellow":
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "rotation_degrees", 180, 0.3)
+	else:
+		var tween: Tween = create_tween()
+		tween.tween_property(self, "rotation_degrees", 0, 0.3)
+	if color == "green":
+		shield.show()
+	elif color == "purple":
+		get_tree().get_first_node_in_group("ropes").show()
+	velocity = Vector2.ZERO
+	var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
+	global_position = Vector2(battlefield.global_position.x + battlefield.pivot_offset.x, battlefield.global_position.y + battlefield.pivot_offset.y)
+	ghost_effect()
 
 func deal_damage(damage_value: float) -> void:
 	if not is_immuning:

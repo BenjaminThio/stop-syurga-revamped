@@ -18,13 +18,13 @@ theme_override_constants/separation = 100
 alignment = 2
 
 [node name="Option1" type="Label" parent="Row1"]
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(256, 37)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_34riu")
 theme_override_font_sizes/font_size = 27
 
 [node name="Option2" type="Label" parent="Row1"]
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(256, 37)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_34riu")
 theme_override_font_sizes/font_size = 27
@@ -35,13 +35,13 @@ theme_override_constants/separation = 100
 alignment = 2
 
 [node name="Option3" type="Label" parent="Row2"]
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(256, 37)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_34riu")
 theme_override_font_sizes/font_size = 27
 
 [node name="Option4" type="Label" parent="Row2"]
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(256, 37)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_34riu")
 theme_override_font_sizes/font_size = 27
@@ -52,13 +52,13 @@ theme_override_constants/separation = 100
 alignment = 2
 
 [node name="Option5" type="Label" parent="Row3"]
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(256, 37)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_34riu")
 theme_override_font_sizes/font_size = 27
 
 [node name="Option6" type="Label" parent="Row3"]
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(256, 37)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_34riu")
 theme_override_font_sizes/font_size = 27

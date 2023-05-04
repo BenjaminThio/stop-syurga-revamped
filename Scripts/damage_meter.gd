@@ -68,6 +68,7 @@ func enemy_turn() -> void:
 	slider.queue_free()
 	animation_player.play_backwards("damage_meter_appear")
 	await time.sleep(animation_player.get_current_animation_length())
+	action_buttons.reset()
 	self.queue_free()
 
 func get_calculated_damage() -> float:

@@ -1,9 +1,3 @@
-res://Scenes/main.tscn
 res://Scenes/intro.tscn
+res://Scenes/main.tscn
 res://Scenes/test.tscn
-res://Scenes/game_over.tscn
-res://Scripts/game_over.gd
-res://Instances/player.tscn
-res://Scripts/player.gd
-res://Scripts/test.gd
-res://Modules/Python/time.gd

@@ -1,36 +1,50 @@
-[gd_scene load_steps=6 format=3 uid="uid://pgksc71ae235"]
+[gd_scene load_steps=8 format=3 uid="uid://pgksc71ae235"]
 
 [ext_resource type="Script" path="res://Scripts/test.gd" id="1_ol346"]
-[ext_resource type="Texture2D" uid="uid://cxballbtr12s" path="res://Sprites/PlayerHeart/Default/000.png" id="2_htspi"]
+[ext_resource type="Texture2D" uid="uid://cxballbtr12s" path="res://Sprites/PlayerHeart/Default/000.png" id="3_47eda"]
 [ext_resource type="Script" path="res://Scripts/camera_manager.gd" id="3_eegmh"]
-[ext_resource type="Texture2D" uid="uid://cfq1widkwswom" path="res://Sprites/PlayerHeart/Split/000.png" id="3_xe4fl"]
+[ext_resource type="Texture2D" uid="uid://bn3ebxrjns1on" path="res://Sprites/Flee/leg_idle.png" id="4_7okex"]
+[ext_resource type="Texture2D" uid="uid://c4u42onnx66tf" path="res://Sprites/Flee/leg_walk.png" id="5_o478v"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_f71wr"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_e4ygf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_htspi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_xe4fl")
+"texture": ExtResource("3_47eda")
 }],
 "loop": true,
-"name": &"state",
+"name": &"default",
 "speed": 5.0
 }]
 
-[node name="Test" type="Node2D" groups=["test1", "test2"]]
+[sub_resource type="SpriteFrames" id="SpriteFrames_slycf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7okex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o478v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Test" type="Node2D"]
 texture_filter = 1
+position = Vector2(576, 320)
 script = ExtResource("1_ol346")
 
-[node name="Soul" type="AnimatedSprite2D" parent="."]
-position = Vector2(576, 324)
-scale = Vector2(1.12, 1.12)
-sprite_frames = SubResource("SpriteFrames_f71wr")
-animation = &"state"
-
-[node name="Shard" type="AnimatedSprite2D" parent="."]
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(0, 5)
 script = ExtResource("3_eegmh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_e4ygf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_slycf")
+frame_progress = 0.372869
+offset = Vector2(0, 3)

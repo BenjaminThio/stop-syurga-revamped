@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhhyhm0256bnu"]
+
+[ext_resource type="Texture2D" uid="uid://bvyuxpq8t0kw2" path="res://Sprites/HeartShard/Default/000.png" id="1_ab8b3"]
+[ext_resource type="Script" path="res://Scripts/shard.gd" id="1_y5pje"]
+[ext_resource type="Texture2D" uid="uid://dvdnvxp1l8n7j" path="res://Sprites/HeartShard/Default/001.png" id="2_rfbdf"]
+[ext_resource type="Texture2D" uid="uid://ctqkebqqf201n" path="res://Sprites/HeartShard/Default/002.png" id="3_7t2mq"]
+[ext_resource type="Texture2D" uid="uid://dr34drto10epg" path="res://Sprites/HeartShard/Default/003.png" id="4_51jxh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jvipu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ab8b3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rfbdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7t2mq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_51jxh")
+}],
+"loop": true,
+"name": &"shard_rotate",
+"speed": 5.0
+}]
+
+[node name="Shard" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_jvipu")
+animation = &"shard_rotate"
+autoplay = "shard_rotate"
+script = ExtResource("1_y5pje")

@@ -1,6 +1,6 @@
 extends Control
 
-var quotes: Array[String] = ["The future of\nmonsters depends\non you!", "Don't lose hope!", "You cannot give\nup just yet..."]
+var quotes: Array[String] = ["You cannot give\nup just yet..."] #["The future of\nmonsters depends\non you!", "Don't lose hope!", 
 var on_queue: bool = false
 var phases: int = 0
 
@@ -82,7 +82,7 @@ func play_sound_effect(sound_name: String) -> void:
 	var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
 	
 	add_child(audio_stream_player)
-	audio_stream_player.stream = load("res://Sounds/{sound_name}.mp3".format({"sound_name": sound_name.capitalize()}))
+	audio_stream_player.stream = load("res://Sounds/{sound_name}.wav".format({"sound_name": sound_name.capitalize()}))
 	audio_stream_player.pitch_scale = 1 + randf_range(-0.01, 0.01)
 	audio_stream_player.play()
 	audio_stream_player.finished.connect(audio_stream_player.queue_free)

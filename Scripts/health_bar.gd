@@ -25,6 +25,9 @@ func deal_damage(damage_value: float) -> void:
 	else:
 		db.health = 0
 	update_health_bar()
+	
+	if db.health == 0:
+		owner.game_over()
 
 func heal(heal_value: float) -> void:
 	if heal_value < 0:

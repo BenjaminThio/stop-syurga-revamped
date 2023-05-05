@@ -14,6 +14,7 @@ var color: String = "red"
 var rope_index: int = 1
 var immunity_time: float = 1.8
 
+@onready var main: Node2D = get_tree().get_root().get_node("Main")
 @onready var animated_sprite: AnimatedSprite2D = $Sprite2D
 @onready var shield: Node2D = $Shield
 @onready var shoot_point: Marker2D = $Marker2D
@@ -31,7 +32,7 @@ func _ready() -> void:
 		get_tree().get_first_node_in_group("ropes").show()
 
 func _physics_process(_delta) -> void:
-	if State.current_state != State.COMBATING:
+	if State.current_state != State.COMBATING or main.is_game_over:
 		return
 	
 	if color == "red":
@@ -153,9 +154,37 @@ func change_form(newColor: String):
 
 func deal_damage(damage_value: float) -> void:
 	if not is_immuning:
-		get_tree().get_root().get_node("Main").play_sound_effect("hurt")
-		immunity(immunity_time)
-		get_viewport().get_camera_2d().camera_shake()
 		get_tree().get_first_node_in_group("health_bar").deal_damage(damage_value)
+		if not main.is_game_over:
+			main.play_sound_effect("hurt")
+			immunity(immunity_time)
+			get_viewport().get_camera_2d().camera_shake()
 
 func heal(heal_value: float) -> void: get_tree().get_first_node_in_group("health_bar").deal_damage(heal_value)
+
+func heart_break():
+	var sprite_frames: SpriteFrames = animated_sprite.get_sprite_frames()
+	var animation_names: PackedStringArray = sprite_frames.get_animation_names()
+	var animation_duration: float = sprite_frames.get_frame_duration(animation_names[0], 0)
+	
+	animated_sprite.play("state")
+	#print(animation_duration)
+	await time.sleep(0.7, test)
+	
+	await time.sleep(1)
+	
+	for _i in range(5):
+		var shard: AnimatedSprite2D = load("res://Instances/shard.tscn").instantiate()
+		
+		shard.global_scale = global_scale
+		shard.self_modulate = animated_sprite.self_modulate
+		add_child(shard)
+	
+	animated_sprite.self_modulate.a = 0
+	
+	main.play_sound_effect("Heart Shatter")
+	
+	await time.sleep(1)
+
+func test():
+	main.play_sound_effect("Heart Split")

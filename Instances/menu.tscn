@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="1_34riu"]
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_jt5vx"]
 
-[node name="Menu" type="VBoxContainer"]
+[node name="Menu" type="VBoxContainer" groups=["menu"]]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 724.0

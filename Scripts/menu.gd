@@ -61,11 +61,10 @@ func _process(_delta) -> void:
 		queue_free()
 	
 	elif Input.is_action_just_pressed("accept"):
-		var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
+		var option: String = get_option(player_coord.y, player_coord.x)
 		
 		if State.current_state in [State.ACT, State.MERCY]:
 			var action_manager: Node = action_buttons.get_child(action_buttons.action_index).get_child(0)
-			var option: String = get_option(player_coord.y, player_coord.x)
 			
 			action_manager.select_option(option)
 		
@@ -75,13 +74,9 @@ func _process(_delta) -> void:
 			
 			item.fulfill_effect(health_bar)
 			db.items.pop_at((page_index * 4) + (player_coord.y * 2) + player_coord.x)
-			
-		get_tree().get_root().get_node("Main").play_sound_effect("select")
-		player.hide()
-		action_buttons.turn_off()
-		State.change_state(State.COMBATING)
-		action_buttons.reset()
-		self.queue_free()
+		
+		if option != "change music":
+			had_made_a_choice()
 
 func move_up() -> void:
 	if player_coord.y - 1 >= 0:
@@ -161,3 +156,13 @@ func update_player_position() -> void:
 	var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 	
 	player.global_position = Vector2(act_label.global_position.x - 50, act_label.global_position.y + (act_label.size.y / 2))
+
+func had_made_a_choice() -> void:
+	var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
+	
+	get_tree().get_root().get_node("Main").play_sound_effect("select")
+	player.hide()
+	action_buttons.turn_off()
+	State.change_state(State.COMBATING)
+	action_buttons.reset()
+	queue_free()

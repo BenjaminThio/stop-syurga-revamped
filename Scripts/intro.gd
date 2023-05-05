@@ -19,11 +19,19 @@ var storylines: Array[String] = [
 ]
 
 func _ready() -> void:
-	var image: TextureRect = get_child(0)
+	var image: Sprite2D = get_child(0)
+	
+	image.self_modulate.a = 0
+	
+	await time.sleep(10)
+	
+	$BackgroundMusic.play()
+	
+	#var image: TextureRect = get_child(0)
 	var label: RichTextLabel = get_child(1)
 	var typing_sound_effect: AudioStreamPlayer = get_child(2)
 	
-	image.self_modulate.a = 0
+	#image.self_modulate.a = 0
 	for storylineIndex in range(len(storylines)):
 		image.texture = load("res://Sprites/Intro/intro{imageIndex}.png".format({"imageIndex": storylineIndex + 1}))
 		create_tween().tween_property(image, "self_modulate:a", 1, image_transition_time)
@@ -36,6 +44,14 @@ func _ready() -> void:
 		create_tween().tween_property(image, "self_modulate:a", 0, image_transition_time)
 		await time.sleep(label_reset_time)
 		label.text = ""
+	
+	await time.sleep(5)
+	
+	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+
+func _process(_delta):
+	if Input.is_action_just_pressed("accept"):
+		get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 func get_calculated_char_appear_gap_time() -> float:
 	var char_counter: int = 0

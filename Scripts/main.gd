@@ -1,25 +1,16 @@
 extends Node2D
 
+var is_game_over: bool = false
+
 @onready var background_music_player: AudioStreamPlayer = $BackgroundMusicPlayer
 
 func _ready() -> void:
 	if background_music_player.stream == null:
-		play_audio("res://Musics/The World Revolving.ogg")
+		play_audio("res://Musics/Stop Syurga.mp3")
 	elif not background_music_player.playing and not background_music_player.autoplay:
 		play_audio()
 	else:
 		loop_audio()
-
-var pause = false
-
-func _process(_delta) -> void:
-	if Input.is_action_just_pressed("test2"):
-		pause = not pause
-		for child in get_children():
-			if pause:
-				child.process_mode = Node.PROCESS_MODE_DISABLED
-			else:
-				child.process_mode = Node.PROCESS_MODE_INHERIT
 
 func play_sound_effect(sound_name: String) -> void:
 	var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
@@ -45,3 +36,26 @@ func loop_audio(loop: bool = true) -> void:
 		background_music_player.finished.connect(background_music_player.play)
 	elif not loop and background_music_player.is_connected("finished", background_music_player.play):
 		background_music_player.finished.disconnect(background_music_player.play)
+
+func game_over() -> void:
+	is_game_over = true
+	
+	var player: CharacterBody2D = $Player
+	var main_camera: Camera2D = $Camera2D
+	
+	for child in get_children():
+		if child not in [player, main_camera]:
+			child.queue_free()
+	
+	await player.heart_break()
+	
+	var game_over_screen: Control = load("res://Scenes/game_over.tscn").instantiate()
+	
+	add_child(game_over_screen)
+
+func set_pause(pause: bool):
+	for child in get_children():
+		if pause:
+			child.process_mode = Node.PROCESS_MODE_DISABLED
+		else:
+			child.process_mode = Node.PROCESS_MODE_INHERIT

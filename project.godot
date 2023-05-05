@@ -21,10 +21,6 @@ db="*res://Scripts/database.gd"
 State="*res://Scripts/state.gd"
 time="*res://Modules/Python/time.gd"
 
-[display]
-
-window/subwindows/embed_subwindows=false
-
 [input]
 
 up={

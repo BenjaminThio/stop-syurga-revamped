@@ -22,9 +22,9 @@
 [ext_resource type="FontFile" uid="uid://ca6ob2ibtlxc2" path="res://Fonts/ut-hp-font.ttf" id="19_fsdbe"]
 [ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villian_shield.png" id="19_ht1rv"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="20_5ykt5"]
+[ext_resource type="AudioStream" uid="uid://buuxy74tfkmkb" path="res://Musics/Stop Syurga.mp3" id="25_e2rx2"]
 [ext_resource type="Script" path="res://Scripts/camera_manager.gd" id="25_qqqxs"]
 [ext_resource type="Script" path="res://Scripts/mercy.gd" id="25_tpfve"]
-[ext_resource type="AudioStream" uid="uid://dkiccegwitodo" path="res://Musics/CORE.ogg" id="26_5wap5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqj0j"]
 bg_color = Color(1, 0, 0, 1)
@@ -278,14 +278,14 @@ visible = false
 shape = SubResource("CircleShape2D_mc31a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 325)
+position = Vector2(576, 324)
 script = ExtResource("25_qqqxs")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cvy5a")
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("26_5wap5")
+stream = ExtResource("25_e2rx2")
 
 [connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield" method="_on_resized"]
 [connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield/StaticBody2D/CollisionPolygon2D" method="_on_battlefield_resized"]

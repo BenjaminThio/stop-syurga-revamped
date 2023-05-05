@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b88bcekmurv58"]
+[gd_scene load_steps=6 format=3 uid="uid://cj5e08o6s4y2s"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_5b85o"]
 [ext_resource type="FontFile" uid="uid://jvipihxmlqfy" path="res://Fonts/8-BIT WONDER.TTF" id="1_ied82"]
@@ -17,10 +17,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
+offset_right = 1152.0
+offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5b85o")
@@ -46,9 +44,6 @@ theme_override_fonts/font = SubResource("FontVariation_xn33b")
 theme_override_font_sizes/font_size = 35
 autowrap_mode = 3
 clip_text = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 325)
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_iam53")

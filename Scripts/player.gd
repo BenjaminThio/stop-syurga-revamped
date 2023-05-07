@@ -2,43 +2,49 @@ extends CharacterBody2D
 
 const SPEED: int = 100
 const JUMP_FORCE: int = 290
-const COLORS: Dictionary = {
-	"red": Color.RED,
-	"blue": Color.BLUE,
-	"green": Color(0.004, 0.753, 0),
-	"purple": Color(0.847, 0.204, 0.851),
-	"yellow": Color.YELLOW
+const SOUL: Dictionary = {
+	RED = Color.RED,
+	BLUE = Color.BLUE,
+	GREEN = Color(0.004, 0.753, 0),
+	PURPLE = Color(0.847, 0.204, 0.851),
+	YELLOW = Color.YELLOW
 }
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-var color: String = "red"
+var soul: Color = SOUL.RED
 var rope_index: int = 1
 var immunity_time: float = 1.8
 
 @onready var main: Node2D = get_tree().get_root().get_node("Main")
-@onready var animated_sprite: AnimatedSprite2D = $Sprite2D
+@onready var heart_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shield: Node2D = $Shield
 @onready var shoot_point: Marker2D = $Marker2D
 
+enum DIRECTION {
+	HORIZONTAL,
+	VERTICAL,
+	OMNIDIRECTIONAL
+}
+
 func _ready() -> void:
-	animated_sprite.self_modulate = COLORS[color]
+	heart_animated_sprite.self_modulate = SOUL.RED
 	shield.hide()
 	get_tree().get_first_node_in_group("ropes").hide()
-	if color == "yellow":
+	if soul == SOUL.YELLOW:
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "rotation_degrees", 180, 0.3)
-	if color == "green":
+	if soul == SOUL.GREEN:
 		shield.show()
-	elif color == "purple":
+	elif soul == SOUL.PURPLE:
 		get_tree().get_first_node_in_group("ropes").show()
 
 func _physics_process(_delta) -> void:
-	if State.current_state != State.COMBATING or main.is_game_over:
+	if State.current_state != State.COMBATING:
 		return
 	
-	if color == "red":
-		Move("omnidirectional")
-	elif color == "blue":
-		Move("horizontal")
+	if soul == SOUL.RED:
+		Move(DIRECTION.OMNIDIRECTIONAL)
+	elif soul == SOUL.BLUE:
+		Move(DIRECTION.HORIZONTAL)
 		
 		if not is_on_floor():
 			velocity.y += gravity
@@ -46,7 +52,7 @@ func _physics_process(_delta) -> void:
 			velocity.y = -JUMP_FORCE
 		elif Input.is_action_just_released("up") and velocity.y < -0.1 and not is_on_floor():
 			velocity.y = 0
-	elif color == "green":
+	elif soul == SOUL.GREEN:
 		if ModifiedInput.either_of_the_actions_just_pressed(["up", "left", "down", "right"]):
 			var tween: Tween = create_tween()
 			if Input.is_action_just_pressed("up"):
@@ -58,8 +64,8 @@ func _physics_process(_delta) -> void:
 			elif Input.is_action_just_pressed("right"):
 				tween.tween_property(shield, "rotation_degrees", 90, 0.1)
 			tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	elif color == "purple":
-		Move("horizontal")
+	elif soul == SOUL.PURPLE:
+		Move(DIRECTION.HORIZONTAL)
 		
 		if ModifiedInput.either_of_the_actions_just_pressed(["up", "down"]):
 			if Input.is_action_just_pressed("up") and rope_index - 1 >= 0:
@@ -67,23 +73,23 @@ func _physics_process(_delta) -> void:
 			elif Input.is_action_just_pressed("down") and rope_index + 1 < 3:
 				rope_index += 1
 			create_tween().tween_property(self, "global_position:y", get_tree().get_first_node_in_group("ropes").get_child(rope_index).global_position.y, 0.1)
-	elif color == "yellow":
-		Move("omnidirectional")
+	elif soul == SOUL.YELLOW:
+		Move(DIRECTION.OMNIDIRECTIONAL)
 		
 		if Input.is_action_just_pressed("shoot"):
 			var bullet: Node = preload("res://Instances/bullet.tscn").instantiate()
 			get_tree().get_first_node_in_group("canvas").add_child(bullet)
 			bullet.global_position = shoot_point.global_position
 
-func Move(direction) -> void:
-	if direction == "omnidirectional" or direction == "horizontal":
+func Move(direction: int) -> void:
+	if direction == DIRECTION.OMNIDIRECTIONAL or direction == DIRECTION.HORIZONTAL:
 		if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 			velocity.x = 0
 		elif Input.is_action_pressed("left"):
 			velocity.x = -SPEED
 		elif Input.is_action_pressed("right"):
 			velocity.x = SPEED
-	if direction == "omnidirectional" or direction == "vertical":
+	if direction == DIRECTION.OMNIDIRECTIONAL or direction == DIRECTION.VERTICAL:
 		if Input.is_action_pressed("up") and Input.is_action_pressed("down"):
 			velocity.y = 0
 		elif Input.is_action_pressed("up"):
@@ -93,9 +99,9 @@ func Move(direction) -> void:
 	
 	move_and_slide()
 	
-	if direction == "omnidirectional" or direction == "horizontal":
+	if direction == DIRECTION.OMNIDIRECTIONAL or direction == DIRECTION.HORIZONTAL:
 		velocity.x = lerp(velocity.x, 0.0, 0.3)
-	if direction == "omnidirectional" or direction == "vertical":
+	if direction == DIRECTION.OMNIDIRECTIONAL or direction == DIRECTION.VERTICAL:
 		velocity.y = lerp(velocity.y, 0.0, 0.3)
 
 var is_immuning: bool = false
@@ -114,12 +120,12 @@ func immunity(sec: float, flashing_time: int = 3) -> void:
 
 func ghost_effect() -> void:
 	var ghost: Sprite2D = Sprite2D.new()
-	var sprite_frames: SpriteFrames = animated_sprite.get_sprite_frames()
+	var sprite_frames: SpriteFrames = heart_animated_sprite.get_sprite_frames()
 	var animation_names: PackedStringArray = sprite_frames.get_animation_names()
 	
 	ghost.texture = sprite_frames.get_frame_texture(animation_names[0], 0)
-	ghost.global_scale = animated_sprite.global_scale
-	ghost.self_modulate = COLORS[color]
+	ghost.global_scale = heart_animated_sprite.global_scale
+	ghost.self_modulate = soul
 	add_child(ghost)
 	create_tween().tween_property(ghost, "scale", ghost.scale * 2, 0.5)
 	create_tween().tween_property(ghost, "self_modulate:a", 0, 0.5)
@@ -132,20 +138,20 @@ func respawn() -> void:
 	global_position = spawn_point
 	show()
 
-func change_form(newColor: String):
-	color = newColor
-	animated_sprite.self_modulate = COLORS[color]
+func change_form(new_soul: Color):
+	soul = new_soul
+	heart_animated_sprite.self_modulate = soul
 	shield.hide()
 	get_tree().get_first_node_in_group("ropes").hide()
-	if color == "yellow":
+	if soul == SOUL.YELLOW:
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "rotation_degrees", 180, 0.3)
 	else:
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "rotation_degrees", 0, 0.3)
-	if color == "green":
+	if soul == SOUL.GREEN:
 		shield.show()
-	elif color == "purple":
+	elif soul == SOUL.PURPLE:
 		get_tree().get_first_node_in_group("ropes").show()
 	velocity = Vector2.ZERO
 	var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
@@ -155,7 +161,7 @@ func change_form(newColor: String):
 func deal_damage(damage_value: float) -> void:
 	if not is_immuning:
 		get_tree().get_first_node_in_group("health_bar").deal_damage(damage_value)
-		if not main.is_game_over:
+		if State.current_state != State.GAME_OVER:
 			main.play_sound_effect("hurt")
 			immunity(immunity_time)
 			get_viewport().get_camera_2d().camera_shake()
@@ -163,13 +169,9 @@ func deal_damage(damage_value: float) -> void:
 func heal(heal_value: float) -> void: get_tree().get_first_node_in_group("health_bar").deal_damage(heal_value)
 
 func heart_break():
-	var sprite_frames: SpriteFrames = animated_sprite.get_sprite_frames()
-	var animation_names: PackedStringArray = sprite_frames.get_animation_names()
-	var animation_duration: float = sprite_frames.get_frame_duration(animation_names[0], 0)
+	heart_animated_sprite.play("split")
 	
-	animated_sprite.play("state")
-	#print(animation_duration)
-	await time.sleep(0.7, test)
+	await time.sleep(ModifiedSpriteFrames.get_frame_absolute_duration(heart_animated_sprite), func(): main.play_sound_effect("Heart Split"))
 	
 	await time.sleep(1)
 	
@@ -177,14 +179,11 @@ func heart_break():
 		var shard: AnimatedSprite2D = load("res://Instances/shard.tscn").instantiate()
 		
 		shard.global_scale = global_scale
-		shard.self_modulate = animated_sprite.self_modulate
+		shard.self_modulate = heart_animated_sprite.self_modulate
 		add_child(shard)
 	
-	animated_sprite.self_modulate.a = 0
+	heart_animated_sprite.self_modulate.a = 0
 	
 	main.play_sound_effect("Heart Shatter")
 	
 	await time.sleep(1)
-
-func test():
-	main.play_sound_effect("Heart Split")

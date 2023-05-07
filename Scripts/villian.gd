@@ -104,7 +104,7 @@ func attack() -> void:
 	var attack_animation: AnimationPlayer = attack_move.get_child(attack_move.get_child_count() - 1)
 	var actions: Node2D = get_tree().get_first_node_in_group("actions")
 	
-	player.change_form("blue")
+	player.change_form(player.SOUL.BLUE)
 	
 	await time.sleep(1)
 	

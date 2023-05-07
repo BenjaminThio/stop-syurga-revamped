@@ -1,8 +1,11 @@
 extends Node2D
 
-var is_game_over: bool = false
+var disabled_process_mode: bool = false
+var game_over_screen: PackedScene = preload("res://Scenes/game_over.tscn")
 
 @onready var background_music_player: AudioStreamPlayer = $BackgroundMusicPlayer
+@onready var player: CharacterBody2D = $Player
+@onready var main_camera: Camera2D = $Camera2D
 
 func _ready() -> void:
 	if background_music_player.stream == null:
@@ -11,6 +14,10 @@ func _ready() -> void:
 		play_audio()
 	else:
 		loop_audio()
+
+func _process(_delta) -> void:
+	if Input.is_action_just_pressed("test1"):
+		set_pause(not disabled_process_mode)
 
 func play_sound_effect(sound_name: String) -> void:
 	var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
@@ -38,10 +45,7 @@ func loop_audio(loop: bool = true) -> void:
 		background_music_player.finished.disconnect(background_music_player.play)
 
 func game_over() -> void:
-	is_game_over = true
-	
-	var player: CharacterBody2D = $Player
-	var main_camera: Camera2D = $Camera2D
+	State.change_state(State.GAME_OVER)
 	
 	for child in get_children():
 		if child not in [player, main_camera]:
@@ -49,13 +53,13 @@ func game_over() -> void:
 	
 	await player.heart_break()
 	
-	var game_over_screen: Control = load("res://Scenes/game_over.tscn").instantiate()
-	
-	add_child(game_over_screen)
+	add_child(game_over_screen.instantiate())
 
 func set_pause(pause: bool):
+	disabled_process_mode = pause
+	
 	for child in get_children():
-		if pause:
+		if disabled_process_mode:
 			child.process_mode = Node.PROCESS_MODE_DISABLED
 		else:
 			child.process_mode = Node.PROCESS_MODE_INHERIT

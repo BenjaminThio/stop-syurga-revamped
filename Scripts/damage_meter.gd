@@ -28,7 +28,7 @@ func _ready() -> void:
 	transition_time = distance / speed
 
 func _process(_delta) -> void:
-	if Input.is_action_just_pressed("accept") and tween != null and not has_damaged:
+	if Input.is_action_just_pressed("accept") and tween != null and not has_damaged and slider != null:
 		var villian: Node2D = get_tree().get_first_node_in_group("villian")
 		var villian_sprite: Node2D = villian.get_child(0)
 		var villian_health_bar: ProgressBar = villian.get_child(1)

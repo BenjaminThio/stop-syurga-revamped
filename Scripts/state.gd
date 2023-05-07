@@ -6,8 +6,16 @@ const FIGHT = "fight"
 const ACT = "act"
 const ITEM = "item"
 const MERCY = "mercy"
-const AVAILABLE_STATES: Array[String] = [COMBATING, TAKING_ACTION, FIGHT, ACT, ITEM, MERCY]
-var current_state: String = TAKING_ACTION
+const GAME_OVER = "game_over"
+const AVAILABLE_STATES: Array[String] = [COMBATING, TAKING_ACTION, FIGHT, ACT, ITEM, MERCY, GAME_OVER]
+var current_state: String = TAKING_ACTION:
+	get:
+		return current_state
+	set(value):
+		if get_stack()[1].source == get_script().get_path():
+			current_state = value
+		else:
+			Debug.log_warning(Debug.PROTECTED_VARIABLE + "Please use \"change_state()\" function instead to change the current state.")
 
 func change_state(new_state: String) -> void:
 	new_state = new_state.to_lower()

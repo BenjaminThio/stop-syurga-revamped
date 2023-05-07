@@ -14,7 +14,7 @@ animations = [{
 "texture": ExtResource("3_wqp14")
 }],
 "loop": false,
-"name": &"state",
+"name": &"split",
 "speed": 5.0
 }]
 
@@ -25,10 +25,10 @@ radius = 90.0
 texture_filter = 1
 script = ExtResource("1_pplwt")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.12, 1.12)
 sprite_frames = SubResource("SpriteFrames_30uly")
-animation = &"state"
+animation = &"split"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.1, 0.1)

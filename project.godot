@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 db="*res://Scripts/database.gd"
 State="*res://Scripts/state.gd"
 time="*res://Modules/Python/time.gd"
+Debug="*res://Modules/Godot/debug.gd"
 
 [input]
 

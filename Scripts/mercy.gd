@@ -1,9 +1,12 @@
 class_name Mercy extends Node
 
-const OPTIONS: Array[String] = ["spare", "flee"]
+enum OPTION {
+	SPARE,
+	FLEE
+}
 
-func select_option(option: String) -> void:
-	if option == "spare":
+func select_option(option: int) -> void:
+	if option == OPTION.SPARE:
 		print("Testing123!")
-	elif option == "flee":
+	elif option == OPTION.FLEE:
 		print("Hello World!")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cj5e08o6s4y2s"]
+[gd_scene load_steps=5 format=3 uid="uid://cj5e08o6s4y2s"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_5b85o"]
 [ext_resource type="FontFile" uid="uid://jvipihxmlqfy" path="res://Fonts/8-BIT WONDER.TTF" id="1_ied82"]
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="2_8fmeu"]
-[ext_resource type="AudioStream" uid="uid://ciwfbtniseme3" path="res://Musics/Game Over.mp3" id="4_iam53"]
 
 [sub_resource type="FontVariation" id="FontVariation_xn33b"]
 base_font = ExtResource("2_8fmeu")
@@ -22,6 +21,7 @@ offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5b85o")
+metadata/_edit_group_ = true
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
@@ -44,6 +44,3 @@ theme_override_fonts/font = SubResource("FontVariation_xn33b")
 theme_override_font_sizes/font_size = 35
 autowrap_mode = 3
 clip_text = true
-
-[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_iam53")

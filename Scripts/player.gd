@@ -18,6 +18,10 @@ var immunity_time: float = 1.8
 @onready var heart_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shield: Node2D = $Shield
 @onready var shoot_point: Marker2D = $Marker2D
+@onready var ropes: Node2D = get_tree().get_first_node_in_group("ropes")
+@onready var canvas: Control = get_tree().get_first_node_in_group("canvas")
+@onready var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
+@onready var health_bar: ProgressBar = get_tree().get_first_node_in_group("health_bar")
 
 enum DIRECTION {
 	HORIZONTAL,
@@ -26,16 +30,7 @@ enum DIRECTION {
 }
 
 func _ready() -> void:
-	heart_animated_sprite.self_modulate = SOUL.RED
-	shield.hide()
-	get_tree().get_first_node_in_group("ropes").hide()
-	if soul == SOUL.YELLOW:
-		var tween: Tween = create_tween()
-		tween.tween_property(self, "rotation_degrees", 180, 0.3)
-	if soul == SOUL.GREEN:
-		shield.show()
-	elif soul == SOUL.PURPLE:
-		get_tree().get_first_node_in_group("ropes").show()
+	update_player()
 
 func _physics_process(_delta) -> void:
 	if State.current_state != State.COMBATING:
@@ -72,13 +67,13 @@ func _physics_process(_delta) -> void:
 				rope_index -= 1
 			elif Input.is_action_just_pressed("down") and rope_index + 1 < 3:
 				rope_index += 1
-			create_tween().tween_property(self, "global_position:y", get_tree().get_first_node_in_group("ropes").get_child(rope_index).global_position.y, 0.1)
+			create_tween().tween_property(self, "global_position:y", ropes.get_child(rope_index).global_position.y, 0.1)
 	elif soul == SOUL.YELLOW:
 		Move(DIRECTION.OMNIDIRECTIONAL)
 		
 		if Input.is_action_just_pressed("shoot"):
 			var bullet: Node = preload("res://Instances/bullet.tscn").instantiate()
-			get_tree().get_first_node_in_group("canvas").add_child(bullet)
+			canvas.add_child(bullet)
 			bullet.global_position = shoot_point.global_position
 
 func Move(direction: int) -> void:
@@ -132,41 +127,46 @@ func ghost_effect() -> void:
 	await time.sleep(0.5, ghost.queue_free)
 
 func respawn() -> void:
-	var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
 	var spawn_point: Vector2 = Vector2(battlefield.global_position.x + battlefield.pivot_offset.x, battlefield.global_position.y + battlefield.pivot_offset.y)
 	
 	global_position = spawn_point
 	show()
 
-func change_form(new_soul: Color):
+func change_form(new_soul: Color) -> void:
+	velocity = Vector2.ZERO
+	global_position = Vector2(battlefield.global_position.x + battlefield.pivot_offset.x, battlefield.global_position.y + battlefield.pivot_offset.y)
 	soul = new_soul
+	update_player()
+	ghost_effect()
+
+func update_player() -> void:
 	heart_animated_sprite.self_modulate = soul
-	shield.hide()
-	get_tree().get_first_node_in_group("ropes").hide()
-	if soul == SOUL.YELLOW:
-		var tween: Tween = create_tween()
-		tween.tween_property(self, "rotation_degrees", 180, 0.3)
-	else:
-		var tween: Tween = create_tween()
-		tween.tween_property(self, "rotation_degrees", 0, 0.3)
+	
 	if soul == SOUL.GREEN:
 		shield.show()
-	elif soul == SOUL.PURPLE:
-		get_tree().get_first_node_in_group("ropes").show()
-	velocity = Vector2.ZERO
-	var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
-	global_position = Vector2(battlefield.global_position.x + battlefield.pivot_offset.x, battlefield.global_position.y + battlefield.pivot_offset.y)
-	ghost_effect()
+	elif soul != SOUL.GREEN and shield.visible:
+		shield.hide()
+	
+	if soul == SOUL.PURPLE:
+		ropes.show()
+	elif soul != SOUL.PURPLE and ropes.visible:
+		ropes.hide()
+	
+	if soul == SOUL.YELLOW:
+		create_tween().tween_property(self, "rotation_degrees", 180, 0.3)
+	elif soul != SOUL.YELLOW and rotation_degrees > 0:
+		create_tween().tween_property(self, "rotation_degrees", 0, 0.3)
+	
 
 func deal_damage(damage_value: float) -> void:
 	if not is_immuning:
-		get_tree().get_first_node_in_group("health_bar").deal_damage(damage_value)
+		health_bar.deal_damage(damage_value)
 		if State.current_state != State.GAME_OVER:
 			main.play_sound_effect("hurt")
 			immunity(immunity_time)
 			get_viewport().get_camera_2d().camera_shake()
 
-func heal(heal_value: float) -> void: get_tree().get_first_node_in_group("health_bar").deal_damage(heal_value)
+func heal(heal_value: float) -> void: health_bar.deal_damage(heal_value)
 
 func heart_break():
 	heart_animated_sprite.play("split")

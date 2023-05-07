@@ -47,8 +47,10 @@ func loop_audio(loop: bool = true) -> void:
 func game_over() -> void:
 	State.change_state(State.GAME_OVER)
 	
+	background_music_player.stop()
+	
 	for child in get_children():
-		if child not in [player, main_camera]:
+		if child not in [player, main_camera, background_music_player]:
 			child.queue_free()
 	
 	await player.heart_break()

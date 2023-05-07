@@ -1,13 +1,6 @@
 res://Scenes/main.tscn
-res://Scenes/test.tscn
-res://Scripts/custom_menu.gd
-res://Scripts/state.gd
-res://Scripts/menu.gd
-res://Scripts/mercy.gd
-res://Scripts/damage_meter.gd
 res://Scripts/player.gd
-res://Modules/Godot/debug.gd
-res://Scripts/test.gd
-res://Scripts/test2.gd
-res://Instances/flee.tscn
+res://Instances/player.tscn
+res://Scenes/game_over.tscn
+res://Scripts/game_over.gd
 res://Scripts/main.gd

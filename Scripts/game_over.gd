@@ -29,7 +29,7 @@ func _process(_delta) -> void:
 		phases += 1
 		quote_label.text = ""
 		if phases == 1:
-			await asgore_say("{name}!\nStay determined.".format({"name": db.human_name}))
+			await asgore_say("{name}!\nStay determined.".format({"name": db.player_name}))
 		elif phases == 2:
 			on_queue = true
 			await time.sleep(3)

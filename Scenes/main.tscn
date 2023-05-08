@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://5dyp3jj05jyf"]
+[gd_scene load_steps=38 format=3 uid="uid://5dyp3jj05jyf"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_7kmeb"]
 [ext_resource type="Texture2D" uid="uid://c30bytot8d5sc" path="res://Sprites/Uncategorized/battlefield.png" id="1_ksf4q"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ce331k5k2onbo" path="res://Instances/player.tscn" id="3_xtc3i"]
 [ext_resource type="Script" path="res://Scripts/battlefield_collision.gd" id="4_d1xm4"]
 [ext_resource type="Script" path="res://Scripts/actions.gd" id="5_qnnb1"]
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="6_7ovyu"]
+[ext_resource type="Script" path="res://Scripts/stats.gd" id="6_qwkld"]
 [ext_resource type="Texture2D" uid="uid://cvq5vhmd35rqj" path="res://Sprites/Actions/fight.png" id="8_mbvjo"]
 [ext_resource type="Texture2D" uid="uid://cvjyjh5xsclis" path="res://Sprites/Actions/fight_hovered.png" id="9_a3ogc"]
 [ext_resource type="Script" path="res://Scripts/villian.gd" id="9_squfb"]
@@ -157,15 +159,27 @@ position = Vector2(0, 52)
 scale = Vector2(0.129317, 0.117647)
 texture = ExtResource("3_w0vpv")
 
-[node name="Container" type="HBoxContainer" parent="Canvas"]
+[node name="Description" type="RichTextLabel" parent="Canvas/Battlefield" groups=["description_label"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 744.0
+offset_bottom = 168.0
+pivot_offset = Vector2(27, 18)
+theme_override_fonts/normal_font = ExtResource("6_7ovyu")
+theme_override_font_sizes/normal_font_size = 27
+text = "Hello World!"
+
+[node name="Stats" type="HBoxContainer" parent="Canvas"]
 layout_mode = 0
 offset_left = 192.0
 offset_top = 536.0
 offset_right = 960.0
 offset_bottom = 563.0
+script = ExtResource("6_qwkld")
 metadata/_edit_group_ = true
 
-[node name="Name" type="Label" parent="Canvas/Container"]
+[node name="Name" type="Label" parent="Canvas/Stats"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_304wy")
@@ -173,7 +187,7 @@ theme_override_font_sizes/font_size = 24
 text = "Benjamin"
 vertical_alignment = 1
 
-[node name="Level" type="Label" parent="Canvas/Container"]
+[node name="Level" type="Label" parent="Canvas/Stats"]
 custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_304wy")
@@ -181,7 +195,7 @@ theme_override_font_sizes/font_size = 24
 text = "LV 19"
 vertical_alignment = 1
 
-[node name="HPLabel" type="Label" parent="Canvas/Container"]
+[node name="HPLabel" type="Label" parent="Canvas/Stats"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("19_fsdbe")
 theme_override_font_sizes/font_size = 10
@@ -189,7 +203,7 @@ text = "HP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HealthBar" type="ProgressBar" parent="Canvas/Container" groups=["health_bar"]]
+[node name="HealthBar" type="ProgressBar" parent="Canvas/Stats" groups=["health_bar"]]
 custom_minimum_size = Vector2(200, 24)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_fqj0j")
@@ -199,7 +213,7 @@ value = 20.0
 show_percentage = false
 script = ExtResource("20_5ykt5")
 
-[node name="HealthLabel" type="Label" parent="Canvas/Container"]
+[node name="HealthLabel" type="Label" parent="Canvas/Stats"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("18_304wy")
@@ -252,11 +266,11 @@ position = Vector2(213, 596)
 position = Vector2(576, 160)
 script = ExtResource("9_squfb")
 
-[node name="Yi Fan" type="Sprite2D" parent="Villian"]
+[node name="Sprite2D" type="Sprite2D" parent="Villian"]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("18_xocnk")
 
-[node name="Shield" type="Sprite2D" parent="Villian/Yi Fan"]
+[node name="Shield" type="Sprite2D" parent="Villian/Sprite2D"]
 self_modulate = Color(1, 1, 1, 0)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("19_ht1rv")

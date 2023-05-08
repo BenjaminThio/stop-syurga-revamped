@@ -1,7 +1,7 @@
 extends Node2D
 
 var disabled_process_mode: bool = false
-var game_over_screen: PackedScene = preload("res://Scenes/game_over.tscn")
+var game_over_screen: PackedScene = preload("res://Instances/game_over.tscn")
 
 @onready var background_music_player: AudioStreamPlayer = $BackgroundMusicPlayer
 @onready var player: CharacterBody2D = $Player

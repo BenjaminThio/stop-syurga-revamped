@@ -162,7 +162,7 @@ func had_made_a_choice() -> void:
 	
 	get_tree().get_root().get_node("Main").play_sound_effect("select")
 	player.hide()
-	action_buttons.turn_off()
+	action_buttons.get_child(action_buttons.action_index).frame = 0
 	State.change_state(State.COMBATING)
 	action_buttons.reset()
 	queue_free()

@@ -1,6 +1,9 @@
 extends Node
 
-const PROTECTED_VARIABLE: String = "You can't access protected variable!"
+const PRIVATE_VARIABLE_NOT_ACCESSIBLE: String = "You can't access to this private variable out of the current script!"
+const PROTECTED_VARIABLE_NOT_ACCESSIBLE: String = "You can't access to this protected variable."
+const INVALID_PLAYER_NAME: String = "This player name is invalid!"
+#const NEGATIVE_ARGUMENT_NOT_ACCEPTABLE: String = "This argument's value shouldn't be negative."
 
 func log_error(error, required_print_stack: bool = false):
 	printerr(error)

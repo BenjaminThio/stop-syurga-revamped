@@ -1,6 +1,7 @@
 extends Node2D
 
 const SPEED: int = 100
+@export var enemy_name: String = "Yi Fan"
 var health: int = 34000
 var activate_shield = false
 var rotate: bool = true
@@ -28,9 +29,7 @@ func set_rotate(boolean: bool) -> void:
 
 func deal_damage(damage_value: int) -> void:
 	if damage_value < 0:
-		var error: String = "The negative damage value is not acceptable."
-		printerr(error)
-		push_error(error)
+		Debug.log_error("The negative damage value is not acceptable.", true)
 		return
 	
 	if health - damage_value >= 0:

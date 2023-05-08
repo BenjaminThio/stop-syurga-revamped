@@ -4,6 +4,11 @@ var fleeing: bool = false
 
 @onready var soul = $Soul
 
+var level = 1
+
+func _ready():
+	pass
+
 func _process(_delta):
 	if Input.is_action_just_pressed("accept") and not fleeing:
 		fleeing = true

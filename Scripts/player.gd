@@ -10,7 +10,14 @@ const SOUL: Dictionary = {
 	YELLOW = Color.YELLOW
 }
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-var soul: Color = SOUL.RED
+var soul: Color = SOUL.RED:
+	get:
+		return soul
+	set(value):
+		if get_stack()[1].source == get_script().get_path():
+			soul = value
+		else:
+			Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
 var rope_index: int = 1
 var immunity_time: float = 1.8
 
@@ -164,7 +171,7 @@ func deal_damage(damage_value: float) -> void:
 		if State.current_state != State.GAME_OVER:
 			main.play_sound_effect("hurt")
 			immunity(immunity_time)
-			get_viewport().get_camera_2d().camera_shake()
+			get_viewport().get_camera_2d().shake()
 
 func heal(heal_value: float) -> void: health_bar.deal_damage(heal_value)
 

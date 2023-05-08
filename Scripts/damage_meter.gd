@@ -63,7 +63,7 @@ func slide_slider() -> void:
 func enemy_turn() -> void:
 	var action_buttons: Node2D = get_tree().get_first_node_in_group("actions")
 	
-	action_buttons.turn_off()
+	action_buttons.get_child(action_buttons.action_index).frame = 0
 	State.change_state(State.COMBATING)
 	slider.queue_free()
 	animation_player.play_backwards("damage_meter_appear")

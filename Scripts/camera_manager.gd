@@ -2,7 +2,7 @@ extends Camera2D
 
 @onready var origin = position
 
-func camera_shake(times: int = 5, default_delay_time: float = 0.01, fixed_delay_time: bool = false) -> void:
+func shake(times: int = 5, default_delay_time: float = 0.01, fixed_delay_time: bool = false) -> void:
 	var offset_sign: bool = false
 	var delay_time: float = default_delay_time
 	var shake_range: Array = range(times, 0, -1)

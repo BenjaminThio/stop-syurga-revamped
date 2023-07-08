@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://pgksc71ae235"]
+
+[ext_resource type="Script" path="res://Test/Scripts/speech_bubble.gd" id="1_c4yut"]
+[ext_resource type="Texture2D" uid="uid://lndan2ak6sq2" path="res://Sprites/Bubbles/bubble_2.png" id="2_d88uy"]
+[ext_resource type="FontFile" uid="uid://bnqnorxd15wy6" path="res://Fonts/papyrus.ttf" id="3_1s2tk"]
+
+[sub_resource type="FontVariation" id="FontVariation_myfm5"]
+base_font = ExtResource("3_1s2tk")
+spacing_glyph = 1
+
+[node name="Dialogue" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_c4yut")
+
+[node name="Bubble" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 128.0
+texture = ExtResource("2_d88uy")
+patch_margin_left = 48
+patch_margin_top = 32
+patch_margin_right = 48
+patch_margin_bottom = 32
+
+[node name="Test" type="Label" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 8.0
+offset_right = 247.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_myfm5")
+uppercase = true
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 21.0
+offset_top = 8.0
+offset_right = 247.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_myfm5")
+uppercase = true
+
+[connection signal="resized" from="Test" to="." method="_on_test_resized"]
+[connection signal="resized" from="Label" to="." method="_on_label_resized"]

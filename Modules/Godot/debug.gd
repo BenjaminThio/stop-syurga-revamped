@@ -3,7 +3,24 @@ extends Node
 const PRIVATE_VARIABLE_NOT_ACCESSIBLE: String = "You can't access to this private variable out of the current script!"
 const PROTECTED_VARIABLE_NOT_ACCESSIBLE: String = "You can't access to this protected variable."
 const INVALID_PLAYER_NAME: String = "This player name is invalid!"
+const ARGUMENT_TYPE_UNACCEPTABLE: String = "Cannot pass value of type \"{unacceptable_type}\" as \"{acceptable_types}\""
 #const NEGATIVE_ARGUMENT_NOT_ACCEPTABLE: String = "This argument's value shouldn't be negative."
+
+func type_of(value) -> String:
+	match typeof(value):
+		TYPE_ARRAY:
+			return "Array"
+		TYPE_BOOL:
+			return "bool"
+		TYPE_DICTIONARY:
+			return "Dictionary"
+		TYPE_FLOAT:
+			return "float"
+		TYPE_INT:
+			return "int"
+		TYPE_STRING:
+			return "String"
+	return "Unknown"
 
 func log_error(error, required_print_stack: bool = false):
 	printerr(error)

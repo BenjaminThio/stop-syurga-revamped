@@ -1,0 +1,262 @@
+[gd_scene load_steps=12 format=3 uid="uid://dm6fshn2gwtyr"]
+
+[ext_resource type="Script" path="res://Scripts/main_manu.gd" id="1_w3v32"]
+[ext_resource type="Texture2D" uid="uid://c6vtnsrm3qkg5" path="res://Sprites/main-menu.png" id="1_ylrvo"]
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="2_qc8vm"]
+[ext_resource type="FontFile" uid="uid://csahcrsc4eshy" path="res://Fonts/crypt-of-tomorrow-ut-font-no-rus.ttf" id="3_ereoi"]
+[ext_resource type="Texture2D" uid="uid://ci3d2sq5742uu" path="res://Gimp/better_smaller_logo.png" id="3_nbjb1"]
+[ext_resource type="Texture2D" uid="uid://dnxtn2qy3dr3v" path="res://Gimp/tm.png" id="4_ldm3d"]
+[ext_resource type="AudioStream" uid="uid://d03bavn88qyfk" path="res://Musics/mus_main_menu.ogg" id="7_yye4o"]
+
+[sub_resource type="FontVariation" id="FontVariation_gsp6u"]
+base_font = ExtResource("3_ereoi")
+
+[sub_resource type="FontVariation" id="FontVariation_340f4"]
+base_font = ExtResource("3_ereoi")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_whgaq"]
+base_font = ExtResource("3_ereoi")
+spacing_glyph = 2
+
+[sub_resource type="FontVariation" id="FontVariation_hnbru"]
+base_font = ExtResource("3_ereoi")
+spacing_space = -5
+
+[node name="Main Manu" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_w3v32")
+
+[node name="Reference" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+position = Vector2(576, 324)
+scale = Vector2(0.843338, 0.84375)
+texture = ExtResource("1_ylrvo")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(416, 96)
+scale = Vector2(6, 6)
+texture = ExtResource("3_nbjb1")
+
+[node name="Trademark" type="Sprite2D" parent="Logo"]
+visible = false
+position = Vector2(61.543, -4.45964)
+scale = Vector2(0.126356, 0.126356)
+texture = ExtResource("4_ldm3d")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 165.0
+offset_right = 283.0
+offset_bottom = 214.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "Benjamin"
+vertical_alignment = 1
+
+[node name="Level" type="Label" parent="."]
+layout_mode = 0
+offset_left = 317.0
+offset_top = 165.0
+offset_right = 401.0
+offset_bottom = 214.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "LV 20"
+vertical_alignment = 1
+
+[node name="Playtime" type="Label" parent="."]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 165.0
+offset_right = 652.0
+offset_bottom = 214.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "999:59"
+vertical_alignment = 1
+
+[node name="Location" type="Node2D" parent="."]
+
+[node name="Name" type="Label" parent="Location"]
+offset_left = 168.0
+offset_top = 214.0
+offset_right = 244.0
+offset_bottom = 262.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 36
+text = "Void"
+vertical_alignment = 1
+
+[node name="DecorationSign" type="Label" parent="Location"]
+offset_left = 244.0
+offset_top = 198.0
+offset_right = 295.0
+offset_bottom = 246.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 36
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Location"]
+offset_left = 295.0
+offset_top = 214.0
+offset_right = 447.0
+offset_bottom = 262.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 36
+text = "Darkness"
+vertical_alignment = 1
+
+[node name="Options" type="Node2D" parent="."]
+
+[node name="Continue" type="Label" parent="Options"]
+offset_left = 168.0
+offset_top = 281.0
+offset_right = 320.0
+offset_bottom = 330.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "Continue"
+vertical_alignment = 1
+
+[node name="Reset" type="Label" parent="Options"]
+offset_left = 168.0
+offset_top = 335.0
+offset_right = 263.0
+offset_bottom = 384.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "Reset"
+vertical_alignment = 1
+
+[node name="Settings" type="Label" parent="Options"]
+offset_left = 168.0
+offset_top = 389.0
+offset_right = 320.0
+offset_bottom = 438.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "Settings"
+vertical_alignment = 1
+
+[node name="Leaderboard" type="Label" parent="Options"]
+offset_left = 168.0
+offset_top = 443.0
+offset_right = 377.0
+offset_bottom = 492.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "Leaderboard"
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="Options"]
+offset_left = 168.0
+offset_top = 497.0
+offset_right = 244.0
+offset_bottom = 546.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "Credits"
+vertical_alignment = 1
+
+[node name="Quit" type="Label" parent="Options"]
+offset_left = 168.0
+offset_top = 551.0
+offset_right = 244.0
+offset_bottom = 600.0
+theme_override_fonts/font = ExtResource("2_qc8vm")
+theme_override_font_sizes/font_size = 37
+text = "Quit"
+vertical_alignment = 1
+
+[node name="Credits" type="Node2D" parent="."]
+
+[node name="GameName" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 315.0
+offset_top = 625.0
+offset_right = 469.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_gsp6u")
+theme_override_font_sizes/font_size = 14
+text = "Stop Syurga"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Version" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 480.0
+offset_top = 625.0
+offset_right = 534.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_340f4")
+theme_override_font_sizes/font_size = 14
+text = "v1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Copyright" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 528.0
+offset_top = 625.0
+offset_right = 601.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_whgaq")
+theme_override_font_sizes/font_size = 14
+text = " (C) "
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="DeveloperName" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 595.0
+offset_top = 625.0
+offset_right = 772.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_hnbru")
+theme_override_font_sizes/font_size = 14
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Period" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 783.0
+offset_top = 625.0
+offset_right = 839.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_ereoi")
+theme_override_font_sizes/font_size = 14
+text = "2023"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_yye4o")
+pitch_scale = 0.95
+autoplay = true
+
+[connection signal="resized" from="Location/Name" to="." method="_on_location_name_label_resized"]

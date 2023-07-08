@@ -7,25 +7,13 @@ var game_over_screen: PackedScene = preload("res://Instances/game_over.tscn")
 @onready var player: CharacterBody2D = $Player
 @onready var main_camera: Camera2D = $Camera2D
 
-func _ready() -> void:
+func play_background_music():
 	if background_music_player.stream == null:
-		play_audio("res://Musics/Stop Syurga.mp3")
+		play_audio("res://Musics/mus_stop_syurga.ogg")
 	elif not background_music_player.playing and not background_music_player.autoplay:
 		play_audio()
 	else:
 		loop_audio()
-
-func _process(_delta) -> void:
-	if Input.is_action_just_pressed("test1"):
-		set_pause(not disabled_process_mode)
-
-func play_sound_effect(sound_name: String) -> void:
-	var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
-	
-	add_child(audio_stream_player)
-	audio_stream_player.stream = load("res://Sounds/{sound_name}.wav".format({"sound_name": sound_name.capitalize()}))
-	audio_stream_player.play()
-	audio_stream_player.finished.connect(audio_stream_player.queue_free)
 
 func play_audio(path: String = "", loop: bool = true) -> void:
 	if path != "":
@@ -45,13 +33,22 @@ func loop_audio(loop: bool = true) -> void:
 		background_music_player.finished.disconnect(background_music_player.play)
 
 func game_over() -> void:
-	State.change_state(State.GAME_OVER)
+	State.set_state(State.MAIN_STATE.GAME_OVER)
 	
 	background_music_player.stop()
 	
 	for child in get_children():
 		if child not in [player, main_camera, background_music_player]:
 			child.queue_free()
+		elif child == player:
+			var player_green: Node2D = player.get_node("Green")
+			var spear_spawner: Node2D = player.get_node("SpearAttack/Spawner")
+			
+			if player_green.visible:
+				player_green.hide()
+			if spear_spawner.get_child_count() > 0:
+				for spear in spear_spawner.get_children():
+					spear.queue_free()
 	
 	await player.heart_break()
 	

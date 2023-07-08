@@ -1,7 +1,20 @@
 extends CharacterBody2D
 
+enum DIRECTION {
+	HORIZONTAL,
+	VERTICAL,
+	OMNIDIRECTIONAL
+}
+enum ANGLE_DIRECTION {
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT,
+	NULL
+}
 const SPEED: int = 100
 const JUMP_FORCE: int = 290
+const SHIELD_ROTATE_TIME: float = 0.05
 const SOUL: Dictionary = {
 	RED = Color.RED,
 	BLUE = Color.BLUE,
@@ -20,27 +33,26 @@ var soul: Color = SOUL.RED:
 			Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
 var rope_index: int = 1
 var immunity_time: float = 1.8
+var shield_angle: int = 0
+var reset_shield: bool = false
 
 @onready var main: Node2D = get_tree().get_root().get_node("Main")
 @onready var heart_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var shield: Node2D = $Shield
-@onready var shoot_point: Marker2D = $Marker2D
+@onready var green: Node2D = $Green
+@onready var shield: Area2D = green.get_node("Shield")
+@onready var spear_spawner: Node2D = $SpearAttack/Spawner
+@onready var bullet_spawnpoint: Marker2D = $BulletSpawnpoint
 @onready var ropes: Node2D = get_tree().get_first_node_in_group("ropes")
 @onready var canvas: Control = get_tree().get_first_node_in_group("canvas")
 @onready var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
 @onready var health_bar: ProgressBar = get_tree().get_first_node_in_group("health_bar")
-
-enum DIRECTION {
-	HORIZONTAL,
-	VERTICAL,
-	OMNIDIRECTIONAL
-}
+@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
 
 func _ready() -> void:
 	update_player()
 
 func _physics_process(_delta) -> void:
-	if State.current_state != State.COMBATING:
+	if State.current_state != State.MAIN_STATE.COMBATING:
 		return
 	
 	if soul == SOUL.RED:
@@ -57,15 +69,17 @@ func _physics_process(_delta) -> void:
 	elif soul == SOUL.GREEN:
 		if ModifiedInput.either_of_the_actions_just_pressed(["up", "left", "down", "right"]):
 			var tween: Tween = create_tween()
+			
+			shield.monitoring = false
 			if Input.is_action_just_pressed("up"):
-				tween.tween_property(shield, "rotation_degrees", 0, 0.1)
-			elif Input.is_action_just_pressed("left"):
-				tween.tween_property(shield, "rotation_degrees", 270, 0.1)
-			elif Input.is_action_just_pressed("down"):
-				tween.tween_property(shield, "rotation_degrees", 180, 0.1)
+				shield_angle = get_shield_shortest_rotate_angle(int(shield_angle), ANGLE_DIRECTION.UP)
 			elif Input.is_action_just_pressed("right"):
-				tween.tween_property(shield, "rotation_degrees", 90, 0.1)
-			tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+				shield_angle = get_shield_shortest_rotate_angle(int(shield_angle), ANGLE_DIRECTION.RIGHT)
+			elif Input.is_action_just_pressed("down"):
+				shield_angle = get_shield_shortest_rotate_angle(int(shield_angle), ANGLE_DIRECTION.DOWN)
+			elif Input.is_action_just_pressed("left"):
+				shield_angle = get_shield_shortest_rotate_angle(int(shield_angle), ANGLE_DIRECTION.LEFT)
+			tween.tween_property(shield, "rotation_degrees", shield_angle, SHIELD_ROTATE_TIME).finished.connect(func() -> void: shield.monitoring = true)
 	elif soul == SOUL.PURPLE:
 		Move(DIRECTION.HORIZONTAL)
 		
@@ -80,8 +94,40 @@ func _physics_process(_delta) -> void:
 		
 		if Input.is_action_just_pressed("shoot"):
 			var bullet: Node = preload("res://Instances/bullet.tscn").instantiate()
+			
 			canvas.add_child(bullet)
-			bullet.global_position = shoot_point.global_position
+			bullet.global_position = bullet_spawnpoint.global_position
+			Audio.play_sound("shoot")
+
+func get_angle_direction(angle: int) -> ANGLE_DIRECTION:
+	if angle == 0 or fmod(angle, 360) == 0:
+		return ANGLE_DIRECTION.UP
+	elif angle == 90 or fmod(angle - 90, 360) == 0:
+		return ANGLE_DIRECTION.RIGHT
+	elif angle == 180 or fmod(angle - 180, 360) == 0:
+		return ANGLE_DIRECTION.DOWN
+	elif angle == 270 or fmod(angle - 270, 360) == 0:
+		return ANGLE_DIRECTION.LEFT
+	else:
+		return ANGLE_DIRECTION.NULL
+
+func get_shield_shortest_rotate_angle(current_angle: int, target_direction: ANGLE_DIRECTION) -> int:
+	var left_rotate_steps: int = 1
+	var right_rotate_steps: int = 1
+	
+	if get_angle_direction(current_angle) == target_direction:
+		return current_angle
+	
+	while get_angle_direction(current_angle - (90 * left_rotate_steps)) != target_direction:
+		left_rotate_steps += 1
+	
+	while get_angle_direction(current_angle + (90 * right_rotate_steps)) != target_direction:
+		right_rotate_steps += 1
+	
+	if left_rotate_steps < right_rotate_steps:
+		return current_angle - (left_rotate_steps * 90)
+	else:
+		return current_angle + (right_rotate_steps * 90)
 
 func Move(direction: int) -> void:
 	if direction == DIRECTION.OMNIDIRECTIONAL or direction == DIRECTION.HORIZONTAL:
@@ -114,9 +160,9 @@ func immunity(sec: float, flashing_time: int = 3) -> void:
 	if not is_immuning:
 		is_immuning = true
 		for _i in range(flashing_time):
-			create_tween().tween_property(self, "modulate:a", 0.5, transition_time)
+			create_tween().tween_property(heart_animated_sprite, "modulate:a", 0.5, transition_time)
 			await time.sleep(transition_time)
-			create_tween().tween_property(self, "modulate:a", 1, transition_time)
+			create_tween().tween_property(heart_animated_sprite, "modulate:a", 1, transition_time)
 			await time.sleep(transition_time)
 		is_immuning = false
 
@@ -150,9 +196,9 @@ func update_player() -> void:
 	heart_animated_sprite.self_modulate = soul
 	
 	if soul == SOUL.GREEN:
-		shield.show()
+		green.show()
 	elif soul != SOUL.GREEN and shield.visible:
-		shield.hide()
+		green.hide()
 	
 	if soul == SOUL.PURPLE:
 		ropes.show()
@@ -163,13 +209,12 @@ func update_player() -> void:
 		create_tween().tween_property(self, "rotation_degrees", 180, 0.3)
 	elif soul != SOUL.YELLOW and rotation_degrees > 0:
 		create_tween().tween_property(self, "rotation_degrees", 0, 0.3)
-	
 
 func deal_damage(damage_value: float) -> void:
-	if not is_immuning:
+	if not is_immuning and State.current_state != State.MAIN_STATE.FLEE:
 		health_bar.deal_damage(damage_value)
-		if State.current_state != State.GAME_OVER:
-			main.play_sound_effect("hurt")
+		if State.current_state != State.MAIN_STATE.GAME_OVER:
+			Audio.play_sound("hurt")
 			immunity(immunity_time)
 			get_viewport().get_camera_2d().shake()
 
@@ -178,7 +223,7 @@ func heal(heal_value: float) -> void: health_bar.deal_damage(heal_value)
 func heart_break():
 	heart_animated_sprite.play("split")
 	
-	await time.sleep(ModifiedSpriteFrames.get_frame_absolute_duration(heart_animated_sprite), func(): main.play_sound_effect("Heart Split"))
+	await time.sleep(ModifiedSpriteFrames.get_frame_absolute_duration(heart_animated_sprite), func(): Audio.play_sound("heart_split"))
 	
 	await time.sleep(1)
 	
@@ -191,6 +236,20 @@ func heart_break():
 	
 	heart_animated_sprite.self_modulate.a = 0
 	
-	main.play_sound_effect("Heart Shatter")
+	Audio.play_sound("heart_shatter")
 	
 	await time.sleep(1)
+
+func _on_shield_area_entered(area):
+	if area.is_in_group("spear") or area.is_in_group("yellow_spear"):
+		var bell_sound_duration: float = Audio.play_sound_and_return_length("bell")
+		
+		if area.is_in_group("spear"):
+			spear_spawner.destroy_spear_and_locate_red_spear(area)
+		elif area.is_in_group("yellow_spear"):
+			area.owner.queue_free()
+		shield.get_node("AnimatedSprite").frame = 1
+		
+		await time.sleep(bell_sound_duration)
+		
+		shield.get_node("AnimatedSprite").frame = 0

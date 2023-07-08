@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp5g3jigiqik1"]
+
+[ext_resource type="FontFile" uid="uid://b8bgm0msqwdln" path="res://Fonts/hachicro.TTF" id="1_rxsl6"]
+
+[sub_resource type="Animation" id="Animation_2ix0f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o8vn6"]
+resource_name = "pop_up"
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-64, 48), Vector2(-64, 24), Vector2(-64, 60), Vector2(-64, 48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x4s0g"]
+_data = {
+"RESET": SubResource("Animation_2ix0f"),
+"pop_up": SubResource("Animation_o8vn6")
+}
+
+[node name="HurtValue" type="Label"]
+texture_filter = 1
+offset_right = 128.0
+offset_bottom = 48.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("1_rxsl6")
+theme_override_font_sizes/font_size = 40
+text = "1700"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x4s0g")
+}

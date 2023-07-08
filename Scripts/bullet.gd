@@ -7,5 +7,5 @@ func _process(delta) -> void:
 	velocity.y = -SPEED * delta
 	translate(velocity)
 
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+func _on_visible_on_screen_notifier_screen_exited() -> void:
 	queue_free()

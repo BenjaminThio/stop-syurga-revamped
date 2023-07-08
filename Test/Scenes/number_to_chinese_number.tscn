@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bes84uih034e0"]
+
+[ext_resource type="Script" path="res://Test/Scripts/number_to_chinese_number.gd" id="1_6hisx"]
+
+[node name="NumberToChineseNumber" type="Node2D"]
+script = ExtResource("1_6hisx")

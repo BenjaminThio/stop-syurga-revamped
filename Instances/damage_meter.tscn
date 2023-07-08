@@ -29,11 +29,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_3yy1y"]
-resource_name = "damage_meter_appear"
+resource_name = "damage_meter_disappear"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -45,7 +45,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.278388, 1.32174), Vector2(1.33333, 1.32174)]
+"values": [Vector2(1.33333, 1.32174), Vector2(0.278388, 1.32174)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -57,13 +57,13 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k8mgh"]
 _data = {
 "RESET": SubResource("Animation_1208l"),
-"damage_meter_appear": SubResource("Animation_3yy1y")
+"damage_meter_disappear": SubResource("Animation_3yy1y")
 }
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_btnka"]
@@ -86,16 +86,15 @@ script = ExtResource("1_56rfo")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
 position = Vector2(2.38419e-07, 0)
 scale = Vector2(1.33333, 1.32174)
 texture = ExtResource("2_gbhxo")
 
-[node name="Start" type="Marker2D" parent="Background"]
+[node name="Point1" type="Marker2D" parent="Background"]
 position = Vector2(-274.5, 0)
 scale = Vector2(1.03125, 1.0403)
 
-[node name="End" type="Marker2D" parent="Background"]
+[node name="Point2" type="Marker2D" parent="Background"]
 position = Vector2(274.5, 0)
 scale = Vector2(1.03125, 1.0403)
 

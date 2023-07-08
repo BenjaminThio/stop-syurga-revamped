@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwm6ef8rho1bi"]
+
+[ext_resource type="Script" path="res://Test/Scripts/rewind.gd" id="1_gnid5"]
+[ext_resource type="Texture2D" uid="uid://dk6jlyfn6gnvr" path="res://icon.svg" id="2_27mge"]
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="3_3fpj7"]
+
+[sub_resource type="Animation" id="Animation_skoce"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 64)]
+}
+
+[sub_resource type="Animation" id="Animation_hjxuo"]
+resource_name = "move_icon"
+length = 10.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 64), Vector2(1088, 64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jifua"]
+_data = {
+"RESET": SubResource("Animation_skoce"),
+"move_icon": SubResource("Animation_hjxuo")
+}
+
+[node name="RecordAndRewind" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_gnid5")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(64, 64)
+texture = ExtResource("2_27mge")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jifua")
+}
+
+[node name="State" type="Label" parent="."]
+offset_left = 1024.0
+offset_top = 584.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_fonts/font = ExtResource("3_3fpj7")
+theme_override_font_sizes/font_size = 40
+text = "STOP"
+horizontal_alignment = 1
+vertical_alignment = 1

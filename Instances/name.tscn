@@ -1,0 +1,712 @@
+[gd_scene load_steps=10 format=3 uid="uid://cw3ic1ov1emrr"]
+
+[ext_resource type="Texture2D" uid="uid://djsvvy4bd0bl1" path="res://Sprites/photo_2023-05-16_12-46-16.jpg" id="1_1roa0"]
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="1_t60ep"]
+[ext_resource type="Script" path="res://Scripts/keyboard.gd" id="2_p215c"]
+[ext_resource type="Texture2D" uid="uid://b2n2ljxst4gkb" path="res://Sprites/photo_2023-05-17_10-18-02.jpg" id="2_sfwj4"]
+[ext_resource type="AudioStream" uid="uid://bgy54a7oujyxv" path="res://Sounds/snd_cymbal.ogg" id="5_ipitg"]
+
+[sub_resource type="FontVariation" id="FontVariation_wf4qr"]
+base_font = ExtResource("1_t60ep")
+spacing_glyph = 1
+
+[sub_resource type="Animation" id="Animation_60s4i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(503, 149)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.9, 0.85)]
+}
+
+[sub_resource type="Animation" id="Animation_lsdak"]
+resource_name = "zoom_in"
+length = 4.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(503, 149), Vector2(380, 342)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.9, 0.85), Vector2(2.288, 2.21)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7py5"]
+_data = {
+"RESET": SubResource("Animation_60s4i"),
+"zoom_in": SubResource("Animation_lsdak")
+}
+
+[node name="Name" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reference1" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+position = Vector2(576, 324)
+scale = Vector2(0.9, 0.901252)
+texture = ExtResource("2_sfwj4")
+
+[node name="Reference2" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+position = Vector2(576, 324)
+scale = Vector2(0.9, 0.901252)
+texture = ExtResource("1_1roa0")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 78.0
+offset_right = 768.0
+offset_bottom = 127.0
+theme_override_fonts/font = SubResource("FontVariation_wf4qr")
+theme_override_font_sizes/font_size = 35
+text = "Name yourself."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Node2D" parent="."]
+position = Vector2(503, 149)
+scale = Vector2(0.9, 0.85)
+metadata/_edit_group_ = true
+
+[node name="NameLabel" type="Label" parent="Name"]
+offset_right = 152.0
+offset_bottom = 49.0
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 40
+text = "AAAAAAAA"
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Name"]
+libraries = {
+"": SubResource("AnimationLibrary_y7py5")
+}
+
+[node name="Keyboard" type="Node2D" parent="."]
+script = ExtResource("2_p215c")
+
+[node name="UpperCharsRow1" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 276.0
+offset_top = 202.0
+offset_right = 876.0
+offset_bottom = 248.0
+metadata/_edit_group_ = true
+
+[node name="A" type="Label" parent="Keyboard/UpperCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B" type="Label" parent="Keyboard/UpperCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="C" type="Label" parent="Keyboard/UpperCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "C"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="D" type="Label" parent="Keyboard/UpperCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E" type="Label" parent="Keyboard/UpperCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="F" type="Label" parent="Keyboard/UpperCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="G" type="Label" parent="Keyboard/UpperCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "G"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpperCharsRow2" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 276.0
+offset_top = 240.0
+offset_right = 876.0
+offset_bottom = 286.0
+metadata/_edit_group_ = true
+
+[node name="H" type="Label" parent="Keyboard/UpperCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="I" type="Label" parent="Keyboard/UpperCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "I"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="J" type="Label" parent="Keyboard/UpperCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "J"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="K" type="Label" parent="Keyboard/UpperCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "K"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="L" type="Label" parent="Keyboard/UpperCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "L"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="M" type="Label" parent="Keyboard/UpperCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="N" type="Label" parent="Keyboard/UpperCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "N"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpperCharsRow3" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 276.0
+offset_top = 278.0
+offset_right = 876.0
+offset_bottom = 324.0
+metadata/_edit_group_ = true
+
+[node name="O" type="Label" parent="Keyboard/UpperCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "O"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P" type="Label" parent="Keyboard/UpperCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "P"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Q" type="Label" parent="Keyboard/UpperCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="R" type="Label" parent="Keyboard/UpperCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "R"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="S" type="Label" parent="Keyboard/UpperCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="T" type="Label" parent="Keyboard/UpperCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "T"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="U" type="Label" parent="Keyboard/UpperCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "U"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpperCharsRow4" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 277.0
+offset_top = 316.0
+offset_right = 702.0
+offset_bottom = 362.0
+metadata/_edit_group_ = true
+
+[node name="V" type="Label" parent="Keyboard/UpperCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "V"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="W" type="Label" parent="Keyboard/UpperCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="X" type="Label" parent="Keyboard/UpperCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Y" type="Label" parent="Keyboard/UpperCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Z" type="Label" parent="Keyboard/UpperCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 35
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowerCharsRow1" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 276.0
+offset_top = 364.0
+offset_right = 877.0
+offset_bottom = 413.0
+metadata/_edit_group_ = true
+
+[node name="a" type="Label" parent="Keyboard/LowerCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "a"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="b" type="Label" parent="Keyboard/LowerCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "b"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="c" type="Label" parent="Keyboard/LowerCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "c"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="d" type="Label" parent="Keyboard/LowerCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "d"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="e" type="Label" parent="Keyboard/LowerCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "e"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="f" type="Label" parent="Keyboard/LowerCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "f"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="g" type="Label" parent="Keyboard/LowerCharsRow1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "g"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowerCharsRow2" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 278.0
+offset_top = 400.0
+offset_right = 878.0
+offset_bottom = 448.0
+metadata/_edit_group_ = true
+
+[node name="h" type="Label" parent="Keyboard/LowerCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "h"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="i" type="Label" parent="Keyboard/LowerCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "i"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="j" type="Label" parent="Keyboard/LowerCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "j"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="k" type="Label" parent="Keyboard/LowerCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="l" type="Label" parent="Keyboard/LowerCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "l"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="m" type="Label" parent="Keyboard/LowerCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "m"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="n" type="Label" parent="Keyboard/LowerCharsRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "n"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowerCharsRow3" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 276.0
+offset_top = 438.0
+offset_right = 876.0
+offset_bottom = 486.0
+metadata/_edit_group_ = true
+
+[node name="o" type="Label" parent="Keyboard/LowerCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "o"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="p" type="Label" parent="Keyboard/LowerCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "p"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="q" type="Label" parent="Keyboard/LowerCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="r" type="Label" parent="Keyboard/LowerCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "r"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="s" type="Label" parent="Keyboard/LowerCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="t" type="Label" parent="Keyboard/LowerCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "t"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="u" type="Label" parent="Keyboard/LowerCharsRow3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "u"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowerCharsRow4" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 276.0
+offset_top = 477.0
+offset_right = 703.0
+offset_bottom = 525.0
+metadata/_edit_group_ = true
+
+[node name="v" type="Label" parent="Keyboard/LowerCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "v"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="w" type="Label" parent="Keyboard/LowerCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "w"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="x" type="Label" parent="Keyboard/LowerCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="y" type="Label" parent="Keyboard/LowerCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="z" type="Label" parent="Keyboard/LowerCharsRow4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="HBoxContainer" parent="Keyboard"]
+texture_filter = 1
+offset_left = 243.0
+offset_top = 538.0
+offset_right = 867.0
+offset_bottom = 586.0
+metadata/_edit_group_ = true
+
+[node name="Break" type="Label" parent="Keyboard/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Backspace" type="Label" parent="Keyboard/Options"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "Backspace"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continue" type="Label" parent="Keyboard/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 36
+text = "   Done"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BiggerName" type="Node2D" parent="."]
+visible = false
+position = Vector2(380, 342)
+scale = Vector2(2.288, 2.21)
+
+[node name="BiggerNameLabel" type="Label" parent="BiggerName"]
+offset_right = 171.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("1_t60ep")
+theme_override_font_sizes/font_size = 40
+text = "BENJAMIN"
+vertical_alignment = 1
+
+[node name="CymbalSoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ipitg")

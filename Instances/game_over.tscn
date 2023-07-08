@@ -33,6 +33,7 @@ text = "GAME
 OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Quote" type="Label" parent="."]
 layout_mode = 0

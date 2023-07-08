@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://5dyp3jj05jyf"]
+[gd_scene load_steps=43 format=3 uid="uid://5dyp3jj05jyf"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_7kmeb"]
 [ext_resource type="Texture2D" uid="uid://c30bytot8d5sc" path="res://Sprites/Uncategorized/battlefield.png" id="1_ksf4q"]
@@ -9,24 +9,36 @@
 [ext_resource type="Script" path="res://Scripts/actions.gd" id="5_qnnb1"]
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="6_7ovyu"]
 [ext_resource type="Script" path="res://Scripts/stats.gd" id="6_qwkld"]
+[ext_resource type="Script" path="res://Scripts/description.gd" id="7_mrcu2"]
 [ext_resource type="Texture2D" uid="uid://cvq5vhmd35rqj" path="res://Sprites/Actions/fight.png" id="8_mbvjo"]
 [ext_resource type="Texture2D" uid="uid://cvjyjh5xsclis" path="res://Sprites/Actions/fight_hovered.png" id="9_a3ogc"]
-[ext_resource type="Script" path="res://Scripts/villian.gd" id="9_squfb"]
+[ext_resource type="AudioStream" uid="uid://bspq7dumurpk8" path="res://Sounds/snd_txt_typing.ogg" id="9_n7gds"]
 [ext_resource type="Texture2D" uid="uid://d2n6xuybdhtfw" path="res://Sprites/Actions/act.png" id="10_3x2iy"]
 [ext_resource type="Texture2D" uid="uid://ixbrgxcxhv3i" path="res://Sprites/Actions/act_hovered.png" id="11_u113a"]
 [ext_resource type="Texture2D" uid="uid://rw406vpavma6" path="res://Sprites/Actions/item.png" id="12_rn3ju"]
 [ext_resource type="Texture2D" uid="uid://erphoawbup6k" path="res://Sprites/Actions/item_hovered.png" id="13_klsi0"]
 [ext_resource type="Texture2D" uid="uid://bpmtgpugeiipu" path="res://Sprites/Actions/mercy.png" id="14_5f5a0"]
 [ext_resource type="Texture2D" uid="uid://j0ich4b1s41s" path="res://Sprites/Actions/mercy_hovered.png" id="15_fi60e"]
-[ext_resource type="Script" path="res://Scripts/act.gd" id="15_rvtki"]
 [ext_resource type="FontFile" uid="uid://0ni3xtjq5btw" path="res://Fonts/Mars_Needs_Cunnilingus.ttf" id="18_304wy"]
-[ext_resource type="Texture2D" uid="uid://bru36cl6prpor" path="res://Sprites/Uncategorized/villian.png" id="18_xocnk"]
+[ext_resource type="Script" path="res://Scripts/act_manager.gd" id="18_huxoq"]
 [ext_resource type="FontFile" uid="uid://ca6ob2ibtlxc2" path="res://Fonts/ut-hp-font.ttf" id="19_fsdbe"]
-[ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villian_shield.png" id="19_ht1rv"]
 [ext_resource type="Script" path="res://Scripts/health_bar.gd" id="20_5ykt5"]
-[ext_resource type="AudioStream" uid="uid://buuxy74tfkmkb" path="res://Musics/Stop Syurga.mp3" id="25_e2rx2"]
+[ext_resource type="Script" path="res://Scripts/mercy_manager.gd" id="23_oimd1"]
 [ext_resource type="Script" path="res://Scripts/camera_manager.gd" id="25_qqqxs"]
-[ext_resource type="Script" path="res://Scripts/mercy.gd" id="25_tpfve"]
+[ext_resource type="PackedScene" uid="uid://bnqguapi8ioxm" path="res://Instances/villian.tscn" id="25_tihkl"]
+[ext_resource type="PackedScene" uid="uid://d3864bohjy6fx" path="res://Instances/disco_ball.tscn" id="28_i0lqv"]
+[ext_resource type="AudioStream" uid="uid://saqlic0w1xof" path="res://Musics/mus_stop_syurga.ogg" id="28_n0cl3"]
+[ext_resource type="PackedScene" uid="uid://b5i0xl0dcdd5h" path="res://Instances/block.tscn" id="29_14hwi"]
+[ext_resource type="PackedScene" uid="uid://c7hy08buadnlg" path="res://Instances/barrier.tscn" id="30_rnop0"]
+[ext_resource type="PackedScene" uid="uid://bc5bur4rna2c8" path="res://Instances/spider.tscn" id="31_jgph2"]
+[ext_resource type="PackedScene" uid="uid://b6q0hnbxxlov3" path="res://Instances/croissant.tscn" id="32_iut3t"]
+[ext_resource type="PackedScene" uid="uid://b2oc3kyyftf11" path="res://Instances/leg.tscn" id="33_1p3mp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1temx"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkjox"]
+bg_color = Color(0, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqj0j"]
 bg_color = Color(1, 0, 0, 1)
@@ -90,15 +102,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yst2b"]
-bg_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekhi5"]
-bg_color = Color(0, 1, 0, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mc31a"]
-radius = 112.0
-
 [sub_resource type="Environment" id="Environment_cvy5a"]
 background_mode = 3
 
@@ -107,6 +110,7 @@ texture_filter = 1
 script = ExtResource("1_7kmeb")
 
 [node name="Canvas" type="Control" parent="." groups=["canvas"]]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -133,6 +137,7 @@ patch_margin_top = 9
 patch_margin_right = 9
 patch_margin_bottom = 9
 script = ExtResource("2_4wb0e")
+metadata/_edit_group_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Canvas/Battlefield"]
 
@@ -168,9 +173,25 @@ offset_bottom = 168.0
 pivot_offset = Vector2(27, 18)
 theme_override_fonts/normal_font = ExtResource("6_7ovyu")
 theme_override_font_sizes/normal_font_size = 27
-text = "Hello World!"
+text = "* Hello World!"
+script = ExtResource("7_mrcu2")
 
-[node name="Stats" type="HBoxContainer" parent="Canvas"]
+[node name="VillianHealthBar" type="ProgressBar" parent="Canvas/Battlefield/Description"]
+visible = false
+layout_mode = 0
+offset_top = 10.0
+offset_right = 128.0
+offset_bottom = 26.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1temx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gkjox")
+max_value = 10000.0
+value = 10000.0
+show_percentage = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Canvas/Battlefield/Description"]
+stream = ExtResource("9_n7gds")
+
+[node name="Stats" type="HBoxContainer" parent="Canvas" groups=["stats"]]
 layout_mode = 0
 offset_left = 192.0
 offset_top = 536.0
@@ -240,9 +261,7 @@ sprite_frames = SubResource("SpriteFrames_7sskc")
 animation = &"act"
 frame_progress = 0.44673
 offset = Vector2(39, 0)
-
-[node name="ActManager" type="Node" parent="Actions/Act"]
-script = ExtResource("15_rvtki")
+script = ExtResource("18_huxoq")
 
 [node name="Item" type="AnimatedSprite2D" parent="Actions"]
 position = Vector2(52.9454, -0.999999)
@@ -255,41 +274,12 @@ position = Vector2(260.945, -0.999999)
 scale = Vector2(1.30909, 1.33333)
 sprite_frames = SubResource("SpriteFrames_lhffn")
 offset = Vector2(39, 0)
+script = ExtResource("23_oimd1")
 
-[node name="MercyManager" type="Node" parent="Actions/Mercy"]
-script = ExtResource("25_tpfve")
+[node name="Villian" parent="." instance=ExtResource("25_tihkl")]
 
 [node name="Player" parent="." instance=ExtResource("3_xtc3i")]
-position = Vector2(213, 596)
-
-[node name="Villian" type="Area2D" parent="." groups=["villian"]]
-position = Vector2(576, 160)
-script = ExtResource("9_squfb")
-
-[node name="Sprite2D" type="Sprite2D" parent="Villian"]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("18_xocnk")
-
-[node name="Shield" type="Sprite2D" parent="Villian/Sprite2D"]
-self_modulate = Color(1, 1, 1, 0)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("19_ht1rv")
-
-[node name="Health Bar" type="ProgressBar" parent="Villian"]
-visible = false
-offset_left = -384.0
-offset_top = 96.0
-offset_right = 384.0
-offset_bottom = 123.0
-theme_override_styles/background = SubResource("StyleBoxFlat_yst2b")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ekhi5")
-max_value = 10000.0
-value = 10000.0
-show_percentage = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Villian"]
-visible = false
-shape = SubResource("CircleShape2D_mc31a")
+position = Vector2(216, 592)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
@@ -299,8 +289,25 @@ script = ExtResource("25_qqqxs")
 environment = SubResource("Environment_cvy5a")
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("25_e2rx2")
+stream = ExtResource("28_n0cl3")
+
+[node name="DiscoBall" parent="." instance=ExtResource("28_i0lqv")]
+position = Vector2(512, 192)
+
+[node name="Block" parent="." instance=ExtResource("29_14hwi")]
+position = Vector2(384, 192)
+
+[node name="Barrier" parent="." instance=ExtResource("30_rnop0")]
+position = Vector2(320, 192)
+
+[node name="Spider" parent="." instance=ExtResource("31_jgph2")]
+position = Vector2(256, 192)
+
+[node name="Croissant" parent="." instance=ExtResource("32_iut3t")]
+position = Vector2(448, 192)
+
+[node name="Leg" parent="." instance=ExtResource("33_1p3mp")]
+position = Vector2(640, 264)
 
 [connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield" method="_on_resized"]
 [connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield/StaticBody2D/CollisionPolygon2D" method="_on_battlefield_resized"]
-[connection signal="area_entered" from="Villian" to="Villian" method="_on_villian_shield_area_entered"]

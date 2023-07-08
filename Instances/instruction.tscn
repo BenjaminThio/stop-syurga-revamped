@@ -1,0 +1,482 @@
+[gd_scene load_steps=9 format=3 uid="uid://uogxu3jrxnnr"]
+
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="1_rm5wx"]
+[ext_resource type="Script" path="res://Scripts/instruction_options.gd" id="2_8plyq"]
+[ext_resource type="Script" path="res://Scripts/instruction.gd" id="2_has3r"]
+[ext_resource type="FontFile" uid="uid://csahcrsc4eshy" path="res://Fonts/crypt-of-tomorrow-ut-font-no-rus.ttf" id="3_84nb3"]
+
+[sub_resource type="FontVariation" id="FontVariation_dwymf"]
+base_font = ExtResource("3_84nb3")
+
+[sub_resource type="FontVariation" id="FontVariation_prxa8"]
+base_font = ExtResource("3_84nb3")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_u0ur6"]
+base_font = ExtResource("3_84nb3")
+spacing_glyph = 2
+
+[sub_resource type="FontVariation" id="FontVariation_aaxeu"]
+base_font = ExtResource("3_84nb3")
+spacing_space = -5
+
+[node name="Instruction" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_has3r")
+
+[node name="Title" type="Node2D" parent="."]
+
+[node name="Decoration1" type="Label" parent="Title"]
+texture_filter = 1
+offset_left = 381.0
+offset_top = 35.0
+offset_right = 438.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "___"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleText" type="Label" parent="Title"]
+texture_filter = 1
+offset_left = 438.0
+offset_top = 52.0
+offset_right = 655.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = " Instruction"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Decoration2" type="Label" parent="Title"]
+texture_filter = 1
+offset_left = 662.0
+offset_top = 35.0
+offset_right = 719.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "___"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instructions" type="Node2D" parent="."]
+
+[node name="Instruction1" type="Node2D" parent="Instructions"]
+
+[node name="Keys" type="Label" parent="Instructions/Instruction1"]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 133.0
+offset_right = 569.0
+offset_bottom = 182.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "[Z or ENTER]"
+
+[node name="LinkingChar" type="Label" parent="Instructions/Instruction1"]
+texture_filter = 1
+offset_left = 576.0
+offset_top = 116.0
+offset_right = 595.0
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Instructions/Instruction1"]
+texture_filter = 1
+offset_left = 602.0
+offset_top = 132.0
+offset_right = 738.0
+offset_bottom = 181.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "Confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instruction2" type="Node2D" parent="Instructions"]
+
+[node name="Keys" type="Label" parent="Instructions/Instruction2"]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 182.0
+offset_right = 569.0
+offset_bottom = 231.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "[X or SHIFT]"
+
+[node name="LinkingChar" type="Label" parent="Instructions/Instruction2"]
+texture_filter = 1
+offset_left = 576.0
+offset_top = 165.0
+offset_right = 595.0
+offset_bottom = 214.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Instructions/Instruction2"]
+texture_filter = 1
+offset_left = 602.0
+offset_top = 181.0
+offset_right = 716.0
+offset_bottom = 230.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "Cancel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instruction3" type="Node2D" parent="Instructions"]
+
+[node name="Keys" type="Label" parent="Instructions/Instruction3"]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 231.0
+offset_right = 550.0
+offset_bottom = 280.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "[C or CTRL]"
+
+[node name="LinkingChar" type="Label" parent="Instructions/Instruction3"]
+texture_filter = 1
+offset_left = 557.0
+offset_top = 213.0
+offset_right = 576.0
+offset_bottom = 262.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Node2D" parent="Instructions/Instruction3"]
+
+[node name="DescriptionText1" type="Label" parent="Instructions/Instruction3/Description"]
+texture_filter = 1
+offset_left = 583.0
+offset_top = 229.0
+offset_right = 722.0
+offset_bottom = 278.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "Menu (In"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LinkingChar" type="Label" parent="Instructions/Instruction3/Description"]
+texture_filter = 1
+offset_left = 722.0
+offset_top = 213.0
+offset_right = 741.0
+offset_bottom = 262.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionText2" type="Label" parent="Instructions/Instruction3/Description"]
+texture_filter = 1
+offset_left = 740.0
+offset_top = 229.0
+offset_right = 833.0
+offset_bottom = 278.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "game)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instruction4" type="Node2D" parent="Instructions"]
+
+[node name="Key" type="Label" parent="Instructions/Instruction4"]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 279.0
+offset_right = 439.0
+offset_bottom = 328.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "[F4]"
+
+[node name="LinkingChar" type="Label" parent="Instructions/Instruction4"]
+texture_filter = 1
+offset_left = 446.0
+offset_top = 261.0
+offset_right = 465.0
+offset_bottom = 310.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Instructions/Instruction4"]
+texture_filter = 1
+offset_left = 473.0
+offset_top = 278.0
+offset_right = 663.0
+offset_bottom = 327.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "Fullscreen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instruction5" type="Node2D" parent="Instructions"]
+
+[node name="Key" type="Label" parent="Instructions/Instruction5"]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 328.0
+offset_right = 542.0
+offset_bottom = 377.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "[Hold ESC]"
+
+[node name="LinkingChar" type="Label" parent="Instructions/Instruction5"]
+texture_filter = 1
+offset_left = 549.0
+offset_top = 310.0
+offset_right = 568.0
+offset_bottom = 359.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "_"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Instructions/Instruction5"]
+texture_filter = 1
+offset_left = 576.0
+offset_top = 326.0
+offset_right = 652.0
+offset_bottom = 375.0
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instruction6" type="Label" parent="Instructions"]
+modulate = Color(0.752941, 0.752941, 0.752941, 1)
+offset_left = 373.0
+offset_top = 376.0
+offset_right = 736.0
+offset_bottom = 425.0
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "When HP is 0, you lose."
+
+[node name="Options" type="Node2D" parent="."]
+script = ExtResource("2_8plyq")
+
+[node name="BeginGame" type="Label" parent="Options"]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 462.0
+offset_right = 555.0
+offset_bottom = 511.0
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "Begin Game"
+vertical_alignment = 1
+
+[node name="Settings" type="Label" parent="Options"]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 516.0
+offset_right = 525.0
+offset_bottom = 565.0
+theme_override_fonts/font = ExtResource("1_rm5wx")
+theme_override_font_sizes/font_size = 37
+text = "Settings"
+vertical_alignment = 1
+
+[node name="Credits" type="Node2D" parent="."]
+
+[node name="GameName" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 315.0
+offset_top = 625.0
+offset_right = 469.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_dwymf")
+theme_override_font_sizes/font_size = 14
+text = "Stop Syurga"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Version" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 480.0
+offset_top = 625.0
+offset_right = 534.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_prxa8")
+theme_override_font_sizes/font_size = 14
+text = "v1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Copyright" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 528.0
+offset_top = 625.0
+offset_right = 601.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_u0ur6")
+theme_override_font_sizes/font_size = 14
+text = " (C) "
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="DeveloperName" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 595.0
+offset_top = 625.0
+offset_right = 772.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_aaxeu")
+theme_override_font_sizes/font_size = 14
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Period" type="Label" parent="Credits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+texture_filter = 1
+offset_left = 783.0
+offset_top = 625.0
+offset_right = 839.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_84nb3")
+theme_override_font_sizes/font_size = 14
+text = "2023"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="TrueCredits" type="Node2D" parent="."]
+visible = false
+
+[node name="GameName" type="Label" parent="TrueCredits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = 327.0
+offset_top = 625.0
+offset_right = 453.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_dwymf")
+theme_override_font_sizes/font_size = 14
+text = "undertale"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Version" type="Label" parent="TrueCredits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = 459.0
+offset_top = 625.0
+offset_right = 528.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_prxa8")
+theme_override_font_sizes/font_size = 14
+text = "v1.08"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Copyright" type="Label" parent="TrueCredits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = 520.0
+offset_top = 625.0
+offset_right = 597.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_u0ur6")
+theme_override_font_sizes/font_size = 14
+text = " (C) "
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="DeveloperName" type="Label" parent="TrueCredits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = 588.0
+offset_top = 625.0
+offset_right = 695.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_aaxeu")
+theme_override_font_sizes/font_size = 14
+text = "Toby Fox"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Period" type="Label" parent="TrueCredits"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = 704.0
+offset_top = 625.0
+offset_right = 830.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_84nb3")
+theme_override_font_sizes/font_size = 14
+text = "2015-2017"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

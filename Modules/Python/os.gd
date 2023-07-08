@@ -16,3 +16,21 @@ static func listdir(path: String) -> Array[String]:
 	directory.list_dir_end()
 	
 	return files
+
+static func is_alpha(string: String):
+	var regex: RegEx = RegEx.new()
+	
+	regex.compile("[\\p{P}\\p{S}\\p{Sm}\\p{Sc}\\p{Sk}\\p{So}\\s]")
+	if not regex.search(string):
+		return true
+	else:
+		return false
+
+"""
+static func is_alpha(string: String):
+	regex.compile("[a-zA-Z]+")
+	if regex.search(string):
+		#return true
+	else:
+		return false
+"""

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cio34321so227"]
+
+[ext_resource type="Script" path="res://Scripts/new_game.gd" id="1_3ny5e"]
+[ext_resource type="AudioStream" uid="uid://dncsfxw5eanbi" path="res://Musics/mus_start_menu.ogg" id="3_2f1y6"]
+
+[node name="NewGame" type="Node2D"]
+script = ExtResource("1_3ny5e")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2f1y6")
+autoplay = true

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqd4mxt7oc3qi"]
+
+[ext_resource type="Texture2D" uid="uid://bi5je62dcxpy8" path="res://Sprites/bomb.png" id="1_36bc5"]
+[ext_resource type="Script" path="res://Scripts/bomb.gd" id="1_swybe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v2ss7"]
+radius = 16.0
+
+[node name="Bomb" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_swybe")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_36bc5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3.5)
+shape = SubResource("CircleShape2D_v2ss7")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

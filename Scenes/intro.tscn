@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/intro.gd" id="1_odop8"]
 [ext_resource type="Texture2D" uid="uid://bciqc8p0ck1kw" path="res://Sprites/Intro/intro1.png" id="2_utael"]
-[ext_resource type="AudioStream" uid="uid://d2hupf2bq8ber" path="res://Musics/Once Upon a Time.ogg" id="3_5lv1a"]
+[ext_resource type="AudioStream" uid="uid://d2hupf2bq8ber" path="res://Musics/mus_intro.ogg" id="3_5lv1a"]
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="3_ft5k0"]
-[ext_resource type="AudioStream" uid="uid://burfvqjjq8ggg" path="res://Sounds/Typing.ogg" id="4_cvuyn"]
+[ext_resource type="AudioStream" uid="uid://bspq7dumurpk8" path="res://Sounds/snd_txt_typing.ogg" id="4_seobg"]
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -14,33 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_odop8")
-music_fade_out_time = 8.0
 
-[node name="Image" type="Sprite2D" parent="."]
-position = Vector2(576, 170)
-scale = Vector2(0.584795, 0.574713)
-texture = ExtResource("2_utael")
-
-[node name="Text" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 256.0
-offset_top = 384.0
-offset_right = 896.0
-offset_bottom = 576.0
-theme_override_fonts/normal_font = ExtResource("3_ft5k0")
-theme_override_font_sizes/normal_font_size = 30
-
-[node name="TypingSoundEffect" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_cvuyn")
-
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_5lv1a")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
-
-[node name="Image2" type="TextureRect" parent="."]
-visible = false
+[node name="Image" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -55,3 +30,22 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_utael")
 expand_mode = 1
+
+[node name="Text" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 384.0
+offset_right = 896.0
+offset_bottom = 576.0
+theme_override_fonts/normal_font = ExtResource("3_ft5k0")
+theme_override_font_sizes/normal_font_size = 30
+
+[node name="TypingSoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_seobg")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5lv1a")
+pitch_scale = 1.02
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)

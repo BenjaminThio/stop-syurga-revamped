@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://di72hdby1ruh2"]
+
+[ext_resource type="Texture2D" uid="uid://ci58thm4vl1x" path="res://Sprites/Uncategorized/villian_hurt.png" id="1_osaqp"]
+[ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villian_shield.png" id="2_xed42"]
+[ext_resource type="Shader" path="res://Shaders/ripple.gdshader" id="3_he2y5"]
+
+[sub_resource type="Animation" id="Animation_bamys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ripple:material:shader_parameter/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uupho"]
+resource_name = "shock_wave"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ripple:material:shader_parameter/force")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.1, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_813bv"]
+_data = {
+"RESET": SubResource("Animation_bamys"),
+"shock_wave": SubResource("Animation_uupho")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajsyc"]
+shader = ExtResource("3_he2y5")
+shader_parameter/SPEED = 20.0
+shader_parameter/RTIME = 0.0
+shader_parameter/drop0 = Vector4(0.5, 0.5, 1, 0)
+shader_parameter/drop1 = Vector4(0.5, 0.5, 1, 0)
+shader_parameter/drop2 = Vector4(0.5, 0.5, 1, 0)
+shader_parameter/drop3 = Vector4(0.5, 0.5, 1, 0)
+shader_parameter/drop4 = Vector4(0.5, 0.5, 1, 0)
+shader_parameter/drop5 = Vector4(0.5, 0.5, 1, 0)
+shader_parameter/drop6 = Vector4(0.5, 0.5, 1, 0)
+shader_parameter/drop7 = Vector4(0.5, 0.5, 1, 0)
+
+[node name="ShockWave" type="Node2D"]
+texture_filter = 1
+
+[node name="Villian" type="Sprite2D" parent="."]
+position = Vector2(576, 320)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_osaqp")
+metadata/_edit_group_ = true
+
+[node name="Shield" type="Sprite2D" parent="Villian"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_xed42")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Villian"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_813bv")
+}
+
+[node name="Ripple" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ajsyc")
+position = Vector2(576, 320)
+scale = Vector2(0.690647, 0.460432)
+texture = ExtResource("2_xed42")

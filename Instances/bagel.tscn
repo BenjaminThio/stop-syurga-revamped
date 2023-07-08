@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ohula3ynbpj2"]
+
+[ext_resource type="Script" path="res://Scripts/bagel.gd" id="1_e47g2"]
+[ext_resource type="Texture2D" uid="uid://de18l6idor4i1" path="res://Sprites/bagel.png" id="1_ttaax"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6d5e"]
+size = Vector2(32, 32)
+
+[node name="Bagel" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_e47g2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ttaax")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_u6d5e")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

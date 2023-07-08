@@ -18,4 +18,4 @@ func shake(times: int = 5, default_delay_time: float = 0.01, fixed_delay_time: b
 func generate_random_shake_offset(shake_index: int, offset_sign: bool) -> int:
 	var offset_values = [-1, 1]
 	
-	return offset_values[randi() % offset_values.size()] * shake_index * ((int(offset_sign) * 2) - 1)
+	return random.choice(offset_values) * shake_index * ((int(offset_sign) * 2) - 1)

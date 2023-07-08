@@ -3,6 +3,8 @@ extends Sprite2D
 
 @export var fixed_scale: float = 1.0
 
+@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+
 func _process(_delta) -> void:
 	for child in get_children():
 		if child.name in ["EpiphysisTop", "EpiphysisBottom"]:
@@ -10,4 +12,6 @@ func _process(_delta) -> void:
 
 func _on_player_collide(body) -> void:
 	if body.is_in_group("player"):
-		body.deal_damage(3)
+		#if not body.is_immuning:
+		#	queue_free()
+		body.deal_damage(villian.attack)

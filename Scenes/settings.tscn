@@ -1,0 +1,185 @@
+[gd_scene load_steps=15 format=3 uid="uid://ctguuxm3j6gq4"]
+
+[ext_resource type="Script" path="res://Scripts/settings.gd" id="1_hsa0c"]
+[ext_resource type="Texture2D" uid="uid://dhghk623kxnqt" path="res://Sprites/settings.png" id="1_jw4u7"]
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="2_ds4j7"]
+[ext_resource type="Texture2D" uid="uid://8vmiupn24xaj" path="res://Gimp/snowflakes/snowflake_1.png" id="4_jjdne"]
+[ext_resource type="Texture2D" uid="uid://dnlyn62or40v4" path="res://Gimp/snowflakes/snowflake_2.png" id="5_7yp8d"]
+[ext_resource type="Texture2D" uid="uid://caxnoma4rv1s8" path="res://Gimp/snowflakes/snowflake_3.png" id="6_jaej0"]
+[ext_resource type="Texture2D" uid="uid://bdkdr1yifj6tw" path="res://Gimp/snowflakes/snowflake_4.png" id="7_0gn46"]
+[ext_resource type="Texture2D" uid="uid://cmlvryahtfyvh" path="res://Gimp/snowflakes/snowflake_5.png" id="8_jlwk5"]
+
+[sub_resource type="FontVariation" id="FontVariation_kfvv7"]
+base_font = ExtResource("2_ds4j7")
+spacing_glyph = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5bole"]
+emission_shape = 3
+emission_box_extents = Vector3(500, 250, 1)
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+gravity = Vector3(98, 98, 0)
+initial_velocity_max = 1000.0
+angular_velocity_min = 45.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 2.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_et1ng"]
+emission_shape = 3
+emission_box_extents = Vector3(500, 250, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(98, 98, 0)
+initial_velocity_max = 1000.0
+angular_velocity_min = 45.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 2.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhluv"]
+emission_shape = 3
+emission_box_extents = Vector3(500, 250, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(98, 98, 0)
+initial_velocity_max = 1000.0
+angular_velocity_min = 45.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bspti"]
+emission_shape = 3
+emission_box_extents = Vector3(500, 250, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(98, 98, 0)
+initial_velocity_max = 1000.0
+angular_velocity_min = 45.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mwvvq"]
+emission_shape = 3
+emission_box_extents = Vector3(500, 250, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(98, 98, 0)
+initial_velocity_max = 1000.0
+angular_velocity_min = 45.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 3.0
+
+[node name="Settings" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Reference" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(0.843338, 0.84375)
+texture = ExtResource("1_jw4u7")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 27.0
+offset_right = 728.0
+offset_bottom = 115.0
+theme_override_fonts/font = SubResource("FontVariation_kfvv7")
+theme_override_font_sizes/font_size = 70
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Options" type="Node2D" parent="."]
+script = ExtResource("1_hsa0c")
+
+[node name="Exit" type="Label" parent="Options"]
+offset_left = 198.0
+offset_top = 106.0
+offset_right = 274.0
+offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 36
+text = "Exit"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Language" type="Label" parent="Options"]
+offset_left = 198.0
+offset_top = 187.0
+offset_right = 350.0
+offset_bottom = 235.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 36
+text = "Language"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Language" type="Label" parent="Options/Language"]
+layout_mode = 0
+offset_left = 194.0
+offset_right = 327.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 36
+text = "English"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Snowflakes" type="Node2D" parent="."]
+visible = false
+
+[node name="SnowflakeParticles1" type="GPUParticles2D" parent="Snowflakes"]
+position = Vector2(104, 168)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_5bole")
+texture = ExtResource("4_jjdne")
+lifetime = 1.5
+randomness = 1.0
+
+[node name="SnowflakeParticles2" type="GPUParticles2D" parent="Snowflakes"]
+position = Vector2(104, 168)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_et1ng")
+texture = ExtResource("5_7yp8d")
+lifetime = 1.5
+
+[node name="SnowflakeParticles3" type="GPUParticles2D" parent="Snowflakes"]
+position = Vector2(104, 168)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_nhluv")
+texture = ExtResource("6_jaej0")
+lifetime = 1.5
+
+[node name="SnowflakeParticles4" type="GPUParticles2D" parent="Snowflakes"]
+position = Vector2(104, 168)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_bspti")
+texture = ExtResource("7_0gn46")
+lifetime = 1.5
+
+[node name="SnowflakeParticles5" type="GPUParticles2D" parent="Snowflakes"]
+position = Vector2(104, 168)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_mwvvq")
+texture = ExtResource("8_jlwk5")
+lifetime = 1.5
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]

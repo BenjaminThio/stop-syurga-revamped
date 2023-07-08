@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6q0hnbxxlov3"]
+
+[ext_resource type="Script" path="res://Scripts/croissant.gd" id="1_5tnmg"]
+[ext_resource type="Texture2D" uid="uid://jywcce6s3xt8" path="res://Sprites/croissant.png" id="1_kv4u2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76mxf"]
+size = Vector2(38, 32)
+
+[node name="Croissant" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_5tnmg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_kv4u2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(1.026, 1)
+shape = SubResource("RectangleShape2D_76mxf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

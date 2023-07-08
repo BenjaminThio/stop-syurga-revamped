@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cf7k28atgyq8i" path="res://Sprites/Weapons/Knife/knife_4.png" id="4_efssy"]
 [ext_resource type="Texture2D" uid="uid://8i1q32w2vu0h" path="res://Sprites/Weapons/Knife/knife_3.png" id="5_ht785"]
 [ext_resource type="Texture2D" uid="uid://h7rv4xar5rsu" path="res://Sprites/Weapons/Knife/knife_5.png" id="6_k6oe1"]
-[ext_resource type="AudioStream" uid="uid://c3mgw5ya4edcv" path="res://Sounds/Slay.wav" id="7_masc6"]
+[ext_resource type="AudioStream" uid="uid://c3mgw5ya4edcv" path="res://Sounds/snd_slay.wav" id="7_masc6"]
 [ext_resource type="Texture2D" uid="uid://l371fapi5bk1" path="res://Sprites/Weapons/Knife/knife_6.png" id="7_p26nv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_76vvy"]

@@ -1,110 +1,87 @@
 extends Node
 
-const min_name_length: int = 3
-const max_name_length: int = 8
-const max_level: int = 20
-const base_hit_points: int = 16
-const hit_points_bonus_per_level: int = 4
-const max_hit_points_bonus: int = 99
-const attack_bonus_per_level: int = 2
-
-var player_name: String = "Benjamin":
-	get:
-		return player_name
-	set(value):
-		set_player_name(value)
-
-var level: int:
-	get:
-		return level
-	set(value):
-		if value > max_level:
-			value = max_level
-			
-		if get_stack()[1].source == get_script().get_path():
-			var level_define_max_hit_points: Callable = Callable(
-				func() -> void:
-					if level < max_level:
-						max_health = base_hit_points + (hit_points_bonus_per_level * level) # (hit_points_bonus_per_level * (level - 1)) + hit_points_bonus_per_level
-					elif level >= max_level:
-						max_health = max_hit_points_bonus
-			)
-			
-			var level_define_attack: Callable = Callable(
-				func() -> void:
-					attack = -2 + (attack_bonus_per_level * level) # attack_bonus_per_level * (level - 1)
-			)
-			
-			var level_define_defense: Callable = Callable(
-				func() -> void:
-					defense = floor((level - 1) / 4.0)
-			)
-			
-			level = value
-			level_define_max_hit_points.call()
-			level_define_attack.call()
-			level_define_defense.call()
-		else:
-			pass
-			#Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
-var max_health: float:
-	get:
-		return max_health
-	set(value):
-		if get_stack()[1].source == get_script().get_path():
-			max_health = value
-			get_tree().get_first_node_in_group("health_bar").set_max(max_health)
-		else:
-			Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
-var health: float = 5.0
-var items: Array[Item] = [
-	Item.new("Bing Chilling", 5),
-	Item.new("Zen An", 10),
-	Item.new("Zen Thye", 15),
-	Item.new("Choon Hong", 20),
-	Item.new("Benjamin", 25),
-	Item.new("Yao Zong", 30),
-	Item.new("Bing Chilling", 35),
-	Item.new("Bing Chilling", 40)
+enum LANGUAGE {
+	ENGLISH,
+	CHINESE,
+	CLASSICAL_CHINESE,
+	MALAY,
+	JAPANESE
+}
+var save_path: String = "user://save.save"
+var default_data: Dictionary = {
+	player = {
+		name = null,
+		id = null,
+		uid = null,
+		exp = 0,
+		gold = 0,
+		playtime = 0,
+		location_index = 0
+	},
+	settings = {
+		language = LANGUAGE.ENGLISH
+	}
+}
+var data: Dictionary = default_data.duplicate(true)
+var exp_to_level: Array[int] = [
+	0,
+	10,
+	30,
+	70,
+	120,
+	200,
+	300,
+	500,
+	800,
+	1200,
+	1700,
+	2500,
+	3500,
+	5000,
+	7000,
+	10000,
+	15000,
+	25000,
+	50000,
+	99999
 ]
 
-var defense: float:
-	get:
-		return defense
-	set(value):
-		if get_stack()[1].source == get_script().get_path():
-			defense = value
-		else:
-			Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
-var attack: float:
-	get:
-		return attack
-	set(value):
-		if get_stack()[1].source == get_script().get_path():
-			attack = value
-		else:
-			Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
-var weapon: String
-var armor: String
+func _ready():
+	load_data()
+	level_define_all()
 
-func _ready() -> void:
-	level = 20
+func load_data() -> Dictionary:
+	if FileAccess.file_exists(save_path):
+		var file: FileAccess = FileAccess.open(save_path, FileAccess.READ)
+		data = file.get_var()
+	else:
+		save_data()
+	return data
 
-func level_up() -> void:
-	if level + 1 <= max_level:
-		level += 1
-
-func set_player_name(value: String):
-	value = value.strip_edges()
-		
-	if value.length() < min_name_length and value.length() > max_name_length:
-		if value.length() == 0:
-			value = str(null)
-		elif value.length() > 0 and value.length() < min_name_length:
-			while value.length() < min_name_length:
-				value += str(randi_range(0, 9))
-		elif value.length() > max_name_length:
-			value = value.left(max_name_length)
-		Debug.log_warning(Debug.INVALID_PLAYER_NAME, true)
+func save_data() -> void:
+	var file: FileAccess = FileAccess.open(save_path, FileAccess.WRITE)
 	
-	player_name = value
+	file.store_var(data)
+
+func get_player_level() -> int:
+	for level_index in range(exp_to_level.size()):
+		if data.player.exp < exp_to_level[level_index]:
+			return level_index
+	return exp_to_level.size()
+
+func level_define_all() -> void:
+	level_define_max_hit_points()
+	level_define_attack()
+	level_define_defense()
+
+func level_define_max_hit_points() -> void:
+	if get_player_level() < PlayerData.max_level:
+		PlayerData.max_health = PlayerData.base_hit_points + (PlayerData.hit_points_bonus_per_level * get_player_level())
+	elif get_player_level() >= PlayerData.max_level:
+		PlayerData.max_health = PlayerData.max_hit_points_bonus
+
+func level_define_attack() -> void:
+		PlayerData.attack = -2 + (PlayerData.attack_bonus_per_level * get_player_level())
+
+func level_define_defense() -> void:
+	PlayerData.defense = floor((get_player_level() - 1) / 4.0)

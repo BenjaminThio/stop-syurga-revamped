@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://i3x32ka02d3p"]
+
+[ext_resource type="Texture2D" uid="uid://do6bs877gad73" path="res://Sprites/Spears/red_spear.png" id="1_1fskx"]
+[ext_resource type="Script" path="res://Scripts/spear.gd" id="1_bhk3s"]
+[ext_resource type="Texture2D" uid="uid://bn1h8c8nucymr" path="res://Sprites/Spears/blue_spear.png" id="2_5gwmk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0b3vh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5gwmk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_1fskx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onvl3"]
+size = Vector2(12, 24)
+
+[node name="Spear" type="Area2D" groups=["spear"]]
+script = ExtResource("1_bhk3s")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_0b3vh")
+frame_progress = 0.411099
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(0.916, 0.958)
+shape = SubResource("RectangleShape2D_onvl3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

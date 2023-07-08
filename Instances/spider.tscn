@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc5bur4rna2c8"]
+
+[ext_resource type="Texture2D" uid="uid://cdgffyydnw0vq" path="res://Sprites/spider.png" id="1_0mfbt"]
+[ext_resource type="Script" path="res://Scripts/spider.gd" id="1_70soy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptpxu"]
+size = Vector2(38, 38)
+
+[node name="Spider" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_70soy")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_0mfbt")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(1.026, 1)
+shape = SubResource("RectangleShape2D_ptpxu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

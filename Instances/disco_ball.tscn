@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3864bohjy6fx"]
+
+[ext_resource type="Texture2D" uid="uid://d38i25fbbd0b3" path="res://Sprites/disco_ball.png" id="1_44d8b"]
+[ext_resource type="Script" path="res://Scripts/disco_ball.gd" id="1_pxosu"]
+[ext_resource type="Texture2D" uid="uid://bdbkd3qp771xb" path="res://Sprites/disco_ball_hit.png" id="2_2v3gg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6b2ux"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_44d8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2v3gg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c4fmq"]
+radius = 29.0163
+
+[node name="DiscoBall" type="Area2D"]
+script = ExtResource("1_pxosu")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_6b2ux")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 18)
+scale = Vector2(1, 1.028)
+shape = SubResource("CircleShape2D_c4fmq")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

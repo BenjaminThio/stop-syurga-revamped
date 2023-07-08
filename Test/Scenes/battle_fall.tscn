@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dio1ld6lt4p76"]
+
+[ext_resource type="Script" path="res://Test/Scripts/battle_fall.gd" id="1_3kit2"]
+[ext_resource type="Texture2D" uid="uid://cxballbtr12s" path="res://Sprites/PlayerHeart/Default/000.png" id="2_mv76v"]
+
+[node name="Test3" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3kit2")
+
+[node name="Soul" type="Sprite2D" parent="."]
+position = Vector2(576, 448)
+scale = Vector2(5, 5)
+texture = ExtResource("2_mv76v")

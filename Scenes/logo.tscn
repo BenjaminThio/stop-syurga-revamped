@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://0y46dxnjq6n7"]
+
+[ext_resource type="Script" path="res://Scripts/logo.gd" id="1_8qwd4"]
+[ext_resource type="Texture2D" uid="uid://dkys6exd8stnf" path="res://Sprites/photo_2023-05-27_19-40-21.jpg" id="2_sou77"]
+[ext_resource type="Texture2D" uid="uid://ci3d2sq5742uu" path="res://Gimp/better_smaller_logo.png" id="3_183iq"]
+[ext_resource type="Texture2D" uid="uid://dnxtn2qy3dr3v" path="res://Gimp/tm.png" id="4_sb1xu"]
+[ext_resource type="FontFile" uid="uid://csahcrsc4eshy" path="res://Fonts/crypt-of-tomorrow-ut-font-no-rus.ttf" id="5_noxa0"]
+[ext_resource type="AudioStream" uid="uid://bmk0058sxxgak" path="res://Sounds/snd_intronoise.ogg" id="6_n550c"]
+
+[sub_resource type="FontVariation" id="FontVariation_fak0g"]
+base_font = ExtResource("5_noxa0")
+
+[node name="LogoCutscene" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_8qwd4")
+
+[node name="Reference" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(0.9, 0.901252)
+texture = ExtResource("2_sou77")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(576, 331)
+scale = Vector2(6.727, 6.727)
+texture = ExtResource("3_183iq")
+
+[node name="Trademark" type="Sprite2D" parent="Logo"]
+position = Vector2(61.543, -4.45964)
+scale = Vector2(0.126356, 0.126356)
+texture = ExtResource("4_sb1xu")
+
+[node name="HintLabel" type="Label" parent="."]
+self_modulate = Color(0.517647, 0.517647, 0.517647, 1)
+offset_left = 444.0
+offset_top = 486.0
+offset_right = 708.0
+offset_bottom = 507.0
+theme_override_fonts/font = SubResource("FontVariation_fak0g")
+theme_override_font_sizes/font_size = 15
+text = "[Press Z or Enter]"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_n550c")
+autoplay = true

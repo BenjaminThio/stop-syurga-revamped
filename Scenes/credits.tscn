@@ -1,0 +1,798 @@
+[gd_scene load_steps=10 format=3 uid="uid://3wawdkw4mi5l"]
+
+[ext_resource type="Texture2D" uid="uid://ci3d2sq5742uu" path="res://Gimp/better_smaller_logo.png" id="1_8nk7x"]
+[ext_resource type="Script" path="res://Scripts/credits.gd" id="1_8qgpj"]
+[ext_resource type="FontFile" uid="uid://jvipihxmlqfy" path="res://Fonts/8-BIT WONDER.TTF" id="2_e5an0"]
+[ext_resource type="FontFile" uid="uid://csahcrsc4eshy" path="res://Fonts/crypt-of-tomorrow-ut-font-no-rus.ttf" id="3_k56qv"]
+[ext_resource type="Texture2D" uid="uid://dk6jlyfn6gnvr" path="res://icon.svg" id="4_ripwr"]
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="5_a1b2v"]
+
+[sub_resource type="Animation" id="Animation_nulvh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Credits:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 704)]
+}
+
+[sub_resource type="Animation" id="Animation_n560q"]
+resource_name = "credits"
+length = 90.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Credits:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 90),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 704), Vector2(0, -4544)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bojjt"]
+_data = {
+"RESET": SubResource("Animation_nulvh"),
+"credits": SubResource("Animation_n560q")
+}
+
+[node name="Credits" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_8qgpj")
+
+[node name="Credits" type="Node2D" parent="."]
+position = Vector2(0, 704)
+
+[node name="Logo" type="Sprite2D" parent="Credits"]
+position = Vector2(576, 40)
+scale = Vector2(6.727, 6.727)
+texture = ExtResource("1_8nk7x")
+
+[node name="Credit1" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 896.0
+offset_bottom = 225.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Programming and Coding"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit1"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit2" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 352.0
+offset_right = 896.0
+offset_bottom = 385.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Attacks Design"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit2"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit3" type="Label" parent="Credits"]
+offset_left = 248.0
+offset_top = 512.0
+offset_right = 908.0
+offset_bottom = 545.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Photograph manipulation"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit3"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit4" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 680.0
+offset_right = 896.0
+offset_bottom = 713.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Animation"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit4"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit5" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 832.0
+offset_right = 896.0
+offset_bottom = 865.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Storylines and scripts"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit5"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit6" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 992.0
+offset_right = 896.0
+offset_bottom = 1025.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Game UI"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit6"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit7" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 1152.0
+offset_right = 896.0
+offset_bottom = 1185.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Sprites"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit7"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio
+Undertale"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit8" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 1328.0
+offset_right = 896.0
+offset_bottom = 1361.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Sounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit8"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio
+Undertale"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit9" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 1520.0
+offset_right = 896.0
+offset_bottom = 1553.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Musics or soundtracks"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit9"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Undertale
+Robin Blend"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit10" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 1712.0
+offset_right = 896.0
+offset_bottom = 1745.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Game Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit10"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit11" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 1872.0
+offset_right = 896.0
+offset_bottom = 1905.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Intro"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit11"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit12" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 2032.0
+offset_right = 896.0
+offset_bottom = 2065.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Encounter Villain Scene"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit12"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit13" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 2192.0
+offset_right = 896.0
+offset_bottom = 2225.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Battle Systems"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit13"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit14" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 2352.0
+offset_right = 896.0
+offset_bottom = 2385.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit14"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit15" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 2512.0
+offset_right = 896.0
+offset_bottom = 2545.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Languages Translator"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit15"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit16" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 2672.0
+offset_right = 896.0
+offset_bottom = 2705.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Audio Systems"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit16"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit17" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 2832.0
+offset_right = 896.0
+offset_bottom = 2865.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Leaderboard"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit17"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit18" type="Label" parent="Credits"]
+offset_left = 256.0
+offset_top = 2992.0
+offset_right = 896.0
+offset_bottom = 3025.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Database"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit18"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit19" type="Label" parent="Credits"]
+offset_left = 208.0
+offset_top = 3152.0
+offset_right = 943.0
+offset_bottom = 3185.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Game Mechanics Replication"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit19"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 64.0
+offset_right = 560.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit20" type="Label" parent="Credits"]
+offset_left = 208.0
+offset_top = 3312.0
+offset_right = 943.0
+offset_bottom = 3345.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Main Menu and Naming Scene"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit20"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 64.0
+offset_right = 560.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit21" type="Label" parent="Credits"]
+offset_left = 192.0
+offset_top = 3472.0
+offset_right = 960.0
+offset_bottom = 3505.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Reference or Prototype"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit21"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 576.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Undertale"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit22" type="Label" parent="Credits"]
+offset_left = 192.0
+offset_top = 3648.0
+offset_right = 960.0
+offset_bottom = 3714.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Game tools and 
+Reuseable Components"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit22"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 96.0
+offset_right = 576.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit23" type="Label" parent="Credits"]
+offset_left = 192.0
+offset_top = 3840.0
+offset_right = 960.0
+offset_bottom = 3873.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Shaders"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit23"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 576.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit24" type="Label" parent="Credits"]
+offset_left = 192.0
+offset_top = 4000.0
+offset_right = 960.0
+offset_bottom = 4033.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Special Thanks"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit24"]
+layout_mode = 0
+offset_top = 72.0
+offset_right = 768.0
+offset_bottom = 177.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Teh Yi Fan (Prototype of the villain)
+
+Loh Zen thye (Prototype of the main character)
+
+Edmund Lim Zee Em (Provided good suggestions)
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Credit25" type="Label" parent="Credits"]
+offset_left = 192.0
+offset_top = 4272.0
+offset_right = 960.0
+offset_bottom = 4305.0
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Powered By"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="Label" parent="Credits/Credit25"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Godot Engine"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="Sprite2D" parent="Credits/Credit25"]
+position = Vector2(384, 176)
+texture = ExtResource("4_ripwr")
+
+[node name="CreditsContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 50.0
+theme_override_constants/separation = 30
+
+[node name="Credit1" type="Label" parent="CreditsContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_e5an0")
+theme_override_font_sizes/font_size = 30
+text = "Programming and Coding"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="CreditsContainer/Credit1"]
+layout_mode = 2
+offset_top = 63.0
+offset_right = 630.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("3_k56qv")
+theme_override_font_sizes/font_size = 15
+text = "Benjamin Thio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="Label" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 568.0
+offset_right = 108.0
+offset_bottom = 616.0
+theme_override_fonts/font = ExtResource("5_a1b2v")
+theme_override_font_sizes/font_size = 36
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "credits"
+libraries = {
+"": SubResource("AnimationLibrary_bojjt")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)

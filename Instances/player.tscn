@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce331k5k2onbo"]
+[gd_scene load_steps=12 format=3 uid="uid://ce331k5k2onbo"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pplwt"]
 [ext_resource type="Texture2D" uid="uid://cxballbtr12s" path="res://Sprites/PlayerHeart/Default/000.png" id="3_150qt"]
 [ext_resource type="Texture2D" uid="uid://cfq1widkwswom" path="res://Sprites/PlayerHeart/Split/000.png" id="3_wqp14"]
+[ext_resource type="Texture2D" uid="uid://bqagwmsr4wurd" path="res://Sprites/shield_1.png" id="4_0q3iv"]
+[ext_resource type="Texture2D" uid="uid://bwtf26sow2qnn" path="res://Sprites/green_circle.png" id="4_a085k"]
+[ext_resource type="Texture2D" uid="uid://b775g0l7cj4yc" path="res://Sprites/shield_2.png" id="5_iq0hd"]
+[ext_resource type="Script" path="res://Scripts/spear_spawner.gd" id="7_dllx0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_30uly"]
 animations = [{
@@ -19,14 +23,31 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqqrt"]
-radius = 90.0
+radius = 80.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2k5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0q3iv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iq0hd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ce78p"]
+size = Vector2(600, 30)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
+scale = Vector2(1.12, 1.12)
 script = ExtResource("1_pplwt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.12, 1.12)
 sprite_frames = SubResource("SpriteFrames_30uly")
 animation = &"split"
 
@@ -34,14 +55,42 @@ animation = &"split"
 scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_aqqrt")
 
-[node name="Shield" type="Node2D" parent="."]
-visible = false
+[node name="Green" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Shield"]
-offset_left = -8.0
-offset_top = -13.0
-offset_right = 8.0
-offset_bottom = -10.0
+[node name="Shield" type="Area2D" parent="Green"]
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, 9)
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="Green/Shield"]
+position = Vector2(0, -23.5)
+sprite_frames = SubResource("SpriteFrames_t2k5d")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Green/Shield"]
+position = Vector2(0, -29.4643)
+scale = Vector2(0.1, 0.1)
+shape = SubResource("RectangleShape2D_ce78p")
+
+[node name="Circle" type="Sprite2D" parent="Green"]
+texture = ExtResource("4_a085k")
+
+[node name="SpearAttack" type="Node2D" parent="."]
+
+[node name="Spawnpoints" type="Node2D" parent="SpearAttack"]
+
+[node name="Up" type="Marker2D" parent="SpearAttack/Spawnpoints"]
+position = Vector2(0, 285.714)
+
+[node name="Right" type="Marker2D" parent="SpearAttack/Spawnpoints"]
+position = Vector2(-285.714, 0)
+
+[node name="Down" type="Marker2D" parent="SpearAttack/Spawnpoints"]
+position = Vector2(0, -285.714)
+
+[node name="Left" type="Marker2D" parent="SpearAttack/Spawnpoints"]
+position = Vector2(285.714, 0)
+
+[node name="Spawner" type="Node2D" parent="SpearAttack"]
+script = ExtResource("7_dllx0")
+
+[node name="BulletSpawnpoint" type="Marker2D" parent="."]
+position = Vector2(0, 8)
+
+[connection signal="area_entered" from="Green/Shield" to="." method="_on_shield_area_entered"]

@@ -1,7 +1,9 @@
-res://Modules/Godot
-res://Instances
-res://Scenes
 res://Scripts
+res://Instances
+res://Test/Scenes
+res://Scenes
+res://Shaders
+res://Modules/Godot
 res://Instances/Attacks
 C:/Users/USer/AppData/Local/Programs/Microsoft VS Code
 res://Modules/Python

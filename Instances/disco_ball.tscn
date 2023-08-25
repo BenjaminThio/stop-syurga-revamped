@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3864bohjy6fx"]
+[gd_scene load_steps=8 format=3 uid="uid://d3864bohjy6fx"]
 
 [ext_resource type="Texture2D" uid="uid://d38i25fbbd0b3" path="res://Sprites/disco_ball.png" id="1_44d8b"]
 [ext_resource type="Script" path="res://Scripts/disco_ball.gd" id="1_pxosu"]
 [ext_resource type="Texture2D" uid="uid://bdbkd3qp771xb" path="res://Sprites/disco_ball_hit.png" id="2_2v3gg"]
+[ext_resource type="PackedScene" uid="uid://cqih1vt140qdj" path="res://Instances/light.tscn" id="4_gmrl2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6b2ux"]
 animations = [{
@@ -21,8 +22,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_c4fmq"]
 radius = 29.0163
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ki14"]
+size = Vector2(1, 1)
+
 [node name="DiscoBall" type="Area2D"]
 script = ExtResource("1_pxosu")
+light_spawnpoint_rotate_speed = 200
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -33,5 +39,37 @@ position = Vector2(0, 18)
 scale = Vector2(1, 1.028)
 shape = SubResource("CircleShape2D_c4fmq")
 
+[node name="LightDetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="LightDetectionArea"]
+position = Vector2(0, 15.5)
+shape = SubResource("RectangleShape2D_5ki14")
+
+[node name="LightSpawnpoint" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 18)
+rotation = -0.261799
+
+[node name="Light1" parent="LightSpawnpoint" instance=ExtResource("4_gmrl2")]
+attack_type = 1
+
+[node name="Light2" parent="LightSpawnpoint" instance=ExtResource("4_gmrl2")]
+rotation = 1.25664
+attack_type = 1
+
+[node name="Light3" parent="LightSpawnpoint" instance=ExtResource("4_gmrl2")]
+rotation = 2.51327
+attack_type = 1
+
+[node name="Light4" parent="LightSpawnpoint" instance=ExtResource("4_gmrl2")]
+rotation = 3.76991
+attack_type = 1
+
+[node name="Light5" parent="LightSpawnpoint" instance=ExtResource("4_gmrl2")]
+rotation = 5.02655
+attack_type = 1
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="LightDetectionArea" to="." method="_on_light_detection_area_entered"]
+[connection signal="area_exited" from="LightDetectionArea" to="." method="_on_light_detection_area_exited"]

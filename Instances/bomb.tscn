@@ -14,7 +14,7 @@ script = ExtResource("1_swybe")
 texture = ExtResource("1_36bc5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 3.5)
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_v2ss7")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

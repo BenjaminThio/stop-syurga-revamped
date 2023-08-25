@@ -1,0 +1,215 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw7tq13xh3ykm"]
+
+[ext_resource type="PackedScene" uid="uid://b2oc3kyyftf11" path="res://Instances/leg.tscn" id="1_xmf2j"]
+[ext_resource type="PackedScene" uid="uid://b5i0xl0dcdd5h" path="res://Instances/block.tscn" id="2_050xn"]
+
+[sub_resource type="Animation" id="Animation_16pyp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fxa1v"]
+resource_name = "attack2"
+length = 25.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2800)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqlct"]
+_data = {
+"RESET": SubResource("Animation_16pyp"),
+"attack2": SubResource("Animation_fxa1v")
+}
+
+[node name="Attack2" type="Node2D"]
+
+[node name="Leg" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(772, -250)
+move = true
+transition_duration = 0.3
+
+[node name="Leg2" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(430, -250)
+scale = Vector2(-1, 1)
+direction = 1
+move = true
+transition_duration = 0.3
+
+[node name="Leg3" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(720, -21)
+move = true
+transition_duration = 0.4
+
+[node name="Leg4" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(378, -21)
+scale = Vector2(-1, 1)
+direction = 1
+move = true
+transition_duration = 0.4
+
+[node name="Leg9" parent="." instance=ExtResource("1_xmf2j")]
+position = Vector2(620, -1650)
+move_distance = 100.0
+transition_duration = 0.5
+
+[node name="Leg10" parent="." instance=ExtResource("1_xmf2j")]
+position = Vector2(620, -1800)
+move_distance = 100.0
+transition_duration = 0.5
+
+[node name="Leg19" parent="." instance=ExtResource("1_xmf2j")]
+position = Vector2(530, -2023)
+scale = Vector2(-1, 1)
+direction = 1
+move_distance = 100.0
+transition_duration = 0.5
+
+[node name="Leg7" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(681, -500)
+move = true
+transition_duration = 0.4
+
+[node name="Leg8" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(339, -500)
+scale = Vector2(-1, 1)
+direction = 1
+move = true
+transition_duration = 0.4
+
+[node name="Block" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(600, -220)
+
+[node name="Block6" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(600, -300)
+
+[node name="Leg11" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(722, -730)
+move = true
+transition_duration = 0.3
+
+[node name="Leg12" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(380, -730)
+scale = Vector2(-1, 1)
+direction = 1
+move = true
+transition_duration = 0.3
+
+[node name="Block7" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(550, -700)
+
+[node name="Block8" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(550, -780)
+
+[node name="Leg15" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(702, -1220)
+move = true
+transition_duration = 0.3
+
+[node name="Leg16" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(360, -1220)
+scale = Vector2(-1, 1)
+direction = 1
+move = true
+transition_duration = 0.3
+
+[node name="Block9" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(530, -1190)
+
+[node name="Block10" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(529, -1270)
+
+[node name="Block2" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(510, -470)
+
+[node name="Block4" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(510, -550)
+
+[node name="Leg13" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(742, -1000)
+move = true
+transition_duration = 0.4
+
+[node name="Leg14" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(400, -1000)
+scale = Vector2(-1, 1)
+direction = 1
+move = true
+transition_duration = 0.4
+
+[node name="Block3" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(571, -970)
+
+[node name="Block5" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(571, -1050)
+
+[node name="Leg17" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(700, -1470)
+move = true
+transition_duration = 0.4
+
+[node name="Leg18" parent="." instance=ExtResource("1_xmf2j")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(358, -1470)
+scale = Vector2(-1, 1)
+direction = 1
+move = true
+transition_duration = 0.4
+
+[node name="Block11" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(529, -1440)
+
+[node name="Block12" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(529, -1520)
+
+[node name="Block13" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(465, -1620)
+
+[node name="Block14" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(465, -1700)
+
+[node name="Block16" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(465, -1850)
+
+[node name="Block17" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(685, -1980)
+
+[node name="Block18" parent="." instance=ExtResource("2_050xn")]
+position = Vector2(685, -2070)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "attack2"
+libraries = {
+"": SubResource("AnimationLibrary_yqlct")
+}

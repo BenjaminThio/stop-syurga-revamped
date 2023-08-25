@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/yellow_spear.gd" id="1_obwle"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb0vh"]
-size = Vector2(160, 320)
+size = Vector2(160, 130)
 
 [node name="Origin" type="Node2D"]
 texture_filter = 1
@@ -20,7 +20,7 @@ metadata/_edit_group_ = true
 texture = ExtResource("1_gburp")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="YellowSpear"]
-position = Vector2(-2.98023e-07, 4.76837e-07)
+position = Vector2(0, -9.5)
 scale = Vector2(0.1, 0.1)
 shape = SubResource("RectangleShape2D_tb0vh")
 

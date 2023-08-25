@@ -14,8 +14,9 @@ static func choices(seq, k: int = 1) -> Array:
 
 static func sample(seq, k: int = 1):
 	var result: Array = []
+	var duplicated_seq = seq.duplicate(true)
 	
-	if k > seq.size():
+	if k > duplicated_seq.size():
 		var error: String = "ValueError: Sample larger than population or is negative"
 		
 		printerr(error)
@@ -23,9 +24,9 @@ static func sample(seq, k: int = 1):
 		return
 	
 	for _i in range(k):
-		var random_index = randi() % seq.size()
+		var random_index = randi() % duplicated_seq.size()
 		
-		result.append(seq[random_index])
-		seq.pop_at(random_index)
+		result.append(duplicated_seq[random_index])
+		duplicated_seq.pop_at(random_index)
 	
 	return result

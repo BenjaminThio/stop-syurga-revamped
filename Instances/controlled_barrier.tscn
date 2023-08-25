@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8ejriiwn3u12"]
+
+[ext_resource type="PackedScene" uid="uid://c7hy08buadnlg" path="res://Instances/barrier.tscn" id="1_ybhfr"]
+
+[node name="ControlledBarrier" type="Control"]
+custom_minimum_size = Vector2(34, 37)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1118.0
+offset_bottom = -611.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Barrier" parent="." instance=ExtResource("1_ybhfr")]
+position = Vector2(17, 18.5)

@@ -1,3 +1,6 @@
+res://Scenes/intro.tscn
+res://Scripts/light.gd
+res://Scripts/main.gd
+res://Scripts/global.gd
+res://Scripts/player.gd
 res://Scenes/main.tscn
-res://Instances/block.tscn
-res://Instances/leg.tscn

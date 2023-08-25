@@ -1,10 +1,29 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnqguapi8ioxm"]
+[gd_scene load_steps=15 format=3 uid="uid://bnqguapi8ioxm"]
 
 [ext_resource type="Script" path="res://Scripts/villian.gd" id="1_qgy3b"]
 [ext_resource type="Texture2D" uid="uid://bru36cl6prpor" path="res://Sprites/Uncategorized/villian.png" id="2_xlvxm"]
+[ext_resource type="Texture2D" uid="uid://ci58thm4vl1x" path="res://Sprites/Uncategorized/villian_hurt.png" id="3_bjiae"]
 [ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villian_shield.png" id="3_s13w6"]
 [ext_resource type="Texture2D" uid="uid://cbtx4bchd1fde" path="res://Sprites/Shaders/Pixel.png" id="4_k1lhr"]
+[ext_resource type="Texture2D" uid="uid://c2qire4ei6x5w" path="res://Sprites/yi_fan_mental_break_down.png" id="4_liseb"]
 [ext_resource type="PackedScene" uid="uid://baw3f8qxhlt4c" path="res://Instances/speech.tscn" id="5_scbxl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j80k0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xlvxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_liseb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bjiae")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Gradient" id="Gradient_mshnh"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -34,17 +53,19 @@ radius = 112.0
 [node name="Villian" type="Area2D" groups=["villian"]]
 position = Vector2(576, 160)
 script = ExtResource("1_qgy3b")
+health = 28900
+spareable = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_xlvxm")
+sprite_frames = SubResource("SpriteFrames_j80k0")
 
-[node name="Shield" type="Sprite2D" parent="Sprite2D"]
+[node name="Shield" type="Sprite2D" parent="AnimatedSprite2D"]
 self_modulate = Color(1, 1, 1, 0)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_s13w6")
 
-[node name="VaporizeParticles" type="GPUParticles2D" parent="Sprite2D"]
+[node name="VaporizeParticles" type="GPUParticles2D" parent="AnimatedSprite2D"]
 rotation = 0.261799
 scale = Vector2(1.8, 2.9)
 emitting = false
@@ -57,9 +78,9 @@ speed_scale = 3.0
 [node name="HealthBar" type="ProgressBar" parent="."]
 visible = false
 offset_left = -120.0
-offset_top = 96.0
+offset_top = 144.0
 offset_right = 120.0
-offset_bottom = 110.0
+offset_bottom = 158.0
 theme_override_styles/background = SubResource("StyleBoxFlat_yst2b")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ekhi5")
 max_value = 10000.0
@@ -72,5 +93,3 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_mc31a")
-
-[connection signal="area_entered" from="." to="." method="_on_villian_shield_area_entered"]

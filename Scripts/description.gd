@@ -4,11 +4,11 @@ var statements: Array = []:
 	get:
 		return statements
 	set(value):
-		if get_stack()[1].source == get_script().get_path():
+		#if get_stack()[1].source == get_script().get_path():
 			statements = value
 			State.add_substate_to_queue(State.SUBSTATE.STATEMENT)
-		else:
-			Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
+		#else:
+		#	Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
 var skipable: bool = false
 var upcoming_event: Callable = Callable()
 

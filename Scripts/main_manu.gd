@@ -6,7 +6,7 @@ enum OPTION {
 	SETTINGS,
 	LEADERBOARD,
 	CREDITS,
-	QUIT
+	#QUIT
 }
 var selected_option: int = 0
 
@@ -22,7 +22,7 @@ var selected_option: int = 0
 @onready var settings_label: Label = $Options/Settings
 @onready var leaderboard_label: Label = $Options/Leaderboard
 @onready var credits_label: Label = $Options/Credits
-@onready var quit_label: Label = $Options/Quit
+#@onready var quit_label: Label = $Options/Quit
 
 func _ready():
 	continue_label.text = [
@@ -60,6 +60,7 @@ func _ready():
 		"Kredit",
 		"クレジット"
 	][db.data.settings.language]
+	"""
 	quit_label.text = [
 		"Quit",
 		"退出游戏",
@@ -67,6 +68,7 @@ func _ready():
 		"Keluar", #"Keluar Dari Permainan",
 		"ゲームを辞める"
 	][db.data.settings.language]
+	"""
 	
 	name_label.text = db.data.player.name
 	level_label.text = [
@@ -109,7 +111,11 @@ func _process(_delta):
 		highlight_selected_option()
 	elif Input.is_action_just_pressed("accept"):
 		if selected_option == OPTION.CONTINUE:
-			get_tree().change_scene_to_file("res://Scenes/encounter.tscn")
+			if Global.has_encountered_villian:
+				get_tree().change_scene_to_file("res://Scenes/main.tscn")
+			else:
+				Global.has_encountered_villian = true
+				get_tree().change_scene_to_file("res://Scenes/encounter.tscn")
 		elif selected_option == OPTION.RESET or selected_option == OPTION.SETTINGS:
 			Global.origin_scene = get_tree().current_scene.scene_file_path
 			if selected_option == OPTION.RESET:
@@ -121,8 +127,10 @@ func _process(_delta):
 			return
 		elif selected_option == OPTION.CREDITS:
 			get_tree().change_scene_to_file("res://Scenes/credits.tscn")
+		"""
 		elif selected_option == OPTION.QUIT:
 			get_tree().quit()
+		"""
 
 func remove_highlight():
 	for option in options.get_children():

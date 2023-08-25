@@ -36,7 +36,7 @@ const translated_yes: PackedStringArray = [
 	"はい"
 ]
 
-var keyboard_coord: Vector2 = Vector2.ZERO
+var keyboard_coord: Vector2i = Vector2i.ZERO
 var is_keys_shaking: bool = false
 var focus_name: bool = false
 var is_name_shaking: bool = false
@@ -83,29 +83,31 @@ func _process(_delta):
 						if keyboard_coord.x - 1 > 0:
 							keyboard_coord.x -= 1
 					keyboard_coord.y -= 1
-					while keyboard_coord.x >= get_child(int(keyboard_coord.y)).get_child_count():
+					while keyboard_coord.x >= get_child(keyboard_coord.y).get_child_count():
 						keyboard_coord.y -= 1
 				elif keyboard_coord.y - 1 < 0:
 					keyboard_coord.y = get_child_count() - 1
+					@warning_ignore("integer_division")
 					keyboard_coord.x = floor((keyboard_coord.x + 1) / get_child(get_child_count() - 1).get_child_count())
 			elif Input.is_action_just_pressed("left"):
 				if keyboard_coord.x - 1 >= 0:
 					keyboard_coord.x -= 1
 				elif keyboard_coord.x - 1 < 0:
 					if keyboard_coord.y == get_child_count() - 1:
-						keyboard_coord.x = get_child(int(keyboard_coord.y)).get_child_count() - 1
+						keyboard_coord.x = get_child(keyboard_coord.y).get_child_count() - 1
 					elif keyboard_coord.y - 1 >= 0:
 						keyboard_coord.y -= 1
-						keyboard_coord.x = get_child(int(keyboard_coord.y)).get_child_count() - 1
+						keyboard_coord.x = get_child(keyboard_coord.y).get_child_count() - 1
 			elif Input.is_action_just_pressed("down"):
 				if keyboard_coord.y + 1 < get_child_count():
 					keyboard_coord.y += 1
-					while keyboard_coord.x >= get_child(int(keyboard_coord.y)).get_child_count():
+					while keyboard_coord.x >= get_child(keyboard_coord.y).get_child_count():
 						if keyboard_coord.y == get_child_count() - 1:
 							break
 						elif keyboard_coord.y < get_child_count() - 1:
 							keyboard_coord.y += 1
 					if keyboard_coord.y == get_child_count() - 1:
+						@warning_ignore("integer_division")
 						keyboard_coord.x = floor((keyboard_coord.x + 1) / get_child(get_child_count() - 1).get_child_count())
 				elif keyboard_coord.y + 1 >= get_child_count():
 					if keyboard_coord.y == get_child_count() - 1:
@@ -114,9 +116,9 @@ func _process(_delta):
 							keyboard_coord.x -= 1
 					keyboard_coord.y = 0
 			elif Input.is_action_just_pressed("right"):
-				if keyboard_coord.x + 1 < get_child(int(keyboard_coord.y)).get_child_count():
+				if keyboard_coord.x + 1 < get_child(keyboard_coord.y).get_child_count():
 					keyboard_coord.x += 1
-				elif keyboard_coord.x + 1 >= get_child(int(keyboard_coord.y)).get_child_count():
+				elif keyboard_coord.x + 1 >= get_child(keyboard_coord.y).get_child_count():
 					if keyboard_coord.y == get_child_count() - 1 or keyboard_coord.y + 1 < get_child_count() - 1:
 						keyboard_coord.x = 0
 					if keyboard_coord.y + 1 < get_child_count() - 1:
@@ -124,7 +126,7 @@ func _process(_delta):
 			reset_keyboard()
 			update_keyboard_keys()
 		elif Input.is_action_just_pressed("accept"):
-			var selected_key: String = get_child(int(keyboard_coord.y)).get_child(int(keyboard_coord.x)).text.strip_edges()
+			var selected_key: String = get_child(keyboard_coord.y).get_child(keyboard_coord.x).text.strip_edges()
 			
 			if selected_key in TRANSLATED_QUIT:
 				main.name_label_text = name_label.text
@@ -169,7 +171,7 @@ func _process(_delta):
 			reset_keyboard()
 			update_keyboard_keys()
 		elif Input.is_action_just_pressed("accept"):
-			var selected_option: String = get_child(int(keyboard_coord.y)).get_child(int(keyboard_coord.x)).text.strip_edges()
+			var selected_option: String = get_child(keyboard_coord.y).get_child(keyboard_coord.x).text.strip_edges()
 			
 			if selected_option in translated_no:
 				focus_name = false
@@ -244,7 +246,7 @@ func backspace():
 		name_label.text = name_label.text.left(name_label.text.length() - 1)
 
 func update_keyboard_keys():
-	var selected_key: Label = get_child(int(keyboard_coord.y)).get_child(int(keyboard_coord.x))
+	var selected_key: Label = get_child(keyboard_coord.y).get_child(keyboard_coord.x)
 	
 	selected_key.set("theme_override_colors/font_color", Color.YELLOW)
 

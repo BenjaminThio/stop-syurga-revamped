@@ -109,7 +109,7 @@ func _process(_delta):
 
 func get_calculated_char_appear_gap_time() -> float:
 	var char_counter: int = 0
-	var background_music_length : float = get_child(3).stream.get_length()
+	var background_music_length : float = background_music.stream.get_length()
 	
 	for storyline in storylines:
 		char_counter += len(storyline[db.data.settings.language])

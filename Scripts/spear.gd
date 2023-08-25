@@ -22,6 +22,7 @@ var velocity: Vector2 = Vector2.ZERO
 		elif direction == DIRECTION.LEFT:
 			rotation_degrees = 270
 @export var speed: int = 100
+@export var damage_multiplier: int = 2
 @onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 
@@ -41,5 +42,5 @@ func _on_body_entered(body):
 	if not Engine.is_editor_hint() and body.is_in_group("player"):
 		var spear_spawner: Node2D = player.get_node("SpearAttack/Spawner")
 		
-		body.deal_damage(villian.attack * 2)
+		body.deal_damage(villian.attack * damage_multiplier)
 		spear_spawner.destroy_spear_and_locate_red_spear(self)

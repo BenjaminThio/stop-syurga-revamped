@@ -26,8 +26,9 @@ var flee_animated_sprite_scene: PackedScene = preload("res://Instances/flee.tscn
 	]
 ][db.data.settings.language]
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
+@onready var player_animated_sprite: AnimatedSprite2D = player.get_node("AnimatedSprite2D")
 @onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
-@onready var villian_sprite: Sprite2D = villian.get_child(0)
+@onready var villian_sprite: AnimatedSprite2D = villian.get_child(0)
 @onready var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
 @onready var canvas: Control = get_tree().get_first_node_in_group("canvas")
 @onready var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
@@ -63,23 +64,31 @@ func select_option(option: int) -> void:
 		#battlefield.add_child(player)
 		player.global_position = player_global_position
 		State.set_state(State.MAIN_STATE.FLEE)
-		flee_animated_sprite.self_modulate = player.soul
+		flee_animated_sprite.self_modulate = player.SOUL_COLOR[player.soul]
 		
 		player.add_child(flee_animated_sprite)
 		
-		create_tween().tween_property(flee_animated_sprite, "offset:y", 4, 0.5)
-		Audio.play_sound("slidewhist")
+		if player.soul == player.SOUL.JUSTICE:
+			var rotate_sound_length: float = Audio.play_sound_and_return_length("rotate")
+			
+			await create_tween().tween_property(player, "rotation_degrees", 0, rotate_sound_length).finished
+			
+			player.ghost_effect()
+			Audio.play_sound("create")
+			
+			await time.sleep(0.5)
 		
-		await time.sleep(0.5)
+		var slidewhist_sound_length: float = Audio.play_sound_and_return_length("slidewhist")
+		
+		await create_tween().tween_property(flee_animated_sprite, "offset:y", 4, slidewhist_sound_length).finished
 		
 		flee_animated_sprite.play("flee")
 		
 		await time.sleep(ModifiedSpriteFrames.get_frame_absolute_duration(flee_animated_sprite))
 		
-		create_tween().tween_property(player, "global_position:x", -10, 2)
-		Audio.play_sound("escape")
+		var escape_sound_length: float = Audio.play_sound_and_return_length("escape")
 		
-		await time.sleep(2)
+		await create_tween().tween_property(player, "global_position:x", -ModifiedSpriteFrames.get_frame(player_animated_sprite).get_width(), escape_sound_length).finished
 		
 		flee_animated_sprite.stop()
 		Transition.fade_in(canvas, func() -> void: get_tree().change_scene_to_file("res://Scenes/main_manu.tscn"))

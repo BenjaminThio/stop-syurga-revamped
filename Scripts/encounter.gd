@@ -12,6 +12,7 @@ var chew_times: int = 5
 @onready var snack_package_animation_player: AnimationPlayer = $Snack/Package/AnimationPlayer
 @onready var half_ring_particles: GPUParticles2D = $Snack/HalfRingParticles
 @onready var full_ring_particles: GPUParticles2D = $Snack/FullRingParticles
+@onready var eating_sound_effect: AudioStreamPlayer = $EatingSoundEffect
 
 func _on_snack_package_area_entered(area) -> void:
 	if area.get_parent() == right_hand and right_hand_animation_player.is_playing() and right_hand_animation_player.current_animation == "take_super_ring":
@@ -32,10 +33,12 @@ func _on_mouth_area_entered(area) -> void:
 		await time.sleep(mouth_animation_player.current_animation_length - super_ring_disappear_time)
 		right_hand.frame = 0
 		await time.sleep(super_ring_disappear_time)
+		eating_sound_effect.play()
 		for _i in range(chew_times):
 			mouth_animation_player.play("eating")
 			await time.sleep(mouth_animation_player.current_animation_length)
 		mouth_animation_player.stop()
+		eating_sound_effect.stop()
 		right_hand_animation_player.play("hide_hand")
 		await time.sleep(right_hand_animation_player.current_animation_length + 1.0)
 		right_hand_animation_player.play("take_super_ring")

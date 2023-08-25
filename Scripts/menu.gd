@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 var menu: CustomMenu
-var player_coord: Vector2 = Vector2.ZERO
+var player_coord: Vector2i = Vector2i.ZERO
 var page_index: int = 0
 
 @onready var action_buttons: Node2D = get_tree().get_first_node_in_group("actions")
@@ -61,7 +61,7 @@ func _process(_delta) -> void:
 			action_buttons.get_child(action_buttons.action_index).frame = 0
 			action_buttons.reset()
 			item.fulfill_effect(health_bar)
-			PlayerData.items.pop_at((page_index * (menu.width * menu.height)) + (int(player_coord.y) * menu.width) + int(player_coord.x))
+			PlayerData.items.pop_at((page_index * (menu.width * menu.height)) + (player_coord.y * menu.width) + player_coord.x)
 			description_label.upcoming_event = queue_free
 			description_label.set_statements([
 				[
@@ -119,11 +119,11 @@ func move_right() -> void:
 func move(move_function: Callable) -> void:
 	move_function.call()
 			
-	while is_option_null(Vector2(player_coord.x, player_coord.y)):
+	while is_option_null(player_coord):
 		move_function.call()
 
 func update_player_position() -> void:
-	var act_label: Label = get_child(int(player_coord.y)).get_child(int(player_coord.x))
+	var act_label: Label = get_child(player_coord.y).get_child(player_coord.x)
 	
 	player.global_position = Vector2(act_label.global_position.x - 50, act_label.global_position.y + (act_label.size.y / 2))
 
@@ -132,8 +132,8 @@ func render_menu() -> void:
 		for option_index in range(menu.width):
 			var option_label: Label = get_child(row_index).get_child(option_index)
 			
-			if not is_option_null(Vector2(option_index, row_index)):
-				var option: String = get_option(Vector2(option_index, row_index))
+			if not is_option_null(Vector2i(option_index, row_index)):
+				var option: String = get_option(Vector2i(option_index, row_index))
 				
 				option_label.text = "* {option}".format({"option": option.capitalize()})
 			else:
@@ -146,10 +146,10 @@ func render_menu() -> void:
 		page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		page_label.text = "PAGE {page_number}".format({"page_number": page_index + 1})
 
-func is_option_null(option_coord: Vector2) -> bool:
+func is_option_null(option_coord: Vector2i) -> bool:
 	var option
-	var row_index: int = int(option_coord.y)
-	var option_index: int = int(option_coord.x)
+	var row_index: int = option_coord.y
+	var option_index: int = option_coord.x
 	
 	if menu.paged:
 		option = menu.options[page_index][row_index][option_index]
@@ -160,9 +160,9 @@ func is_option_null(option_coord: Vector2) -> bool:
 		return false
 	return true
 
-func get_option(option_coord: Vector2):
-	var row_index: int = int(option_coord.y)
-	var option_index: int = int(option_coord.x)
+func get_option(option_coord: Vector2i):
+	var row_index: int = option_coord.y
+	var option_index: int = option_coord.x
 	
 	if menu.paged:
 		return menu.options[page_index][row_index][option_index].item_name

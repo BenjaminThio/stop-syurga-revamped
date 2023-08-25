@@ -9,6 +9,10 @@ size = Vector2(38, 32)
 [node name="Croissant" type="Area2D"]
 texture_filter = 1
 script = ExtResource("1_5tnmg")
+move_distance = 450
+static_duration = 0.3
+rotate_speed = 150
+metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_kv4u2")

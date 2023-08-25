@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqih1vt140qdj"]
+
+[ext_resource type="Script" path="res://Scripts/light.gd" id="1_6pv31"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bw4cd"]
+size = Vector2(4, 630.35)
+
+[node name="Light" type="Area2D" groups=["light"]]
+script = ExtResource("1_6pv31")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 648.0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 324)
+scale = Vector2(1, 1.028)
+shape = SubResource("RectangleShape2D_bw4cd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -239,4 +239,5 @@ func _on_file_selected(path: String) -> void:
 	owner.set_pause(false)
 
 func _on_file_dialog_canceled():
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
+	pass
+	#DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)

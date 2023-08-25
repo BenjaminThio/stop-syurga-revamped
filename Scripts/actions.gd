@@ -49,16 +49,18 @@ func _process(_delta) -> void:
 		Audio.play_sound("squeak")
 	elif Input.is_action_just_pressed("accept"):
 		typing_sound_effect.stop()
+		Audio.play_sound("select")
 		if not focus:
 			match action_index:
 				State.MAIN_STATE.FIGHT, State.MAIN_STATE.ACT:
 					focus = true
 					focus_action()
 				State.MAIN_STATE.ITEM, State.MAIN_STATE.MERCY:
+					if action_index == State.MAIN_STATE.ITEM and PlayerData.items.size() == 0:
+						return
 					confirm_action()
 		elif focus:
 			confirm_action()
-		Audio.play_sound("select")
 	elif Input.is_action_just_pressed("cancel"):
 		if not focus and not confirmed_action:
 			return
@@ -130,9 +132,8 @@ func confirm_action() -> void:
 			
 			battlefield.add_child(menu)
 			await time.sleep(0.001)
-			match State.current_state:
-				State.MAIN_STATE.MERCY:
-					menu.get_child(0).get_child(0).self_modulate = Color.YELLOW
+			if State.current_state == State.MAIN_STATE.MERCY and villian.spareable:
+				menu.get_child(0).get_child(0).self_modulate = Color.YELLOW
 			menu.update_player_position()
 
 func generate_description(transition_time: float = 0.03) -> void:

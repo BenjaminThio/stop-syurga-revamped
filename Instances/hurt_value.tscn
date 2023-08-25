@@ -31,7 +31,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-64, 48), Vector2(-64, 24), Vector2(-64, 60), Vector2(-64, 48)]
+"values": [Vector2(-64, 96), Vector2(-64, 72), Vector2(-64, 108), Vector2(-64, 96)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x4s0g"]
@@ -43,7 +43,7 @@ _data = {
 [node name="HurtValue" type="Label"]
 texture_filter = 1
 offset_right = 128.0
-offset_bottom = 48.0
+offset_bottom = 48.0001
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("1_rxsl6")

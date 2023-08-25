@@ -117,6 +117,9 @@ func _process(_delta) -> void:
 					if walking_animation_player.current_animation_position > 4:
 						flashlight_shake_index = walking_animation_player.current_animation_position / 2
 					create_tween().tween_property(flashlight, "position:x", flashlight_shake_index * [-1, 1][direction_index], view_shake_time)
+					"""create_tween().tween_property(flashlight, "self_modulate:a", 1.0 / 10.0, 0.1)
+					create_tween().tween_property(flashlight, "self_modulate:a", 1, 0.1)
+					create_tween().tween_property(flashlight, "self_modulate:a", 1.0 / 10.0, 0.1)"""
 					await create_tween().tween_property(self, "rotation_degrees", 0.5 * [-1, 1][direction_index], view_shake_time).finished
 					await create_tween().tween_property(self, "rotation_degrees", 0, view_shake_time).finished
 				else:

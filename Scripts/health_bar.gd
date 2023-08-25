@@ -3,6 +3,7 @@ extends ProgressBar
 @onready var stats: HBoxContainer = get_parent()
 
 func _ready() -> void:
+	PlayerData.health = PlayerData.max_health
 	update_health_bar()
 
 func _process(_delta) -> void:
@@ -15,6 +16,9 @@ func _process(_delta) -> void:
 	"""
 
 func deal_damage(damage_value: float) -> void:
+	if State.current_state == State.MAIN_STATE.GAME_OVER:
+		return
+	
 	if damage_value < 0:
 		Debug.log_error("The negative damage value is not acceptable, please use \"heal()\" function instead.", true)
 		return

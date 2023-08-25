@@ -6,11 +6,11 @@ var contents: Array = []:
 	get:
 		return contents
 	set(value):
-		if get_stack()[1].source == get_script().get_path():
+		#if get_stack()[1].source == get_script().get_path():
 			contents = value
 			State.add_substate_to_queue(State.SUBSTATE.SPEECH)
-		else:
-			Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
+		#else:
+		#	Debug.log_warning(Debug.PRIVATE_VARIABLE_NOT_ACCESSIBLE, true)
 var skipable: bool = false
 var upcoming_event: Callable = Callable()
 var speech_gap_time: float = DEFAULT_SPEECH_GAP_TIME
@@ -22,7 +22,7 @@ var speech_gap_time: float = DEFAULT_SPEECH_GAP_TIME
 @onready var actions: Node2D = get_tree().get_first_node_in_group("actions")
 @onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
 @onready var villian_speech_bubble: Node2D = villian.get_node("Speech")
-@onready var villian_sprite: Sprite2D = villian.get_node("Sprite2D")
+@onready var villian_sprite: AnimatedSprite2D = villian.get_node("AnimatedSprite2D")
 @onready var villian_vaporize_particles: GPUParticles2D = villian_sprite.get_node("VaporizeParticles")
 @onready var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
 @onready var stats: HBoxContainer = get_tree().get_first_node_in_group("stats")
@@ -38,7 +38,7 @@ func generate_speech() -> void:
 	skipable = false
 	if contents.size() > 0:
 		villian.set_rotate(false)
-		villian.sprite.rotation_degrees = 0 
+		villian.animated_sprite.rotation_degrees = 0 
 		await say_content(contents[0])
 		contents.pop_front()
 		skipable = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dccg5oar6pr1d"]
 
 [ext_resource type="Script" path="res://Scripts/intro.gd" id="1_odop8"]
-[ext_resource type="Texture2D" uid="uid://bciqc8p0ck1kw" path="res://Sprites/Intro/intro1.png" id="2_utael"]
+[ext_resource type="Texture2D" uid="uid://be5hby0oqp4fe" path="res://Sprites/Intro/intro1.png" id="2_utael"]
 [ext_resource type="AudioStream" uid="uid://d2hupf2bq8ber" path="res://Musics/mus_intro.ogg" id="3_5lv1a"]
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="3_ft5k0"]
 [ext_resource type="AudioStream" uid="uid://bspq7dumurpk8" path="res://Sounds/snd_txt_typing.ogg" id="4_seobg"]

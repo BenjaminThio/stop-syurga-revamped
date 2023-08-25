@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://y8wia3tv1eq1"]
+
+[ext_resource type="Script" path="res://Scripts/falling_attack_generator.gd" id="1_tsmsp"]
+[ext_resource type="PackedScene" uid="uid://bj5ot8jjq3vo6" path="res://Instances/controlled_block.tscn" id="2_s1wul"]
+[ext_resource type="PackedScene" uid="uid://dfytgmk47bmoe" path="res://Instances/controlled_bomb.tscn" id="3_a8phb"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 1152.0
+theme_override_constants/separation = 150
+alignment = 1
+script = ExtResource("1_tsmsp")
+attacks = Array[PackedScene]([ExtResource("2_s1wul"), ExtResource("3_a8phb")])
+
+[connection signal="resized" from="." to="." method="_on_resized"]

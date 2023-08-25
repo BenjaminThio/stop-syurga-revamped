@@ -8,7 +8,7 @@
 base_font = ExtResource("3_uijjl")
 spacing_glyph = 5
 
-[node name="GameOver" type="Control"]
+[node name="GameOver" type="Control" groups=["game_over_screen"]]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 8

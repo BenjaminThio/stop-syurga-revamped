@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://blk3en0v4pvlg"]
+
+[ext_resource type="Script" path="res://Scripts/white_spear.gd" id="1_gs1fa"]
+[ext_resource type="Texture2D" uid="uid://cslfogj6ud18w" path="res://Sprites/new_white_spear.png" id="2_nt2u3"]
+
+[node name="WhiteSpear" type="Area2D"]
+texture_filter = 1
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_gs1fa")
+metadata/_edit_group_ = true
+
+[node name="WhiteSpear" type="Sprite2D" parent="."]
+texture = ExtResource("2_nt2u3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+rotation = 1.5708
+polygon = PackedVector2Array(-3.5, -46.5, -3.5, -39.5, -6.5, -39.5, -6.5, -33.5, -9.5, -33.5, -9.5, -23.5, -12.5, -23.5, -12.5, -7.5, -9.5, -7.5, -9.5, -10.5, 9.5, -10.5, 9.5, -7.5, 12.5, -7.5, 12.5, -23.5, 9.5, -23.5, 9.5, -33.5, 6.5, -33.5, 6.5, -39.5, 3.5, -39.5, 3.5, -46.5)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(-1.90735e-06, -1.19209e-07)
+scale = Vector2(4.65, 1.25)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

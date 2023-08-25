@@ -4,34 +4,34 @@ var options: Array:
 	get:
 		return options
 	set(value):
-		if get_stack()[1].source == get_script().get_path():
+		#if get_stack()[1].source == get_script().get_path():
 			options = value
-		else:
-			Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
+		#else:
+		#	Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
 var width: int:
 	get:
 		return width
 	set(value):
-		if get_stack()[1].source == get_script().get_path():
+		#if get_stack()[1].source == get_script().get_path():
 			width = value
-		else:
-			Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
+		#else:
+		#	Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
 var height: int:
 	get:
 		return height
 	set(value):
-		if get_stack()[1].source == get_script().get_path():
+	#	if get_stack()[1].source == get_script().get_path():
 			height = value
-		else:
-			Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
+	#	else:
+	#		Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
 var paged: bool:
 	get:
 		return paged
 	set(value):
-		if get_stack()[1].source == get_script().get_path():
+	#	if get_stack()[1].source == get_script().get_path():
 			paged = value
-		else:
-			Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
+	#	else:
+	#		Debug.log_warning(Debug.PROTECTED_VARIABLE_NOT_ACCESSIBLE, true)
 
 func create_paged_menu(new_options: Array, option_quantity_in_a_page: int = 4) -> void:
 	const MAX_HEIGHT: int = 2

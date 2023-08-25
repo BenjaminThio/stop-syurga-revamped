@@ -1,11 +1,16 @@
 extends Node2D
 
 var disabled_process_mode: bool = false
+var cheat_mode_activated: bool = false
 var game_over_screen: PackedScene = preload("res://Instances/game_over.tscn")
 
 @onready var background_music_player: AudioStreamPlayer = $BackgroundMusicPlayer
 @onready var player: CharacterBody2D = $Player
 @onready var main_camera: Camera2D = $Camera2D
+
+func _process(_delta):
+	if Input.is_action_just_pressed("cheat"):
+		cheat_mode_activated = not cheat_mode_activated
 
 func play_background_music():
 	if background_music_player.stream == null:
@@ -39,6 +44,11 @@ func game_over() -> void:
 	
 	for child in get_children():
 		if child not in [player, main_camera, background_music_player]:
+			var quitting_label: Label = get_tree().get_first_node_in_group("quitting_label")
+			
+			if is_instance_valid(quitting_label) and child == quitting_label:
+				continue
+			
 			child.queue_free()
 		elif child == player:
 			var player_green: Node2D = player.get_node("Green")
@@ -52,7 +62,8 @@ func game_over() -> void:
 	
 	await player.heart_break()
 	
-	add_child(game_over_screen.instantiate())
+	if get_tree().get_nodes_in_group("game_over_screen").size() == 0:
+		add_child(game_over_screen.instantiate())
 
 func set_pause(pause: bool):
 	disabled_process_mode = pause

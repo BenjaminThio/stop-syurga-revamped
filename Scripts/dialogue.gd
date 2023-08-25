@@ -15,7 +15,7 @@ var battlefield_player: CharacterBody2D = battlefield.get_node("Player")
 var battlefield_player_color: Color = battlefield_player.soul
 var battlefield_player_origin: Vector2 = battlefield_player.global_position
 var battlefield_player_scale: Vector2 = battlefield_player.global_scale
-var battlefield_villian_sprite: Sprite2D = battlefield.get_node("Villian/Sprite2D")
+var battlefield_villian_sprite: AnimatedSprite2D = battlefield.get_node("Villian/AnimatedSprite2D")
 var battle_fall: bool = false
 
 @onready var speaker_sprite: AnimatedSprite2D = $SpeakerSprite
@@ -31,6 +31,7 @@ var battle_fall: bool = false
 @onready var soul: Sprite2D = owner.get_node("Soul")
 @onready var camera: Camera2D = owner.get_node("Camera2D")
 @onready var walking_sound_effect: AudioStreamPlayer = owner.get_node("WalkingSoundEffect")
+@onready var eating_sound_effect: AudioStreamPlayer = owner.get_node("EatingSoundEffect")
 @onready var background_music_player: AudioStreamPlayer = owner.get_node("BackgroundMusicPlayer")
 
 func _ready() -> void:
@@ -53,7 +54,7 @@ func _process(_delta) -> void:
 			
 			if dialogue_index == 26:
 				for owner_child in owner.get_children():
-					if owner_child not in [get_parent(), face, soul, camera, walking_sound_effect, background_music_player]:
+					if owner_child not in [get_parent(), face, soul, camera, walking_sound_effect, eating_sound_effect, background_music_player]:
 						owner_child.hide()
 					elif owner_child == face:
 						var mask: Sprite2D = face.get_node("Mask")

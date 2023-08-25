@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ce78p"]
-size = Vector2(600, 30)
+size = Vector2(600, 142.857)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
@@ -64,7 +64,7 @@ position = Vector2(0, -23.5)
 sprite_frames = SubResource("SpriteFrames_t2k5d")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Green/Shield"]
-position = Vector2(0, -29.4643)
+position = Vector2(0, -28.5714)
 scale = Vector2(0.1, 0.1)
 shape = SubResource("RectangleShape2D_ce78p")
 

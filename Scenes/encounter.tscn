@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cvl52eqcpbnie"]
+[gd_scene load_steps=58 format=3 uid="uid://cvl52eqcpbnie"]
 
 [ext_resource type="Script" path="res://Scripts/encounter.gd" id="1_8llko"]
 [ext_resource type="Texture2D" uid="uid://ckjmq1d7l4xd2" path="res://Gimp/Zip/data/023.png" id="2_6qg2d"]
@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://dfm28jykoueff" path="res://Musics/mus_void.ogg" id="30_l8ae2"]
 [ext_resource type="AudioStream" uid="uid://baf8cnj2xmsd5" path="res://Sounds/snd_txt_unknown.ogg" id="30_uth7w"]
 [ext_resource type="AudioStream" uid="uid://bi7euknl5gks8" path="res://Sounds/snd_walking.ogg" id="31_mpoct"]
+[ext_resource type="AudioStream" uid="uid://ct5bp57k1bpi7" path="res://Sounds/snd_eating.ogg" id="32_5jb8c"]
 
 [sub_resource type="Animation" id="Animation_bm2d7"]
 length = 0.001
@@ -836,6 +837,9 @@ ignore_rotation = false
 [node name="WalkingSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_mpoct")
 bus = &"Echo"
+
+[node name="EatingSoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_5jb8c")
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("30_l8ae2")

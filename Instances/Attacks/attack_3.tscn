@@ -1,0 +1,317 @@
+[gd_scene load_steps=5 format=3 uid="uid://mp0xwxgtlx67"]
+
+[ext_resource type="PackedScene" uid="uid://dffbgyqo4y526" path="res://Instances/bone.tscn" id="1_tqaed"]
+
+[sub_resource type="Animation" id="Animation_nchga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackGroup2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackGroup1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackGroup3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackGroup4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackGroup5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_11l25"]
+resource_name = "attack3"
+length = 14.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackGroup2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 9.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1992, 0), Vector2(-1992, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackGroup1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.5, 9.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(1992, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackGroup3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 9.5, 11.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(552, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackGroup4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 9.5, 11.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-552, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackGroup5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 11.5, 14),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-1032, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hfiug"]
+_data = {
+"RESET": SubResource("Animation_nchga"),
+"attack3": SubResource("Animation_11l25")
+}
+
+[node name="Attack3" type="Node2D"]
+position = Vector2(192, 96)
+
+[node name="AttackGroup1" type="Node2D" parent="."]
+
+[node name="Diaphysis1" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(-200, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis3" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(-512, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis2" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+position = Vector2(-352, 76)
+scale = Vector2(1.16667, 0.0909091)
+
+[node name="Diaphysis4" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+position = Vector2(-672, 76)
+scale = Vector2(1.16667, 0.0909091)
+
+[node name="Diaphysis5" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(-832, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis8" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(-1472, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis9" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+position = Vector2(-1312, 76)
+scale = Vector2(1.16667, 0.090909)
+
+[node name="Diaphysis10" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+position = Vector2(-1632, 76)
+scale = Vector2(1.16667, 0.0909092)
+
+[node name="Diaphysis11" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(-1792, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis7" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(-1152, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis6" parent="AttackGroup1" instance=ExtResource("1_tqaed")]
+position = Vector2(-992, 76)
+scale = Vector2(1.16667, 0.0909092)
+
+[node name="AttackGroup2" type="Node2D" parent="."]
+
+[node name="Diaphysis1" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(1792, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis3" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(1480, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis2" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+position = Vector2(1600, 72)
+
+[node name="Diaphysis4" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+position = Vector2(1280, 72)
+
+[node name="Diaphysis5" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(1160, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis8" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(520, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis9" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+position = Vector2(640, 72)
+
+[node name="Diaphysis10" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+position = Vector2(320, 72)
+
+[node name="Diaphysis11" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(200, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis7" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(840, 20)
+scale = Vector2(1.16667, 1.36364)
+attack_type = 1
+
+[node name="Diaphysis6" parent="AttackGroup2" instance=ExtResource("1_tqaed")]
+position = Vector2(960, 72)
+
+[node name="AttackGroup3" type="Node2D" parent="."]
+
+[node name="Diaphysis2" parent="AttackGroup3" instance=ExtResource("1_tqaed")]
+modulate = Color(1, 0.64, 0.24, 1)
+position = Vector2(-200, 0)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 2
+
+[node name="Diaphysis4" parent="AttackGroup3" instance=ExtResource("1_tqaed")]
+modulate = Color(1, 0.64, 0.24, 1)
+position = Vector2(-352, 0)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 2
+
+[node name="AttackGroup4" type="Node2D" parent="."]
+
+[node name="Diaphysis" parent="AttackGroup4" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(200, 0)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 1
+
+[node name="Diaphysis3" parent="AttackGroup4" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(352, 0)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 1
+
+[node name="AttackGroup5" type="Node2D" parent="."]
+
+[node name="Diaphysis" parent="AttackGroup5" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(200, -3.8147e-06)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 1
+
+[node name="Diaphysis2" parent="AttackGroup5" instance=ExtResource("1_tqaed")]
+modulate = Color(1, 0.64, 0.24, 1)
+position = Vector2(352, -3.8147e-06)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 2
+
+[node name="Diaphysis3" parent="AttackGroup5" instance=ExtResource("1_tqaed")]
+modulate = Color(1, 0.64, 0.24, 1)
+position = Vector2(512, -3.8147e-06)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 2
+
+[node name="Diaphysis4" parent="AttackGroup5" instance=ExtResource("1_tqaed")]
+modulate = Color(0.08, 0.66, 1, 1)
+position = Vector2(672, -3.8147e-06)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 1
+
+[node name="Diaphysis5" parent="AttackGroup5" instance=ExtResource("1_tqaed")]
+modulate = Color(1, 0.64, 0.24, 1)
+position = Vector2(832, -3.8147e-06)
+scale = Vector2(1.16667, 1.81818)
+attack_type = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "attack3"
+libraries = {
+"": SubResource("AnimationLibrary_hfiug")
+}

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://s8bqgtxftj2i"]
+
+[ext_resource type="FontFile" uid="uid://0ni3xtjq5btw" path="res://Fonts/Mars_Needs_Cunnilingus.ttf" id="1_uu1ei"]
+
+[node name="QuittingLabel" type="Label" groups=["quitting_label"]]
+self_modulate = Color(0.898039, 0.898039, 0.898039, 0)
+texture_filter = 1
+offset_left = 148.0
+offset_top = 2.0
+offset_right = 268.0
+offset_bottom = 29.0
+scale = Vector2(0.9, 0.9)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_uu1ei")
+theme_override_font_sizes/font_size = 24
+text = "QUITTING"

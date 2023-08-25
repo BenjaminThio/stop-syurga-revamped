@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv1fxpn5b8hsq"]
+
+[ext_resource type="Script" path="res://Scripts/rising_white_spear.gd" id="1_31bqi"]
+[ext_resource type="Texture2D" uid="uid://c3sa3g44taf77" path="res://Sprites/white_spear.png" id="1_falbt"]
+
+[node name="RisingWhiteSpear" type="Area2D"]
+texture_filter = 1
+position = Vector2(0, 24)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_31bqi")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_falbt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-3.5, -46.5, -3.5, -39.5, -6.5, -39.5, -6.5, -33.5, -9.5, -33.5, -9.5, -23.5, -12.5, -23.5, -12.5, -7.5, -9.5, -7.5, -9.5, -10.5, -3.52017, -10.5, -3.5, 46.5, 3.5, 46.5, 3.63553, -10.5, 9.5, -10.5, 9.5, -7.5, 12.5, -7.5, 12.5, -23.5, 9.5, -23.5, 9.5, -33.5, 6.5, -33.5, 6.5, -39.5, 3.5, -39.5, 3.5, -46.5)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

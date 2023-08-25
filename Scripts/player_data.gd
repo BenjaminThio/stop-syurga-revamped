@@ -9,19 +9,19 @@ const max_hit_points_bonus: int = 99
 const attack_bonus_per_level: int = 2
 
 var max_health: float
-var health: float = 5.0
+var health: float
 var defense: float
 var attack: float
 var gold: int = 0
 var items: Array[Item] = [
-	Item.new("Bing Chilling", 5),
-	Item.new("Zen An", 10),
-	Item.new("Zen Thye", 15),
-	Item.new("Choon Hong", 20),
-	Item.new("Benjamin", 25),
-	Item.new("Yao Zong", 30),
-	Item.new("Bing Chilling", 35),
-	Item.new("Bing Chilling", 40)
+	Item.new("Thye's Hot Dog", 100),
+	Item.new("Syurga Fruit", 60),
+	Item.new("Syurga Fruit", 60),
+	Item.new("Syurga Fruit", 60),
+	Item.new("Bing Chilling", 50),
+	Item.new("Bing Chilling", 50),
+	Item.new("Super Ring", 40),
+	Item.new("Super Ring", 40)
 ]
 var weapon: String
 var armor: String

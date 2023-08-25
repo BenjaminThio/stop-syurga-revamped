@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj5ot8jjq3vo6"]
+
+[ext_resource type="PackedScene" uid="uid://b5i0xl0dcdd5h" path="res://Instances/block.tscn" id="1_t5j8q"]
+
+[node name="ControlledBlock" type="Control"]
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 38.0
+offset_bottom = 38.0
+
+[node name="Block" parent="." instance=ExtResource("1_t5j8q")]
+position = Vector2(19, 19)

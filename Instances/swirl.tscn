@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1bfv2gv3dwa2"]
+
+[ext_resource type="PackedScene" uid="uid://dc8bst4onebb7" path="res://Instances/plain_white_spear.tscn" id="1_75nq6"]
+[ext_resource type="Script" path="res://Scripts/swirl.gd" id="1_qxse2"]
+
+[node name="Swirl" type="Marker2D"]
+script = ExtResource("1_qxse2")
+
+[node name="PlainWhiteSpear1" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(6.82121e-13, -256)
+rotation = 3.14159
+
+[node name="PlainWhiteSpear2" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(184, -184)
+rotation = -2.35619
+
+[node name="PlainWhiteSpear3" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(256, -7.9126e-11)
+rotation = -1.5708
+
+[node name="PlainWhiteSpear4" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(184, 184)
+rotation = -0.785398
+
+[node name="PlainWhiteSpear5" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(0, 256)
+
+[node name="PlainWhiteSpear6" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(-184, 184)
+rotation = 0.785398
+
+[node name="PlainWhiteSpear7" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(-256, -2.72848e-11)
+rotation = 1.5708
+
+[node name="PlainWhiteSpear8" parent="." instance=ExtResource("1_75nq6")]
+position = Vector2(-184, -184)
+rotation = 2.35619

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfytgmk47bmoe"]
+
+[ext_resource type="PackedScene" uid="uid://bqd4mxt7oc3qi" path="res://Instances/bomb.tscn" id="1_7vrku"]
+
+[node name="ControlledBomb" type="Control"]
+custom_minimum_size = Vector2(38, 46.5)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1114.0
+offset_bottom = -601.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bomb" parent="." instance=ExtResource("1_7vrku")]
+position = Vector2(19, 23.5)

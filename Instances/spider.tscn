@@ -9,6 +9,7 @@ size = Vector2(38, 38)
 [node name="Spider" type="Area2D"]
 texture_filter = 1
 script = ExtResource("1_70soy")
+metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_0mfbt")
@@ -17,4 +18,7 @@ texture = ExtResource("1_0mfbt")
 scale = Vector2(1.026, 1)
 shape = SubResource("RectangleShape2D_ptpxu")
 
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier" to="." method="_on_visible_on_screen_notifier_screen_exited"]

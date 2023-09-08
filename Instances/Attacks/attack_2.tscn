@@ -46,6 +46,7 @@ _data = {
 modulate = Color(1, 1, 0, 1)
 position = Vector2(772, -250)
 move = true
+damage_multiplier = 2
 transition_duration = 0.3
 
 [node name="Leg2" parent="." instance=ExtResource("1_xmf2j")]
@@ -54,12 +55,14 @@ position = Vector2(430, -250)
 scale = Vector2(-1, 1)
 direction = 1
 move = true
+damage_multiplier = 2
 transition_duration = 0.3
 
 [node name="Leg3" parent="." instance=ExtResource("1_xmf2j")]
 modulate = Color(1, 1, 0, 1)
 position = Vector2(720, -21)
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Leg4" parent="." instance=ExtResource("1_xmf2j")]
@@ -68,16 +71,19 @@ position = Vector2(378, -21)
 scale = Vector2(-1, 1)
 direction = 1
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Leg9" parent="." instance=ExtResource("1_xmf2j")]
 position = Vector2(620, -1650)
 move_distance = 100.0
+damage_multiplier = 2
 transition_duration = 0.5
 
 [node name="Leg10" parent="." instance=ExtResource("1_xmf2j")]
 position = Vector2(620, -1800)
 move_distance = 100.0
+damage_multiplier = 2
 transition_duration = 0.5
 
 [node name="Leg19" parent="." instance=ExtResource("1_xmf2j")]
@@ -85,12 +91,14 @@ position = Vector2(530, -2023)
 scale = Vector2(-1, 1)
 direction = 1
 move_distance = 100.0
+damage_multiplier = 2
 transition_duration = 0.5
 
 [node name="Leg7" parent="." instance=ExtResource("1_xmf2j")]
 modulate = Color(1, 1, 0, 1)
 position = Vector2(681, -500)
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Leg8" parent="." instance=ExtResource("1_xmf2j")]
@@ -99,6 +107,7 @@ position = Vector2(339, -500)
 scale = Vector2(-1, 1)
 direction = 1
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Block" parent="." instance=ExtResource("2_050xn")]
@@ -111,6 +120,7 @@ position = Vector2(600, -300)
 modulate = Color(1, 1, 0, 1)
 position = Vector2(722, -730)
 move = true
+damage_multiplier = 2
 transition_duration = 0.3
 
 [node name="Leg12" parent="." instance=ExtResource("1_xmf2j")]
@@ -119,6 +129,7 @@ position = Vector2(380, -730)
 scale = Vector2(-1, 1)
 direction = 1
 move = true
+damage_multiplier = 2
 transition_duration = 0.3
 
 [node name="Block7" parent="." instance=ExtResource("2_050xn")]
@@ -131,6 +142,7 @@ position = Vector2(550, -780)
 modulate = Color(1, 1, 0, 1)
 position = Vector2(702, -1220)
 move = true
+damage_multiplier = 2
 transition_duration = 0.3
 
 [node name="Leg16" parent="." instance=ExtResource("1_xmf2j")]
@@ -139,6 +151,7 @@ position = Vector2(360, -1220)
 scale = Vector2(-1, 1)
 direction = 1
 move = true
+damage_multiplier = 2
 transition_duration = 0.3
 
 [node name="Block9" parent="." instance=ExtResource("2_050xn")]
@@ -157,6 +170,7 @@ position = Vector2(510, -550)
 modulate = Color(1, 1, 0, 1)
 position = Vector2(742, -1000)
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Leg14" parent="." instance=ExtResource("1_xmf2j")]
@@ -165,6 +179,7 @@ position = Vector2(400, -1000)
 scale = Vector2(-1, 1)
 direction = 1
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Block3" parent="." instance=ExtResource("2_050xn")]
@@ -177,6 +192,7 @@ position = Vector2(571, -1050)
 modulate = Color(1, 1, 0, 1)
 position = Vector2(700, -1470)
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Leg18" parent="." instance=ExtResource("1_xmf2j")]
@@ -185,6 +201,7 @@ position = Vector2(358, -1470)
 scale = Vector2(-1, 1)
 direction = 1
 move = true
+damage_multiplier = 2
 transition_duration = 0.4
 
 [node name="Block11" parent="." instance=ExtResource("2_050xn")]

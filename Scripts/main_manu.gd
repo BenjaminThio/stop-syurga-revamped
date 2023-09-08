@@ -4,8 +4,9 @@ enum OPTION {
 	CONTINUE,
 	RESET,
 	SETTINGS,
+	SINGLE_ATTACK,
 	LEADERBOARD,
-	CREDITS,
+	CREDITS
 	#QUIT
 }
 var selected_option: int = 0
@@ -20,11 +21,14 @@ var selected_option: int = 0
 @onready var continue_label: Label = $Options/Continue
 @onready var reset_label: Label = $Options/Reset
 @onready var settings_label: Label = $Options/Settings
+@onready var single_attack: Label = $Options/SingleAttack
 @onready var leaderboard_label: Label = $Options/Leaderboard
 @onready var credits_label: Label = $Options/Credits
+@onready var rain_particles: GPUParticles2D = $RainParticles
 #@onready var quit_label: Label = $Options/Quit
 
 func _ready():
+	rain_particles.show()
 	continue_label.text = [
 		"Continue",
 		"继续游戏",
@@ -45,6 +49,13 @@ func _ready():
 		"置",
 		"Tetapan",
 		"設定"
+	][db.data.settings.language]
+	single_attack.text = [
+		"Single Attack",
+		"单一攻击",
+		"獨一攻擊",
+		"Serangan Tunggal",
+		"単一攻撃"
 	][db.data.settings.language]
 	leaderboard_label.text = [
 		"Leaderboard",
@@ -111,6 +122,7 @@ func _process(_delta):
 		highlight_selected_option()
 	elif Input.is_action_just_pressed("accept"):
 		if selected_option == OPTION.CONTINUE:
+			Global.loop_attack_index = null
 			if Global.has_encountered_villian:
 				get_tree().change_scene_to_file("res://Scenes/main.tscn")
 			else:
@@ -123,6 +135,8 @@ func _process(_delta):
 				get_tree().change_scene_to_file("res://Scenes/new_game.tscn")
 			elif selected_option == OPTION.SETTINGS:
 				get_tree().change_scene_to_file("res://Scenes/settings.tscn")
+		elif selected_option == OPTION.SINGLE_ATTACK:
+			get_tree().change_scene_to_file("res://Scenes/single_attack.tscn")
 		elif selected_option == OPTION.LEADERBOARD:
 			return
 		elif selected_option == OPTION.CREDITS:

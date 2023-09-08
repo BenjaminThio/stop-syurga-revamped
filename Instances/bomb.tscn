@@ -1,21 +1,75 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqd4mxt7oc3qi"]
+[gd_scene load_steps=8 format=3 uid="uid://bqd4mxt7oc3qi"]
 
 [ext_resource type="Texture2D" uid="uid://bi5je62dcxpy8" path="res://Sprites/bomb.png" id="1_36bc5"]
 [ext_resource type="Script" path="res://Scripts/bomb.gd" id="1_swybe"]
+[ext_resource type="Texture2D" uid="uid://bg271212v325l" path="res://Sprites/prebomb.png" id="3_yd0qs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_23o6s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_36bc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yd0qs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2ss7"]
 radius = 16.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h8ac"]
+size = Vector2(2304, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pud4"]
+size = Vector2(12, 1296)
+
 [node name="Bomb" type="Area2D"]
 texture_filter = 1
 script = ExtResource("1_swybe")
+metadata/_edit_group_ = true
 
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_36bc5")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_23o6s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_v2ss7")
 
+[node name="HorizontalLaser" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+monitoring = false
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="HorizontalLaser"]
+offset_left = -1152.0
+offset_top = -6.0
+offset_right = 1152.0
+offset_bottom = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalLaser"]
+shape = SubResource("RectangleShape2D_7h8ac")
+
+[node name="VerticalLaser" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+monitoring = false
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="VerticalLaser"]
+offset_left = -6.0
+offset_top = -648.0
+offset_right = 6.0
+offset_bottom = 648.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VerticalLaser"]
+shape = SubResource("RectangleShape2D_6pud4")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="HorizontalLaser" to="." method="_on_laser_body_entered"]
+[connection signal="body_entered" from="VerticalLaser" to="." method="_on_laser_body_entered"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b5i0xl0dcdd5h" path="res://Instances/block.tscn" id="1_t5j8q"]
 
-[node name="ControlledBlock" type="Control"]
+[node name="ControlledBlock" type="Control" groups=["block"]]
 custom_minimum_size = Vector2(38, 38)
 layout_mode = 3
 anchors_preset = 0

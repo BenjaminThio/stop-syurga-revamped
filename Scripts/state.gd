@@ -68,7 +68,29 @@ func set_state(new_state: MAIN_STATE) -> void:
 		elif current_state == MAIN_STATE.FLEE:
 			var menu: VBoxContainer = get_tree().get_first_node_in_group("menu")
 			var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
-			var descriptions: PackedStringArray = ["Escaped...", "I've got better to do.", "I'm outta here."]
+			var descriptions: PackedStringArray = [
+				[
+					"Escaped...",
+					"逃脱。。。",
+					"逃之。。。",
+					"Melarikan diri...",
+					"逃げた"
+				][db.data.settings.language],
+				[
+					"I've got better to do.",
+					"我有更重要的事要做。",
+					"吾有更为要之事待为办。",
+					"Saya ada hal yang lebih penting untuk diselesaikan.",
+					"やることがある。"
+				][db.data.settings.language],
+				[
+					"I'm outta here.",
+					"我先走咯。",
+					"吾将去。",
+					"Saya pergi dulu.",
+					"俺はここから出る。"
+				][db.data.settings.language]
+			]
 			
 			menu.queue_free()
 			description_label.text = "\t* {random_description}".format({"random_description": random.choice(descriptions)})

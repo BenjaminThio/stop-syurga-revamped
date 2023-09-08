@@ -35,7 +35,57 @@ var activate_shield = false
 @onready var main: Node2D = get_tree().get_root().get_node("Main")
 @onready var webs: Node2D = get_tree().get_first_node_in_group("webs")
 
+enum SPEAR_DIRECTION {
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT
+}
+enum INVERTED_DIRECTION {
+	DOWN,
+	LEFT,
+	UP,
+	RIGHT
+}
+enum WEB_DIRECTION {
+	LEFT,
+	RIGHT
+}
+enum ATTACK {
+	SPIDER
+}
+enum SPIDER_DIRECTION {
+	LEFT,
+	RIGHT
+}
+enum SPEAR_TYPE {
+	RED,
+	YELLOW
+}
+const attacks_path: String = "res://Instances/Attacks/"
+const TOTAL_SPEAR_IN_A_ROUND: int = 50
+const SPEAR_ATTACK_GAP_TIME: float = 0.25
+const TOTAL_YELLOW_SPEAR_IN_A_ROUND: int = 20
+const YELLOW_SPEAR_ATTACK_GAP_TIME: float = 0.4
+const PERSEVERANCE_ATTACK_SPAWNPOINT_DISTANCE: int = 200
+const TOTAL_SPIDER_IN_A_ROUND: int = 50
+var attacks: Array[String] = os.listdir(attacks_path)
+var attack_index = 0
+var spider_scene: PackedScene = preload("res://Instances/spider.tscn")
+var hand_scene: PackedScene = preload("res://Instances/hand.tscn")
+var white_spear_scene: PackedScene = preload("res://Instances/white_spear.tscn")
+var rising_spear_scene: PackedScene = preload("res://Instances/rising_white_spear.tscn")
+var swirl_scene: PackedScene = preload("res://Instances/swirl.tscn")
+
 func _ready() -> void:
+	#Reset state engine.
+	State.current_state = State.MAIN_STATE.IDLE
+	State.substates_queue.clear()
+	State.is_substate_busy = false
+	
+	if Global.loop_attack_index != null:
+		attack_index = Global.loop_attack_index
+	
 	health_bar.max_value = max_health
 	update_health_bar(false)
 	
@@ -137,48 +187,6 @@ func shake(times: int = 15, default_delay_time: float = 0.01, target: Node2D = g
 		await time.sleep(delay_time)
 	target.position.x = 0
 
-enum SPEAR_DIRECTION {
-	UP,
-	RIGHT,
-	DOWN,
-	LEFT
-}
-enum INVERTED_DIRECTION {
-	DOWN,
-	LEFT,
-	UP,
-	RIGHT
-}
-enum WEB_DIRECTION {
-	LEFT,
-	RIGHT
-}
-enum ATTACK {
-	SPIDER
-}
-enum SPIDER_DIRECTION {
-	LEFT,
-	RIGHT
-}
-enum SPEAR_TYPE {
-	RED,
-	YELLOW
-}
-const attacks_path: String = "res://Instances/Attacks/"
-const TOTAL_SPEAR_IN_A_ROUND: int = 50
-const SPEAR_ATTACK_GAP_TIME: float = 0.25
-const TOTAL_YELLOW_SPEAR_IN_A_ROUND: int = 20
-const YELLOW_SPEAR_ATTACK_GAP_TIME: float = 0.4
-const PERSEVERANCE_ATTACK_SPAWNPOINT_DISTANCE: int = 200
-const TOTAL_SPIDER_IN_A_ROUND: int = 50
-var attacks: Array[String] = os.listdir(attacks_path)
-var attack_index = 0
-var spider_scene: PackedScene = preload("res://Instances/spider.tscn")
-var hand_scene: PackedScene = preload("res://Instances/hand.tscn")
-var white_spear_scene: PackedScene = preload("res://Instances/white_spear.tscn")
-var rising_spear_scene: PackedScene = preload("res://Instances/rising_white_spear.tscn")
-var swirl_scene: PackedScene = preload("res://Instances/swirl.tscn")
-
 func cast_attack():
 	actions.reset()
 	
@@ -221,7 +229,7 @@ func cast_attack():
 			await battlefield.set_property(Vector2(256, 272), Vector2(448, 256), true)
 		elif attack_index == 18:
 			await battlefield.set_property(Vector2(86, 105), Vector2(533, 424), true)
-		elif attack_index >= 19:
+		elif attack_index == 19:
 			await battlefield.set_property(Vector2(768, 337), Vector2(192, 192), true)
 	elif typeof(attack_index) == TYPE_NIL:
 		await battlefield.set_property(Vector2(272, 192), Vector2(440, 336), true)
@@ -375,15 +383,15 @@ func cast_attack():
 			player.change_form(player.SOUL.JUSTICE)
 			main.add_child(falling_attack)
 			
-			await time.sleep(falling_attack.transition_duration * 2)
+			await time.sleep(falling_attack.transition_duration + falling_attack.rewind_duration)
 		elif attack_index == 8:
 			var falling_attack: VBoxContainer = load("res://Instances/Attacks/falling_attack.tscn").instantiate()
 			
 			player.change_form(player.SOUL.JUSTICE)
 			falling_attack.transition_type = Tween.TRANS_LINEAR
-			falling_attack.transition_duration = 20.0
+			falling_attack.transition_duration = 24.0
 			falling_attack.rows_count = 15
-			falling_attack.row_space = 200
+			falling_attack.row_space = 300
 			falling_attack.attacks_count_in_a_row = 2
 			falling_attack.rewindable = false
 			falling_attack.attacks = [falling_attack.bomb, falling_attack.barrier] as Array[PackedScene]
@@ -648,7 +656,7 @@ func cast_attack():
 				await time.sleep(0.5)
 			
 			await time.sleep(1.4)
-		elif attack_index >= 19:
+		elif attack_index == 19:
 			for _i in range(15):
 				var swirl: Marker2D = swirl_scene.instantiate()
 				
@@ -668,10 +676,11 @@ func cast_attack():
 			player.perseverance_soul_tween.kill()
 			player.perseverance_soul_tween = null
 		actions.take_action(true)
-		if attack_index < 19:
-			attack_index += 1
-		else:
-			attack_index = 0
+		if Global.loop_attack_index == null:
+			if attack_index < 19:
+				attack_index += 1
+			else:
+				attack_index = 0
 	elif typeof(attack_index) == TYPE_NIL:
 		var attack_pattern: Array = []
 		

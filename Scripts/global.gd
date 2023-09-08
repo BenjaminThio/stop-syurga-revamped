@@ -11,6 +11,7 @@ var origin_scene: String = "res://Scenes/main_manu.tscn":
 var reset: bool = false
 var quitting_label_scene: PackedScene = preload("res://Instances/quitting_label.tscn")
 var has_encountered_villian: bool = false
+var loop_attack_index = null
 
 #DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
 

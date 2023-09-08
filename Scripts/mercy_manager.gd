@@ -53,8 +53,28 @@ func select_option(option: int) -> void:
 			player.hide()
 			menu.queue_free()
 			description_label.set_statements([
-				"You apologized, but he refused it...",
-				"It seems like this is not the only way to influence him."
+				[
+					[
+						"You apologized, but he refused it...",
+						"It seems like this is not the only way to convince him."
+					],
+					[
+						"你道歉，可是他拒绝了。。。",
+						"看来这不是唯一能说服他的方法。"
+					],
+					[
+						"尔道歉，然彼拒之。。。",
+						"观之，此非独说服彼之法。"
+					],
+					[
+						"Kamu meminta maaf, tetapi dia menolaknya.",
+						"Kelihatannya ini bukan caranya untuk memujuk dia."
+					],
+					[
+						"あなたは謝罪しましたが、彼はそれを拒否しました。。。",
+						"彼を説得する唯一の方法ではないようです。"
+					]
+				][db.data.settings.language]
 			])
 	elif option == OPTION.FLEE:
 		var player_global_position: Vector2 = player.global_position

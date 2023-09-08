@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c7hy08buadnlg" path="res://Instances/barrier.tscn" id="1_ybhfr"]
 
-[node name="ControlledBarrier" type="Control"]
+[node name="ControlledBarrier" type="Control" groups=["barrier"]]
 custom_minimum_size = Vector2(34, 37)
 layout_mode = 3
 anchors_preset = 15

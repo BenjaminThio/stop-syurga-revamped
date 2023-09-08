@@ -12,7 +12,13 @@ var transition_finished: bool = false
 @onready var language_label: Label = $Language/Language
 @onready var title_label: Label = owner.get_node("Title")
 @onready var snowflakes: Node2D = owner.get_node("Snowflakes")
+@onready var sun_origin: Node2D = owner.get_node("SunOrigin")
+@onready var leaves: Node2D = owner.get_node("Leaves")
+@onready var withered_leaves: Node2D = owner.get_node("WitheredLeaves")
+@onready var sun: Node2D = sun_origin.get_node("Sun")
 @onready var background_music_player: AudioStreamPlayer = owner.get_node("BackgroundMusicPlayer")
+
+@export var sun_rotate_speed: int = 25
 
 func _ready():
 	#var harp_noise_length: float = Audio.play_sound_and_return_length("harpnoise")
@@ -20,10 +26,18 @@ func _ready():
 	
 	highlight_selected_option()
 	update_language()
+	
+	if date.month >= Time.MONTH_MARCH and date.month <= Time.MONTH_MAY:
+		leaves.show()
+	elif date.month >= Time.MONTH_SEPTEMBER and date.month <= Time.MONTH_NOVEMBER:
+		withered_leaves.show()
+	elif date.month >= Time.MONTH_JUNE and date.month <= Time.MONTH_AUGUST:
+		sun_origin.show()
+	elif date.month == Time.MONTH_DECEMBER or date.month >= Time.MONTH_JANUARY and date.month <= Time.MONTH_FEBRUARY:
+		snowflakes.show()
+	
 	Audio.play_sound("harpnoise")
 	await Transition.curtain_open(owner, func(): transition_finished = true)
-	
-	snowflakes.show()
 	
 	if date.month >= Time.MONTH_MARCH and date.month <= Time.MONTH_MAY or date.month >= Time.MONTH_SEPTEMBER and date.month <= Time.MONTH_NOVEMBER:
 		background_music_player.stream = load("res://Musics/mus_fall_spring.ogg")
@@ -33,7 +47,17 @@ func _ready():
 		background_music_player.stream = load("res://Musics/mus_winter.ogg")
 	background_music_player.play()
 
-func _process(_delta):
+func _process(delta):
+	if sun_origin.rotation_degrees < 360:
+		sun_origin.rotation_degrees += PI * delta * sun_rotate_speed
+	else:
+		sun_origin.rotation_degrees = 0
+	
+	if sun_origin.rotation_degrees > -360:
+		sun.rotation_degrees -= PI * delta * sun_rotate_speed
+	else:
+		sun.rotation_degrees = 0
+	
 	if not transition_finished:
 		return
 	

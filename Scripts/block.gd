@@ -22,8 +22,8 @@ func _on_body_entered(body):
 func vanish():
 	var burst_sound_length: float = Audio.play_sound_and_return_length("burst")
 	
-	vanished = true
 	vanish_position = global_position
+	vanished = true
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
 	create_tween().tween_property(self, "scale", Vector2(max_scale, max_scale), burst_sound_length)

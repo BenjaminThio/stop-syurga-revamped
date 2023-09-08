@@ -62,33 +62,24 @@ func generate_speech() -> void:
 				villian_vaporize_particles.one_shot = true
 				create_tween().tween_property(villian_sprite, "self_modulate:a", 0, villian_vaporize_particles.lifetime / villian_vaporize_particles.speed_scale)
 				Audio.play_sound("vaporized")
-				db.data.player.exp += villian.reward.exp
-				db.data.player.gold += villian.reward.gold
-				db.save_data()
-				description_label.set_statements([
-					[
-						[
-							"YOU WIN!",
-							"You earned {exp} exp and {gold} gold.".format({exp = villian.reward.exp, gold = villian.reward.gold})
-						],
-						[
-							"你赢了！",
-							"你获得{exp}经验值和{gold}金币。".format({exp = villian.reward.exp, gold = villian.reward.gold})
-						],
-						[
-							"尔获胜！",
-							"尔得{exp}經驗值及{gold}金幣。".format({exp = villian.reward.exp, gold = villian.reward.gold})
-						],
-						[
-							"KAMU MENANG!",
-							"Kamu telah mendapat {exp} exp dan {gold} syiling emas.".format({exp = villian.reward.exp, gold = villian.reward.gold})
-						],
-						[
-							"勝ちました！",
-							"あなたは{exp}の経験値と{gold}のゴールドを獲得しました。".format({exp = villian.reward.exp, gold = villian.reward.gold})
-						]
-					][db.data.settings.language]
-				])
+				description_label.set_statements([[[
+					"YOU WIN!",
+					"你赢了！",
+					"尔获胜！",
+					"KAMU MENANG!",
+					"勝ちました！"
+				][db.data.settings.language]]])
+				if Global.loop_attack_index == null:
+					description_label.statements[0].append([
+						"You earned {exp} exp and {gold} gold.".format({exp = villian.reward.exp, gold = villian.reward.gold}),
+						"你获得{exp}经验值和{gold}金币。".format({exp = villian.reward.exp, gold = villian.reward.gold}),
+						"尔得{exp}經驗值及{gold}金幣。".format({exp = villian.reward.exp, gold = villian.reward.gold}),
+						"Kamu telah mendapat {exp} exp dan {gold} syiling emas.".format({exp = villian.reward.exp, gold = villian.reward.gold}),
+						"あなたは{exp}の経験値と{gold}のゴールドを獲得しました。".format({exp = villian.reward.exp, gold = villian.reward.gold})
+					][db.data.settings.language])
+					db.data.player.exp += villian.reward.exp
+					db.data.player.gold += villian.reward.gold
+					db.save_data()
 				if db.get_player_level() > previous_level:
 					description_label.statements[0].append([
 						"Your LEVEL increased.",

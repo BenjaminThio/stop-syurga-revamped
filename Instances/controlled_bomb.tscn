@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bqd4mxt7oc3qi" path="res://Instances/bomb.tscn" id="1_7vrku"]
 
-[node name="ControlledBomb" type="Control"]
+[node name="ControlledBomb" type="Control" groups=["bomb"]]
 custom_minimum_size = Vector2(38, 46.5)
 layout_mode = 3
 anchors_preset = 15

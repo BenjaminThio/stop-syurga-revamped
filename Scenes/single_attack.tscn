@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://fvalpyts8o4o"]
+
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="1_6bv2h"]
+[ext_resource type="Script" path="res://Scripts/single_attack.gd" id="1_ongbm"]
+[ext_resource type="Script" path="res://Scripts/single_attack_menu.gd" id="2_nj742"]
+[ext_resource type="Texture2D" uid="uid://cxballbtr12s" path="res://Sprites/PlayerHeart/Default/000.png" id="3_chwb2"]
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="3_s5hkk"]
+[ext_resource type="Script" path="res://Scripts/led_matrix.gd" id="4_7ry4t"]
+[ext_resource type="AudioStream" uid="uid://cjrxthvwsrobq" path="res://Musics/single_attack.ogg" id="7_ki1xm"]
+
+[node name="Single Attack" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_ongbm")
+
+[node name="VerticalContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 440.0
+offset_right = 712.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="VerticalContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_6bv2h")
+theme_override_font_sizes/font_size = 27
+text = "Please choose an attack."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VerticalContainer"]
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="VerticalContainer/CenterContainer"]
+layout_mode = 2
+script = ExtResource("2_nj742")
+
+[node name="ExitChars" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 568.0
+offset_right = 108.0
+offset_bottom = 616.0
+theme_override_constants/separation = -1
+script = ExtResource("4_7ry4t")
+metadata/_edit_group_ = true
+
+[node name="E" type="Label" parent="ExitChars"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_s5hkk")
+theme_override_font_sizes/font_size = 36
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="X" type="Label" parent="ExitChars"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_s5hkk")
+theme_override_font_sizes/font_size = 36
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="I" type="Label" parent="ExitChars"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_s5hkk")
+theme_override_font_sizes/font_size = 36
+text = "I"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="T" type="Label" parent="ExitChars"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_s5hkk")
+theme_override_font_sizes/font_size = 36
+text = "T"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Soul" type="Sprite2D" parent="."]
+texture = ExtResource("3_chwb2")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ki1xm")
+volume_db = -5.0
+autoplay = true

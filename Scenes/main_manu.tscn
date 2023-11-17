@@ -311,20 +311,48 @@ theme_override_constants/separation = 255
 script = ExtResource("7_yx5at")
 metadata/_edit_group_ = true
 
-[node name="Facebook" type="TextureButton" parent="Hyperlinks"]
+[node name="ControlledFacebook" type="Control" parent="Hyperlinks"]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
+
+[node name="Facebook" type="TextureButton" parent="Hyperlinks/ControlledFacebook"]
+layout_mode = 2
+offset_right = 512.0
+offset_bottom = 512.0
+pivot_offset = Vector2(256, 256)
 texture_normal = ExtResource("7_ospei")
 
-[node name="Instagram" type="TextureButton" parent="Hyperlinks"]
+[node name="ControlledInstagram" type="Control" parent="Hyperlinks"]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
+
+[node name="Instagram" type="TextureButton" parent="Hyperlinks/ControlledInstagram"]
+layout_mode = 2
+offset_right = 512.0
+offset_bottom = 512.0
+pivot_offset = Vector2(256, 256)
 texture_normal = ExtResource("8_1dduo")
 
-[node name="GitHub" type="TextureButton" parent="Hyperlinks"]
+[node name="ControlledGitHub" type="Control" parent="Hyperlinks"]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
+
+[node name="GitHub" type="TextureButton" parent="Hyperlinks/ControlledGitHub"]
+layout_mode = 2
+offset_right = 512.0
+offset_bottom = 512.0
+pivot_offset = Vector2(256, 256)
 texture_normal = ExtResource("9_1n5t7")
 
-[node name="YouTube" type="TextureButton" parent="Hyperlinks"]
+[node name="ControlledYouTube" type="Control" parent="Hyperlinks"]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
+
+[node name="YouTube" type="TextureButton" parent="Hyperlinks/ControlledYouTube"]
+layout_mode = 2
+offset_right = 512.0
+offset_bottom = 512.0
+pivot_offset = Vector2(256, 256)
 texture_normal = ExtResource("10_7rmor")
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
@@ -339,15 +367,15 @@ volume_db = -5.0
 autoplay = true
 
 [connection signal="resized" from="Location/Name" to="." method="_on_location_name_label_resized"]
-[connection signal="mouse_entered" from="Hyperlinks/Facebook" to="Hyperlinks" method="_on_mouse_entered_facebook"]
-[connection signal="mouse_exited" from="Hyperlinks/Facebook" to="Hyperlinks" method="_on_mouse_exited_facebook"]
-[connection signal="pressed" from="Hyperlinks/Facebook" to="Hyperlinks" method="_on_facebook_pressed"]
-[connection signal="mouse_entered" from="Hyperlinks/Instagram" to="Hyperlinks" method="_on_mouse_entered_instagram"]
-[connection signal="mouse_exited" from="Hyperlinks/Instagram" to="Hyperlinks" method="_on_mouse_exited_instagram"]
-[connection signal="pressed" from="Hyperlinks/Instagram" to="Hyperlinks" method="_on_instagram_pressed"]
-[connection signal="mouse_entered" from="Hyperlinks/GitHub" to="Hyperlinks" method="_on_mouse_entered_git_hub"]
-[connection signal="mouse_exited" from="Hyperlinks/GitHub" to="Hyperlinks" method="_on_mouse_exited_git_hub"]
-[connection signal="pressed" from="Hyperlinks/GitHub" to="Hyperlinks" method="_on_github_pressed"]
-[connection signal="mouse_entered" from="Hyperlinks/YouTube" to="Hyperlinks" method="_on_you_tube_mouse_entered"]
-[connection signal="mouse_exited" from="Hyperlinks/YouTube" to="Hyperlinks" method="_on_you_tube_mouse_exited"]
-[connection signal="pressed" from="Hyperlinks/YouTube" to="Hyperlinks" method="_on_you_tube_pressed"]
+[connection signal="mouse_entered" from="Hyperlinks/ControlledFacebook/Facebook" to="Hyperlinks" method="_on_mouse_entered_facebook"]
+[connection signal="mouse_exited" from="Hyperlinks/ControlledFacebook/Facebook" to="Hyperlinks" method="_on_mouse_exited_facebook"]
+[connection signal="pressed" from="Hyperlinks/ControlledFacebook/Facebook" to="Hyperlinks" method="_on_facebook_pressed"]
+[connection signal="mouse_entered" from="Hyperlinks/ControlledInstagram/Instagram" to="Hyperlinks" method="_on_mouse_entered_instagram"]
+[connection signal="mouse_exited" from="Hyperlinks/ControlledInstagram/Instagram" to="Hyperlinks" method="_on_mouse_exited_instagram"]
+[connection signal="pressed" from="Hyperlinks/ControlledInstagram/Instagram" to="Hyperlinks" method="_on_instagram_pressed"]
+[connection signal="mouse_entered" from="Hyperlinks/ControlledGitHub/GitHub" to="Hyperlinks" method="_on_mouse_entered_git_hub"]
+[connection signal="mouse_exited" from="Hyperlinks/ControlledGitHub/GitHub" to="Hyperlinks" method="_on_mouse_exited_git_hub"]
+[connection signal="pressed" from="Hyperlinks/ControlledGitHub/GitHub" to="Hyperlinks" method="_on_github_pressed"]
+[connection signal="mouse_entered" from="Hyperlinks/ControlledYouTube/YouTube" to="Hyperlinks" method="_on_you_tube_mouse_entered"]
+[connection signal="mouse_exited" from="Hyperlinks/ControlledYouTube/YouTube" to="Hyperlinks" method="_on_you_tube_mouse_exited"]
+[connection signal="pressed" from="Hyperlinks/ControlledYouTube/YouTube" to="Hyperlinks" method="_on_you_tube_pressed"]

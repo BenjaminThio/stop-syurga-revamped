@@ -1,3 +1,4 @@
+Control
 CollisionShape3D
 Area3D
 Sprite3D
@@ -23,7 +24,6 @@ AnimationPlayer
 Label
 CenterContainer
 VBoxContainer
-Control
 Node
 TextureButton
 Marker2D

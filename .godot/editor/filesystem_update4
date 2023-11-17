@@ -1,8 +1,5 @@
-res://default_bus_layout.tres
 res://Scenes/main_manu.tscn
 res://Scenes/easter_egg.tscn
 res://Scenes/single_attack.tscn
 res://Scenes/main.tscn
-res://EasterEgg/Scripts/Player.gd
-res://EasterEgg/Lightmaps/easter_egg.exr
-res://Scenes/Museum.gd
+res://Scripts/hyperlinks.gd

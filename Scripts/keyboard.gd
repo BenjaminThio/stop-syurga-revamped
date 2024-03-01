@@ -36,6 +36,8 @@ const translated_yes: PackedStringArray = [
 	"はい"
 ]
 
+@export var default_font: FontFile = preload("res://Fonts/DTM-Sans.otf")
+
 var keyboard_coord: Vector2i = Vector2i.ZERO
 var is_keys_shaking: bool = false
 var focus_name: bool = false
@@ -51,6 +53,7 @@ var confirmed_name: bool = false
 @onready var break_option: Label = get_child(-1).get_child(0)
 @onready var backspace_option: Label = get_child(-1).get_child(1)
 @onready var continue_option: Label = get_child(-1).get_child(2)
+@onready var font: FontFile = Global.get_font(default_font)
 
 func _ready():
 	var keyboard: Array[Node] = get_children()
@@ -60,8 +63,9 @@ func _ready():
 	keyboard.pop_back()
 	update_keyboard()
 	update_keyboard_keys()
+	update_font()
 	
-	await time.sleep(0.001)
+	await get_tree().process_frame
 	
 	for keyboard_row in keyboard:
 		for key in keyboard_row.get_children():
@@ -196,6 +200,24 @@ func _process(_delta):
 					cymbal_sound_effect_length,
 					Color.WHITE
 				)
+
+func update_font():
+	var font_variation: FontVariation = FontVariation.new()
+	
+	font_variation.base_font = font
+	font_variation.spacing_glyph = 1
+	
+	title_label.add_theme_font_override("font", font_variation)
+	name_label.add_theme_font_override("font", font)
+	
+	for keys_row in get_children() as Array[HBoxContainer]:
+		for key in keys_row.get_children() as Array[Label]:
+			key.add_theme_font_override("font", font)
+	
+	"""
+	for option in get_child(-1).get_children() as Array[Label]:
+		option.add_theme_font_override("font", font)
+	"""
 
 func shake_name():
 	if not is_name_shaking:

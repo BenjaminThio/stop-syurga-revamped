@@ -11,13 +11,13 @@ var rotation_vector: Vector2 = Vector2.ZERO
 @export var speed: int = 300
 @export var damage_multiplier: int = 2
 
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 
 func _ready():
 	modulate.a = 0
 	
-	await time.sleep(0.001)
+	await get_tree().process_frame
 	
 	if is_instance_valid(player):
 		look_at(player.global_position)
@@ -66,7 +66,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		body.deal_damage(villian.attack * damage_multiplier)
+		body.deal_damage(villain.attack * damage_multiplier)
 
 func _on_screen_exited():
 	queue_free()

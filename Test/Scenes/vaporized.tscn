@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cycwxtwfqqhcd"]
 
 [ext_resource type="Script" path="res://Test/Scripts/vaporized.gd" id="1_g0ym4"]
-[ext_resource type="Texture2D" uid="uid://b5xif1ghabbs0" path="res://Sprites/Uncategorized/smaller_villian.png" id="2_l1fib"]
+[ext_resource type="Texture2D" uid="uid://b5xif1ghabbs0" path="res://Sprites/Uncategorized/smaller_villain.png" id="2_l1fib"]
 [ext_resource type="Texture2D" uid="uid://cbtx4bchd1fde" path="res://Sprites/Shaders/Pixel.png" id="3_g3g04"]
 
 [sub_resource type="Shader" id="Shader_mxyh2"]

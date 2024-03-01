@@ -6,7 +6,7 @@ var activate_position: Vector2 = Vector2.ZERO
 @export var laser_disappear_duration: float = 0.3
 @export var physical_damage_multiplier: int = 2
 @export var magic_damage_multiplier: int = 3
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var horizontal_laser: Area2D = $HorizontalLaser
 @onready var vertical_laser: Area2D = $VerticalLaser
@@ -49,8 +49,8 @@ func _on_area_entered(area):
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		body.deal_damage(villian.attack * physical_damage_multiplier)
+		body.deal_damage(villain.attack * physical_damage_multiplier)
 
 func _on_laser_body_entered(body):
 	if body.is_in_group("player"):
-		body.deal_damage(villian.attack * magic_damage_multiplier)
+		body.deal_damage(villain.attack * magic_damage_multiplier)

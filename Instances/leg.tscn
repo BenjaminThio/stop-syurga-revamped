@@ -7,7 +7,6 @@
 texture_filter = 1
 script = ExtResource("1_io3p5")
 move_distance = 50.0
-damage_multiplier = null
 transition_duration = 1.0
 metadata/_edit_group_ = true
 

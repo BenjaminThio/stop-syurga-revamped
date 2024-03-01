@@ -32,7 +32,7 @@ var fireball_scene: PackedScene = preload("res://Instances/fireball.tscn")
 @onready var main: Node2D = get_tree().get_root().get_node_or_null("Main")
 
 func _ready():
-	await time.sleep(0.001)
+	await get_tree().process_frame
 	if not Engine.is_editor_hint() and main != null:
 		var tween: Tween = create_tween()
 		

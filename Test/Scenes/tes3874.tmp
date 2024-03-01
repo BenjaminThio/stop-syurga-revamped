@@ -1,0 +1,159 @@
+[gd_scene load_steps=11 format=3 uid="uid://bc4i6er4uooof"]
+
+[ext_resource type="Script" path="res://Test/Scripts/test3.gd" id="1_002tj"]
+[ext_resource type="Script" path="res://Test/Scripts/test3_main.gd" id="1_ba54v"]
+[ext_resource type="AudioStream" uid="uid://cr5ga3udoc2h3" path="res://Musics/mus_golden_hour.ogg" id="2_dnnlr"]
+[ext_resource type="Texture2D" uid="uid://bdn2wih5w7dra" path="res://Sprites/slider_grabber.png" id="3_4gstr"]
+[ext_resource type="AudioStream" uid="uid://c7cqtt1g6oox1" path="res://Sounds/snd_rain.ogg" id="3_xkj0a"]
+[ext_resource type="Texture2D" uid="uid://cj4l7df37kdrk" path="res://Sprites/slider_tick.png" id="4_ia8dq"]
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="5_gmdji"]
+
+[sub_resource type="Gradient" id="Gradient_fmr6s"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_uc04r"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_fkl4y"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1)
+
+[node name="Test3" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_ba54v")
+
+[node name="MasterLabel" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 144.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("5_gmdji")
+text = "MASTER:"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BgmLabel" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 96.0
+offset_right = 120.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("5_gmdji")
+text = "BGM:"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SfxLabel" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 120.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("5_gmdji")
+text = "SFX:"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_left = -64.0
+offset_top = 564.0
+offset_right = 1088.0
+offset_bottom = 584.0
+theme_override_fonts/font = ExtResource("5_gmdji")
+
+[node name="Slider1" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+offset_left = 152.0
+offset_top = 72.0
+offset_right = 228.0
+offset_bottom = 88.0
+texture = ExtResource("4_ia8dq")
+script = ExtResource("1_002tj")
+gradient = SubResource("Gradient_fmr6s")
+metadata/_edit_use_anchors_ = true
+
+[node name="Grabber" type="TextureButton" parent="Slider1"]
+offset_left = 74.0
+offset_top = -4.0
+offset_right = 78.0
+offset_bottom = 16.0
+texture_normal = ExtResource("3_4gstr")
+metadata/_edit_use_anchors_ = true
+
+[node name="Slider2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+offset_left = 152.0
+offset_top = 104.0
+offset_right = 228.0
+offset_bottom = 120.0
+texture = ExtResource("4_ia8dq")
+script = ExtResource("1_002tj")
+bus_index = 1
+gradient = SubResource("Gradient_uc04r")
+metadata/_edit_use_anchors_ = true
+
+[node name="Grabber" type="TextureButton" parent="Slider2"]
+offset_left = 74.0
+offset_top = -4.0
+offset_right = 78.0
+offset_bottom = 16.0
+texture_normal = ExtResource("3_4gstr")
+metadata/_edit_use_anchors_ = true
+
+[node name="Slider3" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+offset_left = 152.0
+offset_top = 136.0
+offset_right = 228.0
+offset_bottom = 152.0
+texture = ExtResource("4_ia8dq")
+script = ExtResource("1_002tj")
+bus_index = 2
+gradient = SubResource("Gradient_fkl4y")
+metadata/_edit_use_anchors_ = true
+
+[node name="Grabber" type="TextureButton" parent="Slider3"]
+offset_left = 74.0
+offset_top = -4.0
+offset_right = 78.0
+offset_bottom = 16.0
+texture_normal = ExtResource("3_4gstr")
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayMusic" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 224.0
+theme_override_fonts/font = ExtResource("5_gmdji")
+text = "Play Music"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlaySound" type="Button" parent="."]
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 192.0
+offset_bottom = 288.0
+theme_override_fonts/font = ExtResource("5_gmdji")
+text = "Play Sound"
+metadata/_edit_use_anchors_ = true
+
+[node name="Bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dnnlr")
+bus = &"bgm"
+
+[node name="Sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xkj0a")
+bus = &"sfx"
+
+[connection signal="button_down" from="Slider1/Grabber" to="Slider1" method="_on_grabber_down"]
+[connection signal="button_up" from="Slider1/Grabber" to="Slider1" method="_on_grabber_up"]
+[connection signal="button_down" from="Slider2/Grabber" to="Slider2" method="_on_grabber_down"]
+[connection signal="button_up" from="Slider2/Grabber" to="Slider2" method="_on_grabber_up"]
+[connection signal="button_down" from="Slider3/Grabber" to="Slider3" method="_on_grabber_down"]
+[connection signal="button_up" from="Slider3/Grabber" to="Slider3" method="_on_grabber_up"]
+[connection signal="pressed" from="PlayMusic" to="." method="_on_play_music_pressed"]
+[connection signal="pressed" from="PlaySound" to="." method="_on_play_sound_pressed"]

@@ -1,0 +1,143 @@
+[gd_scene load_steps=23 format=3 uid="uid://bnqguapi8ioxm"]
+
+[ext_resource type="Script" path="res://Scripts/villain.gd" id="1_gsvpo"]
+[ext_resource type="Texture2D" uid="uid://bru36cl6prpor" path="res://Sprites/Uncategorized/villain.png" id="2_h77p1"]
+[ext_resource type="Texture2D" uid="uid://c2qire4ei6x5w" path="res://Sprites/yi_fan_mental_break_down.png" id="3_apwql"]
+[ext_resource type="Texture2D" uid="uid://ci58thm4vl1x" path="res://Sprites/Uncategorized/villain_hurt.png" id="4_h1m8l"]
+[ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villain_shield.png" id="5_7cu47"]
+[ext_resource type="Texture2D" uid="uid://cbtx4bchd1fde" path="res://Sprites/Shaders/Pixel.png" id="6_bb8om"]
+[ext_resource type="PackedScene" uid="uid://baw3f8qxhlt4c" path="res://Instances/speech.tscn" id="7_bcppl"]
+[ext_resource type="Texture2D" uid="uid://bpoj87wiaih2y" path="res://Sprites/dust.png" id="8_imb8j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j80k0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h77p1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_apwql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h1m8l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_mshnh"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.498039)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1ce5q"]
+gradient = SubResource("Gradient_mshnh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pn3tg"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector3(0, -12, 0)
+color_ramp = SubResource("GradientTexture1D_1ce5q")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yst2b"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekhi5"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mc31a"]
+radius = 112.0
+
+[sub_resource type="Curve" id="Curve_b5drg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qf4fb"]
+curve = SubResource("Curve_b5drg")
+
+[sub_resource type="Curve" id="Curve_j8lxs"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 80), 0.0, 0.0, 0, 0, Vector2(0.7, -90), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m65t0"]
+curve = SubResource("Curve_j8lxs")
+
+[sub_resource type="Curve" id="Curve_r86kk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.700348, 0.58628), -1.7, -1.7, 0, 0, Vector2(1, 0), 0.0, -1.11, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_lj1v1"]
+curve = SubResource("Curve_r86kk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_alng4"]
+particle_flag_disable_z = true
+spread = 180.0
+flatness = 0.7
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 98, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 10.0
+linear_accel_curve = SubResource("CurveTexture_m65t0")
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_lj1v1")
+alpha_curve = SubResource("CurveTexture_qf4fb")
+
+[node name="Villain" type="Area2D" groups=["villain"]]
+position = Vector2(576, 160)
+script = ExtResource("1_gsvpo")
+health = 1
+spareable = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_j80k0")
+
+[node name="Shield" type="Sprite2D" parent="AnimatedSprite2D"]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_7cu47")
+
+[node name="VaporizeParticles" type="GPUParticles2D" parent="AnimatedSprite2D"]
+rotation = 0.261799
+scale = Vector2(1.8, 2.9)
+emitting = false
+amount = 2000
+process_material = SubResource("ParticleProcessMaterial_pn3tg")
+texture = ExtResource("6_bb8om")
+lifetime = 3.0
+speed_scale = 3.0
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -120.0
+offset_top = 144.0
+offset_right = 120.0
+offset_bottom = 158.0
+theme_override_styles/background = SubResource("StyleBoxFlat_yst2b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ekhi5")
+max_value = 10000.0
+value = 10000.0
+show_percentage = false
+
+[node name="Speech" parent="." instance=ExtResource("7_bcppl")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_mc31a")
+
+[node name="SpareParticles" type="GPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_alng4")
+texture = ExtResource("8_imb8j")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0

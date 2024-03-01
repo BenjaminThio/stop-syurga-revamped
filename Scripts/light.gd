@@ -20,7 +20,7 @@ var original_attack_type: ATTACK_TYPE = ATTACK_TYPE.LIGHT_BLUE_ATTACK
 		attack_type = value
 		update_light()
 @export var damage_multiplier: int = 3
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 
 """
 func _process(_delta):
@@ -37,10 +37,10 @@ func _on_body_entered(body):
 	if not Engine.is_editor_hint() and body.is_in_group("player"):# and light_deal_damage:
 		match attack_type:
 			ATTACK_TYPE.WHITE_ATTACK:
-				body.deal_damage(villian.attack * damage_multiplier)
+				body.deal_damage(villain.attack * damage_multiplier)
 			ATTACK_TYPE.LIGHT_BLUE_ATTACK:
 				if Vector2i(body.velocity) > Vector2i.ZERO or Vector2i(body.velocity) < Vector2i.ZERO:
-					body.deal_damage(villian.attack * damage_multiplier)
+					body.deal_damage(villain.attack * damage_multiplier)
 			ATTACK_TYPE.ORANGE_ATTACK:
 				if Vector2i(body.velocity) == Vector2i.ZERO:
-					body.deal_damage(villian.attack * damage_multiplier)
+					body.deal_damage(villain.attack * damage_multiplier)

@@ -6,7 +6,15 @@ var walking: bool = false
 var view_shaking: bool = false
 var view_shake_time: float = 0.15
 var last_phase: bool = false
-var flashlight_switched_on: bool = false
+var flashlight_switched_on: bool = false:
+	get:
+		if not disabled_flashlight:
+			return flashlight_switched_on
+		else:
+			return false
+	set(value):
+		flashlight_switched_on = value
+var disabled_flashlight: bool = false
 var brigthness: Dictionary = {
 	flashlight_on = {
 		flashlight_start_value = 50.0 / 255.0,
@@ -27,7 +35,9 @@ var obstacles_tween: Tween = null
 @onready var flashlight: Sprite2D = $Flashlight
 @onready var shadow: Sprite2D = $Shadow
 @onready var obstacles: Sprite2D = $Obstacles
+@onready var exit: Sprite2D = $Exit
 @onready var walking_animation_player: AnimationPlayer = $AnimationPlayer
+@onready var canvas: Control = owner.get_node("Canvas")
 @onready var blur_effect: ColorRect = owner.get_node("Canvas/BlurEffect")
 @onready var dialogue: NinePatchRect = owner.get_node("Canvas/Dialogue")
 @onready var hints_label: Label = owner.get_node("Canvas/HintsLabel")
@@ -37,13 +47,57 @@ var obstacles_tween: Tween = null
 @onready var background_music_player: AudioStreamPlayer = owner.get_node("BackgroundMusicPlayer")
 
 func _ready() -> void:
-	hints_label.text = [
-		"Press UP key to move forward.\nPress F key to switch on flashlight.",
-		"按“上”键向前移动。\n按“F”键打开手电筒。",
-		"按「上」鍵向前移動。\n按「F」鍵開啟手電筒。",
-		"Tekan kekunci ATAS untuk bergerak ke hadapan.\nTekan kekunci F untuk menghidupkan lampu suluh.",
-		"上キーを押して前に進んでください。\nFキーを押して懐中電灯を点灯してください。"
-	][db.data.settings.language]
+	var up_events: Array[InputEvent] = InputMap.action_get_events("up")
+	var up_events_name: Array[StringName] = []
+	var up_events_text: String
+	
+	for up_event in up_events:
+		up_events_name.append(Global.translate_input(up_event.as_text().replace(" (Physical)", "").to_lower()))
+	
+	up_events_name[0] += " "
+	up_events_name[-1] = " " + up_events_name[-1]
+	
+	up_events_text = ["or", "或", "或", "atau", "もしくは"][db.data.settings.language].join(up_events_name)
+	
+	if Global.towards_exit:
+		walking_animation_player.current_animation = "walking_towards_exit"
+		disabled_flashlight = true
+		flashlight.hide()
+		shadow.hide()
+		obstacles.hide()
+		blur_effect.hide()
+		hints_label.text = [
+			"Press {up_event} key to move forward.".format({up_event=up_events_text}),
+			"按“{up_event}”键向前移动。".format({up_event=up_events_text}),
+			"按「{up_event}」鍵向前移動。".format({up_event=up_events_text}),
+			"Tekan kekunci {up_event} untuk bergerak ke hadapan.".format({up_event=up_events_text}),
+			"{up_event}キーを押して前に進んでください。".format({up_event=up_events_text})
+		][db.data.settings.language]
+	else:
+		var flashlight_event: StringName = Global.translate_input(InputMap.action_get_events("flashlight")[0].as_text().replace(" (Physical)", "").to_lower())
+		
+		exit.hide()
+		walking_animation_player.current_animation = "walking"
+		disabled_flashlight = false
+		"""
+		hints_label.text = Autowrap.smart_autowrap(
+			[
+				"Press {up_event} key to move forward.\nPress {flashlight_event} key to switch on flashlight.".format({up_event=up_event, flashlight_event=flashlight_event}),
+				"按“{up_event}”键向前移动。\n按“{flashlight_event}”键打开手电筒。".format({up_event=up_event, flashlight_event=flashlight_event}),
+				"按「{up_event}」鍵向前移動。\n按「{flashlight_event}」鍵開啟手電筒。".format({up_event=up_event, flashlight_event=flashlight_event}),
+				"Tekan kekunci {up_event} untuk bergerak ke hadapan.\nTekan kekunci {flashlight_event} untuk menghidupkan lampu suluh.".format({up_event=up_event, flashlight_event=flashlight_event}),
+				"{up_event}キーを押して前に進んでください。\n{flashlight_event}キーを押して懐中電灯を点灯してください。".format({up_event=up_event, flashlight_event=flashlight_event})
+			][db.data.settings.language], 24, hints_label
+		)
+		"""
+		hints_label.text = [
+			"Press {up_event} key to move forward.\nPress {flashlight_event} key to switch on flashlight.".format({up_event=up_events_text, flashlight_event=flashlight_event}),
+			"按“{up_event}”键向前移动。\n按“{flashlight_event}”键打开手电筒。".format({up_event=up_events_text, flashlight_event=flashlight_event}),
+			"按「{up_event}」鍵向前移動。\n按「{flashlight_event}」鍵開啟手電筒。".format({up_event=up_events_text, flashlight_event=flashlight_event}),
+			"Tekan kekunci {up_event} untuk bergerak ke hadapan.\nTekan kekunci {flashlight_event} untuk menghidupkan lampu suluh.".format({up_event=up_events_text, flashlight_event=flashlight_event}),
+			"{up_event}キーを押して前に進んでください。\n{flashlight_event}キーを押して懐中電灯を点灯してください。".format({up_event=up_events_text, flashlight_event=flashlight_event})
+		][db.data.settings.language]
+	
 	distance_label.hide()
 	
 	if flashlight_switched_on:
@@ -61,7 +115,7 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	#print(flashlight_tween, obstacles_tween)
 	
-	if Input.is_action_just_pressed("flashlight") and not last_phase:
+	if Input.is_action_just_pressed("flashlight") and not last_phase and not disabled_flashlight:
 		if hints_label.visible:
 			hints_label.hide()
 		
@@ -127,129 +181,147 @@ func _process(_delta) -> void:
 			view_shaking = false
 		elif ceil(walking_animation_time_left) == 0 and not last_phase:
 			last_phase = true
-			dialogue.unknown = false
-			distance_label.hide()
 			pause_walking_animation()
-			if flashlight_switched_on:
-				flashlight_switched_on = false
-				update_flashlight()
+			distance_label.hide()
 			
-			await time.sleep(0.5)
-			
-			background_music_player.stream = load("res://Musics/mus_encounter.ogg")
-			background_music_player.play()
-			
-			create_tween().tween_property(obstacles, "global_position", Vector2(513.6, 510), 1)
-			create_tween().tween_property(obstacles, "global_scale", Vector2(1.2, 1.2), 1)
-			create_tween().tween_property(obstacles, "self_modulate:a", 0.7, 1)
-			create_tween().tween_method(set_blurriness, 10, 0, 1)
-			
-			await time.sleep(1.0)
-			
-			#var random_last_words: String = random.choice(["and must be paid back by\nblood!!!", "and you will face the\nconsequences!!!"])
-			
-			dialogue.set_dialogues([
-				[
-					"Oh, my dear, it feels\nlike an eternity since\nwe last crossed paths.\nHave you been pining for\nme?",
-					"What a lengthy trip it\nwas, huh?",
-					"I'm sure it must have\nleft you feeling worn\nout.",
-					"...",
-					"I can't forget the way\nwe fell in love, nor can\nI forget how we\neventually broke up and\nended up in this\nchallenging situation...",
-					"Remember this place?",
-					"...",
-					"......",
-					"It marks our first\nencounter...",
-					"Those were beautiful\ntimes.",
-					"Regrettably, it cannot\nbe undone.",
-					"It was your own hands\nthat shattered it all.",
-					"You are a liar and\nbetrayer...",
-					"You made promises with\nme of a better life and\neverlasting love...",
-					"But in the end, you\nrepent...",
-					"You ruined my entire\nlife!!!",
-					"and now...",
-					"I will let you pay back\nby blood!!!"
-				],
-				[
-					"哦，亲爱的，自从我们上一次也是最后一次的会面以来，就好像永恒，你是否想念我了呢？",
-					"真是一个漫长的旅途啊。",
-					"我想这一定把你累坏了吧？",
-					"。。。",
-					"我还是忘不掉当时的我们是如何醉入爱河，而到最后竟落得如此下场的。",
-					"还记得这里吗？",
-					"。。。",
-					"。。。。。。",
-					"这是我们第一次相遇的地方。",
-					"那些我们在一起的时光是多么的美好。",
-					"可惜啊，一切都不能重来了。",
-					"一切的一切都是你一手造成。",
-					"你这个骗子和叛徒。",
-					"你曾经答应过我你会给我更好的生活和永恒的爱。",
-					"但到最后，你出尔反尔。",
-					"你毁掉我美好的人生！！！",
-					"所以现在。。。",
-					"我要让你血债血偿！！！"
-				],
-				[
-					"哦，吾亲爱者，尔已逾时未交。尔犹怀吾乎？",
-					"真是個漫長之旅啊。",
-					"吾意此必疲惫尔乎？",
-					"。。。",
-					"吾猶忘弗去，當時吾輩如何陶醉於愛河之中，而結局竟至如此下場。",
-					"猶記此處否？",
-					"。。。",
-					"。。。。。。",
-					"是吾等初次相遇之地。",
-					"此起共处之光辉，堪称绝美。",
-					"惜哉，一切不能复返。",
-					"一切的一切皆由尔所致。",
-					"尔此为诈者及叛徒也。",
-					"尔曾答吾之誓，欲以更美好之生活与永恒之爱予吾。",
-					"然至终，尔食言了",
-					"尔毁吾之一生！！！",
-					"是以今日...",
-					"吾欲使尔以己血偿还！！！"
-				],
-				[
-					"Oh, sayangku, rasanya seperti keabadian sejak kita terakhir bertemu. Adakah kamu merindui aku?",
-					"Perjalanan ini memang panjang.",
-					"Saya rasa ini pasti membuatmu letih, kan?",
-					"...",
-					"Saya masih tidak boleh melupakan bagaimana kita saling mencintai, dan akhirnya berakhir dengan situasi mencabar macam ini.",
-					"Masih ingat tempat ini?",
-					"...",
-					"......",
-					"Tempat ini ialah tempat yang kita pertama kali bertemu.",
-					"Masa yang kita bersama adalah begitu indah.",
-					"Sayangnya, semuanya tidak dapat diulang lagi.",
-					"Kau yang menyebabkan semuanya.",
-					"kau memang seorang penipu dan pengkhianat.",
-					"Kau pernah berjanji dengan saya agar memberi kehidupan yang lebih baik dan cinta yang abadi kepada saya.",
-					"Tetapi pada akhirnya, kau melanggar janjimu.",
-					"Kau telah menghancurkan seluruh kehidupan saya!!!",
-					"Jadi sekarang...",
-					"Saya ingin engkau membalas dengan darahmu!!!"
-				],
-				[
-					"ああ、私の愛しい人よ、最後に出会ってから永遠のような気がします。私のことを懐かしんでいましたか？",
-					"本当に長い旅路だな。",
-					"きっと君は疲れ果てているだろうね？",
-					"。。。",
-					"今でも忘れられない、当時の僕たちがいかに愛の川に酔いしれ、そして最後はこんな結末になったのか。",
-					"この場所を覚えていますか？",
-					"。。。",
-					"。。。。。。",
-					"これは私たちが初めて出会った場所です。",
-					"一緒に過ごした時間は何と素晴らしかったことでしょう。",
-					"残念ですね、すべてをやり直すことはできません。",
-					"すべてはあなたによって引き起こされたものです。",
-					"お前は詐欺師であり、裏切り者だ。",
-					"かつて、あなたは私により良い生活と永遠の愛を約束した。",
-					"しかし最後には、あなたは約束を破った。",
-					"お前は俺の人生を台無しにした！！！",
-					"だから今は。。。",
-					"お前に自らの血で償わせる！！！",
-				]
-			][db.data.settings.language])
+			if Global.towards_exit:
+				var cymbal_sound_effect_length: float = Audio.play_sound_and_return_length("cymbal")
+				
+				Transition.fade_in(
+					canvas,
+					func() -> void:
+						Global.towards_exit = false
+						
+						if db.data.player.seen_credits:
+							get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+						else:
+							seen_credits()
+							get_tree().change_scene_to_file("res://Scenes/credits.tscn"),
+					cymbal_sound_effect_length,
+					Color.WHITE
+				)
+			else:
+				dialogue.unknown = false
+				if flashlight_switched_on:
+					flashlight_switched_on = false
+					update_flashlight()
+				
+				await time.sleep(0.5)
+				
+				background_music_player.stream = load("res://Musics/mus_encounter.ogg")
+				background_music_player.play()
+				
+				create_tween().tween_property(obstacles, "global_position", Vector2(513.6, 510), 1)
+				create_tween().tween_property(obstacles, "global_scale", Vector2(1.2, 1.2), 1)
+				create_tween().tween_property(obstacles, "self_modulate:a", 0.7, 1)
+				create_tween().tween_method(set_blurriness, 10, 0, 1)
+				
+				await time.sleep(1.0)
+				
+				#var random_last_words: String = random.choice(["and must be paid back by blood!!!", "and you will face the consequences!!!"])
+				
+				dialogue.set_dialogues([
+					[
+						"Oh, my dear, it feels like an eternity since we last crossed paths. Have you been pining for me?",
+						"What a lengthy trip it was, huh?",
+						"I'm sure it must have left you feeling worn out.",
+						"...",
+						"I can't forget the way we fell in love, nor can I forget how we eventually broke up and ended up in this challenging situation...",
+						"Remember this place?",
+						"...",
+						"......",
+						"It marks our first encounter...",
+						"Those were beautiful times.",
+						"Regrettably, it cannot be undone.",
+						"It was your own hands that shattered it all.",
+						"You are a liar and betrayer...",
+						"You made promises with me of a better life and everlasting love...",
+						"But in the end, you repent...",
+						"You ruined my entire life!!!",
+						"and now...",
+						"I will let you pay back by blood!!!"
+					],
+					[
+						"哦，亲爱的，自从我们上一次也是最后一次的会面以来，就好像永恒，你是否想念我了呢？",
+						"真是一个漫长的旅途啊。",
+						"我想这一定把你累坏了吧？",
+						"。。。",
+						"我还是忘不掉当时的我们是如何醉入爱河，而到最后竟落得如此下场的。",
+						"还记得这里吗？",
+						"。。。",
+						"。。。。。。",
+						"这是我们第一次相遇的地方。",
+						"那些我们在一起的时光是多么的美好。",
+						"可惜啊，一切都不能重来了。",
+						"一切的一切都是你一手造成。",
+						"你这个骗子和叛徒。",
+						"你曾经答应过我你会给我更好的生活和永恒的爱。",
+						"但到最后，你出尔反尔。",
+						"你毁掉我美好的人生！！！",
+						"所以现在。。。",
+						"我要让你血债血偿！！！"
+					],
+					[
+						"哦，吾亲爱者，尔已逾时未交。尔犹怀吾乎？",
+						"真是個漫長之旅啊。",
+						"吾意此必疲惫尔乎？",
+						"。。。",
+						"吾猶忘弗去，當時吾輩如何陶醉於愛河之中，而結局竟至如此下場。",
+						"猶記此處否？",
+						"。。。",
+						"。。。。。。",
+						"是吾等初次相遇之地。",
+						"此起共处之光辉，堪称绝美。",
+						"惜哉，一切不能复返。",
+						"一切的一切皆由尔所致。",
+						"尔此为诈者及叛徒也。",
+						"尔曾答吾之誓，欲以更美好之生活与永恒之爱予吾。",
+						"然至终，尔食言了",
+						"尔毁吾之一生！！！",
+						"是以今日...",
+						"吾欲使尔以己血偿还！！！"
+					],
+					[
+						"Oh, sayangku, rasanya seperti keabadian sejak kita terakhir bertemu. Adakah kamu merindui aku?",
+						"Perjalanan ini memang panjang.",
+						"Saya rasa ini pasti membuatmu letih, kan?",
+						"...",
+						"Saya masih tidak boleh melupakan bagaimana kita saling mencintai, dan akhirnya berakhir dengan situasi mencabar macam ini.",
+						"Masih ingat tempat ini?",
+						"...",
+						"......",
+						"Tempat ini ialah tempat yang kita pertama kali bertemu.",
+						"Masa yang kita bersama adalah begitu indah.",
+						"Sayangnya, semuanya tidak dapat diulang lagi.",
+						"Kau yang menyebabkan semuanya.",
+						"kau memang seorang penipu dan pengkhianat.",
+						"Kau pernah berjanji dengan saya agar memberi kehidupan yang lebih baik dan cinta yang abadi kepada saya.",
+						"Tetapi pada akhirnya, kau melanggar janjimu.",
+						"Kau telah menghancurkan seluruh kehidupan saya!!!",
+						"Jadi sekarang...",
+						"Saya ingin engkau membalas dengan darahmu!!!"
+					],
+					[
+						"ああ、私の愛しい人よ、最後に出会ってから永遠のような気がします。私のことを懐かしんでいましたか？",
+						"本当に長い旅路だな。",
+						"きっと君は疲れ果てているだろうね？",
+						"。。。",
+						"今でも忘れられない、当時の僕たちがいかに愛の川に酔いしれ、そして最後はこんな結末になったのか。",
+						"この場所を覚えていますか？",
+						"。。。",
+						"。。。。。。",
+						"これは私たちが初めて出会った場所です。",
+						"一緒に過ごした時間は何と素晴らしかったことでしょう。",
+						"残念ですね、すべてをやり直すことはできません。",
+						"すべてはあなたによって引き起こされたものです。",
+						"お前は詐欺師であり、裏切り者だ。",
+						"かつて、あなたは私により良い生活と永遠の愛を約束した。",
+						"しかし最後には、あなたは約束を破った。",
+						"お前は俺の人生を台無しにした！！！",
+						"だから今は。。。",
+						"お前に自らの血で償わせる！！！",
+					]
+				][db.data.settings.language])
 	if Input.is_action_just_released("up"):
 		pause_walking_animation()
 
@@ -284,7 +356,7 @@ func update_flashlight():
 			obstacles_tween.tween_property(obstacles, "self_modulate:a", brigthness.flashlight_off.obstacles_end_value, walking_animation_time_left)
 			
 		Audio.play_sound("flashlight_off")
-		
+
 func pause_walking_animation() -> void:
 	if walking_sound_effect.playing:
 		walking_sound_effect.stop()
@@ -303,3 +375,8 @@ func pause_walking_animation() -> void:
 
 func set_blurriness(value: int) -> void:
 	blur_effect.material.set_shader_parameter("blurriness", value)
+
+func seen_credits():
+	if not db.data.player.seen_credits:
+		db.data.player.seen_credits = true
+		db.save_data()

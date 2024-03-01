@@ -10,5 +10,3 @@ theme_override_constants/separation = 150
 alignment = 1
 script = ExtResource("1_tsmsp")
 attacks = Array[PackedScene]([ExtResource("2_s1wul"), ExtResource("3_a8phb")])
-
-[connection signal="resized" from="." to="." method="_on_resized"]

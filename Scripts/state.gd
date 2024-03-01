@@ -62,12 +62,12 @@ func set_state(new_state: MAIN_STATE) -> void:
 	if new_state < MAIN_STATE.keys().size() and new_state != current_state:
 		current_state = new_state
 		if current_state == MAIN_STATE.COMBATING:
-			var villian: Area2D = get_tree().get_first_node_in_group("villian")
+			var villain: Area2D = get_tree().get_first_node_in_group("villain")
 			
-			villian.cast_attack()
+			villain.cast_attack()
 		elif current_state == MAIN_STATE.FLEE:
 			var menu: VBoxContainer = get_tree().get_first_node_in_group("menu")
-			var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
+			var description_manager: Node2D = get_tree().get_first_node_in_group("description_manager")
 			var descriptions: PackedStringArray = [
 				[
 					"Escaped...",
@@ -93,8 +93,9 @@ func set_state(new_state: MAIN_STATE) -> void:
 			]
 			
 			menu.queue_free()
-			description_label.text = "\t* {random_description}".format({"random_description": random.choice(descriptions)})
-			description_label.show()
+			#description_manager.generate_description("\t* {random_description}".format({"random_description": random.choice(descriptions)}), false, false, false)
+			description_manager.generate_description("    * {random_description}".format({"random_description": random.choice(descriptions)}), false, false, false)
+			description_manager.show()
 
 func add_substate_to_queue(substate: SUBSTATE):
 	if substate != current_substate:
@@ -109,10 +110,10 @@ func complete_on_queue_substate():
 	
 	match current_substate:
 		SUBSTATE.STATEMENT:
-			var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
+			var description_manager: Node2D = get_tree().get_first_node_in_group("description_manager")
 			
-			description_label.visible = true
-			description_label.generate_statement()
+			description_manager.visible = true
+			description_manager.generate_statement()
 		SUBSTATE.SPEECH:
 			var speech: Node2D = get_tree().get_first_node_in_group("speech")
 			

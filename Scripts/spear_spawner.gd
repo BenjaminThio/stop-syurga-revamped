@@ -7,4 +7,7 @@ func locate_red_spear():
 func destroy_spear_and_locate_red_spear(spear: Node2D):
 	#remove_child(spear)
 	spear.queue_free()
-	await time.sleep(0.001, locate_red_spear)
+	
+	await get_tree().process_frame
+	
+	locate_red_spear()

@@ -13,7 +13,7 @@ var spawner_id: int
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 @onready var dummy_player = get_tree().get_first_node_in_group("dummy_player")
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 
 """
 func _ready():
@@ -46,7 +46,7 @@ func get_rotation_vector():
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		body.deal_damage(villian.attack * damage_multiplier)
+		body.deal_damage(villain.attack * damage_multiplier)
 
 func _on_fireball_screen_exited():
 	queue_free()

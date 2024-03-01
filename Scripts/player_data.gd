@@ -13,18 +13,52 @@ var health: float
 var defense: float
 var attack: float
 var gold: int = 0
-var items: Array[Item] = [
-	Item.new("Thye's Hot Dog", 100),
-	Item.new("Syurga Fruit", 60),
-	Item.new("Syurga Fruit", 60),
-	Item.new("Syurga Fruit", 60),
-	Item.new("Bing Chilling", 50),
-	Item.new("Bing Chilling", 50),
-	Item.new("Super Ring", 40),
-	Item.new("Super Ring", 40)
-]
+var items: Array[Item]
 var weapon: String
 var armor: String
+
+@onready var thye_hot_dog_translation: String = [
+	"Thye's Hot Dog",
+	"泰式热狗",
+	"程泰之香腸",
+	"Anjing Panas Zen Thye",
+	"チョウタイのソーセージ"
+][db.data.settings.language]
+@onready var syurga_fruit_translation: String = [
+	"Syurga Fruit",
+	"天堂果实",
+	"天果",
+	"Buah Syurga",
+	"ヘブンフルーツ"
+][db.data.settings.language]
+@onready var super_ring_translation: String = [
+	"Super Ring",
+	"超级芝士圈",
+	"超凡芝士環",
+	"Super Ring",
+	"スーパーリングのチーズ味スナック菓子"
+][db.data.settings.language]
+@onready var bing_chilling_translation: String = [
+	"Bing Chilling",
+	"冰淇淋",
+	"冰酪",
+	"Bing Chilling",
+	"ビング・チリング"
+][db.data.settings.language]
+
+func _ready(): items_reset()
+
+func items_reset():
+	items = [
+		Item.new(thye_hot_dog_translation, 100),
+		Item.new(syurga_fruit_translation, 60),
+		Item.new(syurga_fruit_translation, 60),
+		Item.new(syurga_fruit_translation, 60),
+		Item.new(bing_chilling_translation, 50),
+		Item.new(bing_chilling_translation, 50),
+		Item.new(super_ring_translation, 40),
+		Item.new(super_ring_translation, 40)
+	]
 
 """
 var player_name: String = "Benjamin":

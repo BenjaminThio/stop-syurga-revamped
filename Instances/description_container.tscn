@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://d18fqcvh3ln24"]
+
+[ext_resource type="Script" path="res://Scripts/description_container.gd" id="1_kqmg7"]
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="2_lmjv1"]
+
+[node name="DescriptionContainer" type="HBoxContainer"]
+theme_override_constants/separation = 0
+script = ExtResource("1_kqmg7")
+
+[node name="StarSign" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(30, 34)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_lmjv1")
+theme_override_font_sizes/normal_font_size = 27
+text = "*"
+
+[node name="LineContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(690, 0)
+layout_mode = 2
+theme_override_constants/separation = 0

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://deyoubofwa06"]
+
+[ext_resource type="Script" path="res://Scripts/intro_9.gd" id="1_eyvkc"]
+[ext_resource type="Texture2D" uid="uid://b4t87fdtqpxl6" path="res://Sprites/Intro/intro9.png" id="1_vsqel"]
+[ext_resource type="Texture2D" uid="uid://brjkdqptbniqo" path="res://Sprites/Intro/yi_fan_imaginary_cloud.png" id="3_k5tgs"]
+
+[node name="Intro9" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+script = ExtResource("1_eyvkc")
+
+[node name="Memory" type="Sprite2D" parent="."]
+position = Vector2(200, 14.2)
+scale = Vector2(1.42857, 1.429)
+texture = ExtResource("1_vsqel")
+
+[node name="YiFanCloud" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(200, 143)
+scale = Vector2(1.42857, 1.429)
+texture = ExtResource("3_k5tgs")

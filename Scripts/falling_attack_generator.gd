@@ -3,7 +3,7 @@ extends VBoxContainer
 var block: PackedScene = load("res://Instances/controlled_block.tscn")
 var bomb: PackedScene = load("res://Instances/controlled_bomb.tscn")
 var barrier: PackedScene = load("res://Instances/controlled_barrier.tscn")
-var adjusted_location: bool = false
+#var adjusted_location: bool = false
 
 @export var transition_type: Tween.TransitionType = Tween.TRANS_SINE
 @export var transition_duration: float = 10.0
@@ -18,6 +18,8 @@ var adjusted_location: bool = false
 @onready var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
 
 func _ready():
+	global_position.x = -size.x
+	
 	for _row_index in range(rows_count):
 		var h_box_container: HBoxContainer = HBoxContainer.new()
 		
@@ -50,7 +52,40 @@ func _ready():
 			for random_attack in random.sample(attacks, attacks_count_in_a_row):
 				
 				h_box_container.add_child(random_attack.instantiate())
+	
+	await get_tree().process_frame
+	
+	global_position = Vector2(0, -size.y)
+	if rewindable and battlefield != null:
+		var recorder_sign: AnimatedSprite2D = battlefield.get_node("RecorderSign")
+		
+		battlefield.sign_activated = true
+		recorder_sign.frame = 0
+	create_tween().set_trans(transition_type).tween_property(self, "global_position:y", get_viewport_rect().size.y / [1, 1.5][int(rewindable)], transition_duration).finished.connect(
+		func() -> void:
+			if not rewindable:
+				queue_free()
+			if battlefield != null:
+				var recorder_sign: AnimatedSprite2D = battlefield.get_node("RecorderSign")
+				
+				recorder_sign.frame = 1
+			create_tween().set_trans(transition_type).tween_property(self, "global_position:y", -size.y, rewind_duration).finished.connect(
+				func() -> void:
+					if battlefield != null:
+						battlefield.sign_activated = false
+						queue_free()
+			)
+	)
 
+func get_children_group(node: Node) -> PackedStringArray:
+	var groups: PackedStringArray = [] 
+	
+	for child in node.get_children():
+		groups.append(child.get_groups()[0])
+	
+	return groups
+
+"""
 func _on_resized():
 	if not adjusted_location:
 		adjusted_location = true
@@ -75,11 +110,4 @@ func _on_resized():
 							queue_free()
 				)
 		)
-
-func get_children_group(node: Node) -> PackedStringArray:
-	var groups: PackedStringArray = [] 
-	
-	for child in node.get_children():
-		groups.append(child.get_groups()[0])
-	
-	return groups
+"""

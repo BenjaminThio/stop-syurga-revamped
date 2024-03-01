@@ -1,13 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://baw3f8qxhlt4c"]
+[gd_scene load_steps=5 format=3 uid="uid://baw3f8qxhlt4c"]
 
 [ext_resource type="Script" path="res://Scripts/speech.gd" id="1_s71gn"]
 [ext_resource type="Texture2D" uid="uid://lndan2ak6sq2" path="res://Sprites/Bubbles/bubble_2.png" id="2_usb5q"]
-[ext_resource type="FontFile" uid="uid://bnqnorxd15wy6" path="res://Fonts/papyrus.ttf" id="3_7vry3"]
+[ext_resource type="Script" path="res://Scripts/speech_manager.gd" id="3_wscv0"]
 [ext_resource type="AudioStream" uid="uid://c8n14oacc6dcj" path="res://Sounds/snd_txt_yifan.ogg" id="4_ojc01"]
-
-[sub_resource type="FontVariation" id="FontVariation_bknyi"]
-base_font = ExtResource("3_7vry3")
-spacing_glyph = 1
 
 [node name="Speech" type="Node2D" groups=["speech"]]
 texture_filter = 1
@@ -24,17 +20,16 @@ patch_margin_top = 32
 patch_margin_right = 48
 patch_margin_bottom = 32
 
-[node name="Label" type="Label" parent="."]
+[node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 117.0
 offset_top = -18.0
 offset_right = 311.0
 offset_bottom = 62.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("FontVariation_bknyi")
-autowrap_mode = 3
-uppercase = true
+theme_override_constants/separation = 0
+script = ExtResource("3_wscv0")
 
 [node name="SpeechAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ojc01")
+bus = &"sfx"
 
-[connection signal="resized" from="Label" to="." method="_on_label_resized"]
+[connection signal="resized" from="LinesContainer" to="." method="_on_lines_container_resized"]

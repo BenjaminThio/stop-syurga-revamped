@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvl31fgg01ldn"]
+
+[ext_resource type="Script" path="res://Scripts/controlled_key.gd" id="1_4l6e1"]
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="2_8xvkx"]
+[ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="2_vtdxi"]
+[ext_resource type="StyleBox" uid="uid://bc1semd8x4now" path="res://StyleBoxes/disabled_key_button.tres" id="3_qo8n0"]
+[ext_resource type="StyleBox" uid="uid://dlxo4c8dkira0" path="res://StyleBoxes/hover_key_button.tres" id="4_mybv2"]
+[ext_resource type="StyleBox" uid="uid://b1jtbce5ecoaw" path="res://StyleBoxes/pressed_key_button.tres" id="5_fam2v"]
+[ext_resource type="StyleBox" uid="uid://dyny0grdg6ckp" path="res://StyleBoxes/normal_key_button.tres" id="6_7axc3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0a0r1"]
+
+[node name="ControlledKey" type="Control"]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 80.0
+offset_bottom = 64.0
+script = ExtResource("1_4l6e1")
+default_font = ExtResource("2_vtdxi")
+
+[node name="Key" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+offset_left = 8.0
+offset_right = 72.0
+offset_bottom = 64.0
+focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0.313726, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.27451, 0.27451, 1)
+theme_override_fonts/font = ExtResource("2_8xvkx")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0a0r1")
+theme_override_styles/disabled = ExtResource("3_qo8n0")
+theme_override_styles/hover = ExtResource("4_mybv2")
+theme_override_styles/pressed = ExtResource("5_fam2v")
+theme_override_styles/normal = ExtResource("6_7axc3")
+toggle_mode = true
+text = "W"
+
+[connection signal="button_down" from="Key" to="." method="_on_key_button_down"]
+[connection signal="button_up" from="Key" to="." method="_on_key_button_up"]
+[connection signal="pressed" from="Key" to="." method="_on_key_button_pressed"]
+[connection signal="resized" from="Key" to="." method="_on_key_resized"]

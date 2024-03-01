@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://fvalpyts8o4o"]
+[gd_scene load_steps=11 format=3 uid="uid://fvalpyts8o4o"]
 
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="1_6bv2h"]
 [ext_resource type="Script" path="res://Scripts/single_attack.gd" id="1_ongbm"]
@@ -7,6 +7,23 @@
 [ext_resource type="FontFile" uid="uid://bj0sypkfjqyly" path="res://Fonts/DTM-Sans.otf" id="3_s5hkk"]
 [ext_resource type="Script" path="res://Scripts/led_matrix.gd" id="4_7ry4t"]
 [ext_resource type="AudioStream" uid="uid://cjrxthvwsrobq" path="res://Musics/single_attack.ogg" id="7_ki1xm"]
+
+[sub_resource type="Gradient" id="Gradient_dqpwx"]
+colors = PackedColorArray(0.498039, 0.498039, 0.498039, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eya07"]
+gradient = SubResource("Gradient_dqpwx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mwuxm"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(700, 1, 1)
+direction = Vector3(1, 1, 0)
+gravity = Vector3(49, 98, 0)
+scale_min = 3.0
+scale_max = 4.0
+color = Color(1, 1, 1, 0.498039)
+color_ramp = SubResource("GradientTexture1D_eya07")
 
 [node name="Single Attack" type="Control"]
 texture_filter = 1
@@ -93,7 +110,16 @@ uppercase = true
 [node name="Soul" type="Sprite2D" parent="."]
 texture = ExtResource("3_chwb2")
 
+[node name="RainParticles" type="GPUParticles2D" parent="."]
+position = Vector2(448, 0)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_mwuxm")
+lifetime = 3.65
+preprocess = 2.0
+speed_scale = 2.0
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_ki1xm")
 volume_db = -5.0
 autoplay = true
+bus = &"bgm"

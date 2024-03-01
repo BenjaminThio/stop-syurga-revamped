@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://btyx0atxnuro"]
+
+[ext_resource type="Script" path="res://Scripts/input_map_row_container.gd" id="1_5ii0m"]
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="1_wrwhk"]
+
+[node name="RowContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 56)
+script = ExtResource("1_5ii0m")
+
+[node name="Action" type="Label" parent="."]
+custom_minimum_size = Vector2(252, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wrwhk")
+theme_override_font_sizes/font_size = 36
+text = "abc"
+vertical_alignment = 1
+
+[node name="KeyContainer" type="HBoxContainer" parent="."]
+layout_mode = 2

@@ -65,7 +65,7 @@ func _ready():
 		new_single_attack_label.add_theme_font_size_override("font_size", 18)
 		add_child(new_single_attack_label)
 	
-	await time.sleep(0.0001)
+	await get_tree().process_frame
 	
 	highlight_single_attack()
 
@@ -112,6 +112,7 @@ func _process(_delta):
 			var select_sound_length: float = Audio.play_sound_and_return_length("select")
 			
 			Global.loop_attack_index = highlighted_single_attack_index
+			PlayerData.items_reset()
 			
 			await time.sleep(select_sound_length)
 			
@@ -119,7 +120,7 @@ func _process(_delta):
 		elif color_password == easter_egg_trigger_condition:
 			get_tree().change_scene_to_file("res://Scenes/easter_egg.tscn")
 		else:
-			get_tree().change_scene_to_file("res://Scenes/main_manu.tscn")
+			get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func reset_single_attack_labels_color():
 	for single_attack_label in get_children():

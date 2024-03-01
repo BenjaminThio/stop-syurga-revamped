@@ -4,7 +4,7 @@ var vanished: bool = false
 var vanish_position: Vector2
 @export var max_scale: float = 2.0
 @export var damage_multiplier: int = 2
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 
 func _process(_delta):
 	if vanished:
@@ -17,7 +17,7 @@ func _on_area_entered(area):
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		body.deal_damage(villian.attack * damage_multiplier)
+		body.deal_damage(villain.attack * damage_multiplier)
 
 func vanish():
 	var burst_sound_length: float = Audio.play_sound_and_return_length("burst")

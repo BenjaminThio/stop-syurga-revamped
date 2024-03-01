@@ -20,7 +20,7 @@ const ATTACK_TYPE_COLOR: Dictionary = {
 @export var fixed_scale: float = 1.0
 @export var damage_multiplier: int = 2
 
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 
 func _process(_delta) -> void:
 	for child in get_children():
@@ -36,10 +36,10 @@ func _on_player_collide(body) -> void:
 		#	queue_free()
 		match attack_type:
 			ATTACK_TYPE.WHITE_ATTACK:
-				body.deal_damage(villian.attack * damage_multiplier)
+				body.deal_damage(villain.attack * damage_multiplier)
 			ATTACK_TYPE.LIGHT_BLUE_ATTACK:
 				if Vector2i(body.velocity) > Vector2i.ZERO or Vector2i(body.velocity) < Vector2i.ZERO:
-					body.deal_damage(villian.attack * damage_multiplier)
+					body.deal_damage(villain.attack * damage_multiplier)
 			ATTACK_TYPE.ORANGE_ATTACK:
 				if Vector2i(body.velocity) == Vector2i.ZERO:
-					body.deal_damage(villian.attack * damage_multiplier)
+					body.deal_damage(villain.attack * damage_multiplier)

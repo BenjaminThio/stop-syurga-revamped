@@ -2,7 +2,7 @@ extends Control
 
 var main: Node2D = preload("res://Scenes/main.tscn").instantiate()
 var main_player: CharacterBody2D = main.get_node("Player")
-var main_player_color: Color = main_player.soul
+var main_player_color: Color = main_player.SOUL_COLOR[main_player.soul]
 var main_player_origin: Vector2 = main_player.global_position
 var main_player_scale: Vector2 = main_player.global_scale
 var battle_fall: bool = false

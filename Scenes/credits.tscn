@@ -845,10 +845,10 @@ position = Vector2(64, 64)
 texture = ExtResource("4_ripwr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "credits"
 libraries = {
 "": SubResource("AnimationLibrary_bojjt")
 }
+autoplay = "credits"
 
 [node name="Exit" type="Label" parent="."]
 self_modulate = Color(1, 1, 0, 1)
@@ -870,3 +870,4 @@ position = Vector2(576, 324)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_hntm3")
 autoplay = true
+bus = &"bgm"

@@ -54,7 +54,7 @@ var perseverance_soul_tween: Tween = null
 @onready var canvas: Control = get_tree().get_first_node_in_group("canvas")
 @onready var battlefield: NinePatchRect = get_tree().get_first_node_in_group("battlefield")
 @onready var health_bar: ProgressBar = get_tree().get_first_node_in_group("health_bar")
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 
 func _ready() -> void:
 	update_player()

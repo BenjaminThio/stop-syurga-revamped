@@ -10,7 +10,7 @@ enum DIRECTION {
 var velocity: Vector2 = Vector2.ZERO
 var reversed: bool = true
 var rotating: bool = false
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 @export var direction: DIRECTION = DIRECTION.UP:
 	get:
@@ -54,5 +54,5 @@ func _on_body_entered(body):
 	if not Engine.is_editor_hint() and body.is_in_group("player"):
 		var spear_spawner: Node2D = player.get_node("SpearAttack/Spawner")
 		
-		body.deal_damage(villian.attack * damage_multiplier)
+		body.deal_damage(villain.attack * damage_multiplier)
 		spear_spawner.destroy_spear_and_locate_red_spear(owner)

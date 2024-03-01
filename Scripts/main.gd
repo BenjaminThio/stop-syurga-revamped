@@ -21,8 +21,7 @@ func play_background_music():
 		loop_audio()
 
 func play_audio(path: String = "", loop: bool = true) -> void:
-	if path != "":
-		background_music_player.stream = load(path)
+	if path != "": background_music_player.stream = AudioLoader.load_file(path)
 	
 	if not background_music_player.playing and not background_music_player.autoplay:
 		background_music_player.play()

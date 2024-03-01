@@ -1,10 +1,13 @@
 extends Control
 
-var dtm_mono_font: FontFile = preload("res://Fonts/DTM-Mono.otf")
+@export var default_font: FontFile = preload("res://Fonts/DTM-Mono.otf")
+
 @onready var title: Label = $VerticalContainer/Title
 @onready var exit_chars: HBoxContainer = $ExitChars
+@onready var font: FontFile = Global.get_font(default_font)
 
 func _ready():
+	title.add_theme_font_override("font", font)
 	title.text = [
 		"Please choose an attack.",
 		"请选择一种攻击方式。",
@@ -30,7 +33,7 @@ func _ready():
 		new_label.uppercase = true
 		new_label.custom_minimum_size.x = 20
 		new_label.add_theme_color_override("font_color", Color.WHITE)
-		new_label.add_theme_font_override("font", dtm_mono_font)
+		new_label.add_theme_font_override("font", font)
 		new_label.add_theme_font_size_override("font_size", 36)
 		
 		exit_chars.add_child(new_label)

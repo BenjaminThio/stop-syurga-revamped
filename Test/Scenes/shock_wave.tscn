@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://di72hdby1ruh2"]
 
-[ext_resource type="Texture2D" uid="uid://ci58thm4vl1x" path="res://Sprites/Uncategorized/villian_hurt.png" id="1_osaqp"]
-[ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villian_shield.png" id="2_xed42"]
+[ext_resource type="Texture2D" uid="uid://ci58thm4vl1x" path="res://Sprites/Uncategorized/villain_hurt.png" id="1_osaqp"]
+[ext_resource type="Texture2D" uid="uid://ea2ae2ocdgem" path="res://Sprites/Uncategorized/villain_shield.png" id="2_xed42"]
 [ext_resource type="Shader" path="res://Shaders/ripple.gdshader" id="3_he2y5"]
 
 [sub_resource type="Animation" id="Animation_bamys"]

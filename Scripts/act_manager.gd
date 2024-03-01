@@ -48,8 +48,8 @@ var greet_counter: int = 0
 ][db.data.settings.language]
 
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
-@onready var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
+@onready var description_manager: Node2D = get_tree().get_first_node_in_group("description_manager")
 @onready var speech: Node2D = get_tree().get_first_node_in_group("speech")
 @onready var actions: Node2D = get_tree().get_first_node_in_group("actions")
 
@@ -70,20 +70,20 @@ func select_option(option: int) -> void:
 		file_dialog.popup_centered()
 	else:
 		var menu: VBoxContainer = get_tree().get_first_node_in_group("menu")
-		var villian_name: String = villian.enemy_name.to_upper() 
+		var villain_name: String = villain.enemy_name.to_upper() 
 		
 		player.hide()
 		actions.get_child(actions.action_index).frame = 0
 		actions.reset()
 		menu.queue_free()
 		if option == OPTION.CHECK:
-			description_label.set_statements([
+			description_manager.set_statements([
 				[
-					"{villian_name} {villian_attack} ATK {villian_defense} DEF".format({"villian_name": villian_name, "villian_attack": villian.attack, "villian_defense": villian.defense}), 
-					"{villian_name} {villian_attack} 点攻击力 {villian_defense} 点防御力".format({"villian_name": villian_name, "villian_attack": villian.attack, "villian_defense": villian.defense}),
-					"{villian_name} {villian_attack} 点攻击力 {villian_defense} 点防御力".format({"villian_name": villian_name, "villian_attack": villian.attack, "villian_defense": villian.defense}),
-					"{villian_name} {villian_attack} ATK {villian_defense} DEF".format({"villian_name": villian_name, "villian_attack": villian.attack, "villian_defense": villian.defense}),
-					"{villian_name} {villian_attack} ポイントの攻撃力 {villian_defense} ポイントの防御力".format({"villian_name": villian_name, "villian_attack": villian.attack, "villian_defense": villian.defense})
+					"{villain_name} {villain_attack} ATK {villain_defense} DEF".format({"villain_name": villain_name, "villain_attack": villain.attack, "villain_defense": villain.defense}), 
+					"{villain_name}{villain_attack}点攻击力{villain_defense}点防御力".format({"villain_name": villain_name, "villain_attack": villain.attack, "villain_defense": villain.defense}),
+					"{villain_name}{villain_attack}点攻击力{villain_defense}点防御力".format({"villain_name": villain_name, "villain_attack": villain.attack, "villain_defense": villain.defense}),
+					"{villain_name} {villain_attack} ATK {villain_defense} DEF".format({"villain_name": villain_name, "villain_attack": villain.attack, "villain_defense": villain.defense}),
+					"{villain_name}{villain_attack}ポイントの攻撃力{villain_defense}ポイントの防御力".format({"villain_name": villain_name, "villain_attack": villain.attack, "villain_defense": villain.defense})
 				][db.data.settings.language],
 				[
 					"You can sense the fury embedded within his smile.",
@@ -95,42 +95,42 @@ func select_option(option: int) -> void:
 			])
 		elif option == OPTION.GREET:
 			if greet_counter == 0:
-				description_label.set_statements([
+				description_manager.set_statements([
 					[
-						"You greet {villian_name} awkwardly...".format({"villian_name":  villian_name}),
-						"你尴尬地向{villian_name}打招呼。。。".format({"villian_name":  villian_name}),
-						"尔尴尬地向{villian_name}问好。。。".format({"villian_name":  villian_name}),
-						"Kamu menyapa dengan {villian_name} secara kekok...".format({"villian_name":  villian_name}),
-						"あなたは彼にぎこちなく挨拶する。。。".format({"villian_name":  villian_name})
+						"You greet {villain_name} awkwardly...".format({"villain_name":  villain_name}),
+						"你尴尬地向{villain_name}打招呼。。。".format({"villain_name":  villain_name}),
+						"尔尴尬地向{villain_name}问好。。。".format({"villain_name":  villain_name}),
+						"Kamu menyapa dengan {villain_name} secara kekok...".format({"villain_name":  villain_name}),
+						"あなたは彼にぎこちなく挨拶する。。。".format({"villain_name":  villain_name})
 					][db.data.settings.language],
 					[
 						"He thought that you were deliberately provoking him.",
 						"他以为你在刻意激怒他。",
 						"彼以为尔欲挑逗之。",
-						"Dia ingat kamu sedang menghasutnya dengan sengaja。",
+						"Dia ingat kamu sedang menghasutnya dengan sengaja.",
 						"彼はあなたが彼を意図的に刺激しようとしていると思った。"
 					][db.data.settings.language],
 					[
-						"{villian_name}'s ATTACK increased by 2!".format({"villian_name":  villian_name}),
-						"{villian_name}的攻击力增加了2点!".format({"villian_name":  villian_name}),
-						"{villian_name}之攻击力增加二点!".format({"villian_name":  villian_name}),
-						"ATK {villian_name} meningkat sebanyak 2!".format({"villian_name":  villian_name}),
-						"{villian_name}の攻撃力が2上昇しました！".format({"villian_name":  villian_name})
+						"{villain_name}'s ATTACK increased by 2!".format({"villain_name":  villain_name}),
+						"{villain_name}的攻击力增加了2点!".format({"villain_name":  villain_name}),
+						"{villain_name}之攻击力增加二点!".format({"villain_name":  villain_name}),
+						"ATK {villain_name} meningkat sebanyak 2!".format({"villain_name":  villain_name}),
+						"{villain_name}の攻撃力が2上昇しました！".format({"villain_name":  villain_name})
 					][db.data.settings.language]
 				])
-				villian.attack += 2
+				villain.attack += 2
 			elif greet_counter >= 1:
-				description_label.set_statements([
+				description_manager.set_statements([
 					[
-						"You greet {villian_name} again...".format({"villian_name":  villian_name}),
-						"你再次向{villian_name}打招呼。。。".format({"villian_name":  villian_name}),
-						"尔复次向{villian_name}问好。。。".format({"villian_name":  villian_name}),
-						"Kamu bertegur sapa dengan {villian_name} sekali lagi...".format({"villian_name":  villian_name}),
-						"あなたは再び{villian_name}に挨拶する。。。".format({"villian_name":  villian_name})
+						"You greet {villain_name} again...".format({"villain_name":  villain_name}),
+						"你再次向{villain_name}打招呼。。。".format({"villain_name":  villain_name}),
+						"尔复次向{villain_name}问好。。。".format({"villain_name":  villain_name}),
+						"Kamu bertegur sapa dengan {villain_name} sekali lagi...".format({"villain_name":  villain_name}),
+						"あなたは再び{villain_name}に挨拶する。。。".format({"villain_name":  villain_name})
 					][db.data.settings.language]
 				])
 				if greet_counter == 1:
-					description_label.statements.append(
+					description_manager.statements.append(
 						[
 							"He ignores you, and nothing happens...",
 							"他不鸟你，什么事都没有发生。。。",
@@ -140,7 +140,7 @@ func select_option(option: int) -> void:
 						][db.data.settings.language]
 					)
 				elif greet_counter > 1:
-					description_label.statements.append([
+					description_manager.statements.append([
 						[
 							"He started feeling puzzled by your actions.",
 							"他开始对你的迷惑行为感到莫名其妙。",
@@ -151,65 +151,65 @@ func select_option(option: int) -> void:
 					])
 			greet_counter += 1
 		elif option == OPTION.EXPLAIN:
-			description_label.set_statements([
+			description_manager.set_statements([
 				[
-					"You try to explain the reasons for what you did to {villian_name} in the past...".format({"villian_name": villian_name}),
-					"{villian_name} just don't give it a fuck!".format({"villian_name":  villian_name})
+					"You try to explain the reasons for what you did to {villain_name} in the past...".format({"villain_name": villain_name}),
+					"{villain_name} just don't give it a fuck!".format({"villain_name":  villain_name})
 				],
 				[
 					"你试着为你以前的所作所为做出解释。。。",
-					"{villian_name}没有要鸟你的意思。".format({"villian_name":  villian_name}),
+					"{villain_name}没有要鸟你的意思。".format({"villain_name":  villain_name}),
 				],
 				[
 					"尔欲解释尔何故在往昔以斯种为之。。。",
-					"{villian_name}無視尔！".format({"villian_name":  villian_name}),
+					"{villain_name}無視尔！".format({"villain_name":  villain_name}),
 				],
 				[
 					"Kamu cuba menerangkan mengapa kamu melakukan hal itu kepadanya pada masa lalu...",
-					"{villian_name} tidak peduli kamu!".format({"villian_name":  villian_name})
+					"{villain_name} tidak peduli kamu!".format({"villain_name":  villain_name})
 				],
 				[
 					"過去の彼に対してそれをなぜしたのか説明しようとする。。。",
-					"{villian_name}はお前を無視する！".format({"villian_name":  villian_name})
+					"{villain_name}はお前を無視する！".format({"villain_name":  villain_name})
 				]
 			][db.data.settings.language])
 		elif option == OPTION.TEASE:
-			description_label.set_statements([
+			description_manager.set_statements([
 				[
-					"You tease {villian_name} for being a gay...".format({"villian_name":  villian_name}),
+					"You tease {villain_name} for being a gay...".format({"villain_name":  villain_name}),
 					"A wave of unpleasant memories from the past floods back.",
-					"{villian_name}'s ATTACK increased by 7!".format({"villian_name":  villian_name})
+					"{villain_name}'s ATTACK increased by 7!".format({"villain_name":  villain_name})
 				],
 				[
-					"你嘲笑{villian_name}是个同性恋。。。".format({"villian_name":  villian_name}),
+					"你嘲笑{villain_name}是个同性恋。。。".format({"villain_name":  villain_name}),
 					"过去一连串不开心的回忆涌上心头。",
-					"{villian_name}的攻击力增加了7点!".format({"villian_name":  villian_name})
+					"{villain_name}的攻击力增加了7点!".format({"villain_name":  villain_name})
 				],
 				[
-					"尔譏笑{villian_name}為一同性恋者".format({"villian_name":  villian_name}),
+					"尔譏笑{villain_name}為一同性恋者。。。".format({"villain_name":  villain_name}),
 					"往昔之不愉快事悉复涌心头。",
-					"{villian_name}之攻击力增加七点!".format({"villian_name":  villian_name})
+					"{villain_name}之攻击力增加七点!".format({"villain_name":  villain_name})
 				],
 				[
-					"Kamu mentertawakan {villian_name} sebagai seorang homoseksual".format({"villian_name":  villian_name}),
+					"Kamu mentertawakan {villain_name} sebagai seorang homoseksual...".format({"villain_name":  villain_name}),
 					"Kenangan yang sedih dari masa lepas membanjiri fikirannya.",
-					"ATK {villian_name} meningkat sebanyak 7!".format({"villian_name":  villian_name})
+					"ATK {villain_name} meningkat sebanyak 7!".format({"villain_name":  villain_name})
 				],
 				[
-					"君は{villian_name}をゲイと嘲笑する".format({"villian_name":  villian_name}),
+					"君は{villain_name}をゲイと嘲笑する。。。".format({"villain_name":  villain_name}),
 					"過去の不愉快な思い出が甦ってきて、心に押し寄せる。",
-					"{villian_name}の攻撃力が7上昇しました！".format({"villian_name":  villian_name})
+					"{villain_name}の攻撃力が7上昇しました！".format({"villain_name":  villain_name})
 				]
 			][db.data.settings.language])
-			villian.attack += 7
+			villain.attack += 7
 		elif option == OPTION.HUG:
-			description_label.set_statements([
+			description_manager.set_statements([
 				[
-					"You hug {villian_name} at the wrong time....".format({"villian_name":  villian_name}),
-					"你在错的时间拥抱{villian_name}。。。".format({"villian_name":  villian_name}),
-					"君于不当之时拥抱了{villian_name}。。。".format({"villian_name":  villian_name}),
-					"Kamu memeluk {villian_name} pada waktu yang salah...".format({"villian_name":  villian_name}),
-					"君は間違った時に{villian_name}を抱きしめた。。。".format({"villian_name":  villian_name})
+					"You hug {villain_name} at the wrong time...".format({"villain_name":  villain_name}),
+					"你在错的时间拥抱{villain_name}。。。".format({"villain_name":  villain_name}),
+					"君于不当之时拥抱了{villain_name}。。。".format({"villain_name":  villain_name}),
+					"Kamu memeluk {villain_name} pada waktu yang salah...".format({"villain_name":  villain_name}),
+					"君は間違った時に{villain_name}を抱きしめた。。。".format({"villain_name":  villain_name})
 				][db.data.settings.language],
 				[
 					"The developer of this game expresses that he doesn't know how to continue bullshitting already...",
@@ -233,7 +233,7 @@ func select_option(option: int) -> void:
 func _on_file_selected(path: String) -> void:
 	var menu: VBoxContainer = get_tree().get_first_node_in_group("menu")
 	
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
+	#DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
 	owner.play_audio(path)
 	menu.has_made_decision()
 	owner.set_pause(false)

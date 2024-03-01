@@ -1,8 +1,11 @@
 extends Node2D
 
+@export var default_font: FontFile = preload("res://Fonts/DTM-Mono.otf")
+
 var eating: bool = false
 var super_ring_disappear_time: float = 0.3
 var chew_times: int = 5
+
 @onready var mouth: Sprite2D = $Face/Mouth
 @onready var mouth_detection_area: Area2D = $Face/Mouth/DetectionArea
 @onready var mouth_animation_player: AnimationPlayer = $Face/AnimationPlayer
@@ -13,6 +16,13 @@ var chew_times: int = 5
 @onready var half_ring_particles: GPUParticles2D = $Snack/HalfRingParticles
 @onready var full_ring_particles: GPUParticles2D = $Snack/FullRingParticles
 @onready var eating_sound_effect: AudioStreamPlayer = $EatingSoundEffect
+@onready var hints_label: Label = $Canvas/HintsLabel
+@onready var distance_label: Label = $Canvas/DistanceLabel
+@onready var font: FontFile = Global.get_font(default_font)
+
+func _ready():
+	for label in [hints_label, distance_label] as Array[Label]:
+		label.add_theme_font_override("font", font)
 
 func _on_snack_package_area_entered(area) -> void:
 	if area.get_parent() == right_hand and right_hand_animation_player.is_playing() and right_hand_animation_player.current_animation == "take_super_ring":
@@ -34,9 +44,8 @@ func _on_mouth_area_entered(area) -> void:
 		right_hand.frame = 0
 		await time.sleep(super_ring_disappear_time)
 		eating_sound_effect.play()
-		for _i in range(chew_times):
-			mouth_animation_player.play("eating")
-			await time.sleep(mouth_animation_player.current_animation_length)
+		mouth_animation_player.play("eating")
+		await time.sleep(mouth_animation_player.current_animation_length * chew_times)
 		mouth_animation_player.stop()
 		eating_sound_effect.stop()
 		right_hand_animation_player.play("hide_hand")

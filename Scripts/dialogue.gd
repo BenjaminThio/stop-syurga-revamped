@@ -1,5 +1,7 @@
 extends NinePatchRect
 
+@export var actived_block_size: int = 176
+
 var stacked_dialogues: PackedStringArray = []
 var dialogue_index: int = 0
 var on_queue: bool = false
@@ -12,14 +14,19 @@ var unknown: bool = true:
 		update_dialogue()
 var battlefield: Node2D = preload("res://Scenes/main.tscn").instantiate()
 var battlefield_player: CharacterBody2D = battlefield.get_node("Player")
-var battlefield_player_color: Color = battlefield_player.soul
+var battlefield_player_color: Color = battlefield_player.SOUL_COLOR[battlefield_player.soul]
 var battlefield_player_origin: Vector2 = battlefield_player.global_position
 var battlefield_player_scale: Vector2 = battlefield_player.global_scale
-var battlefield_villian_sprite: AnimatedSprite2D = battlefield.get_node("Villian/AnimatedSprite2D")
+var battlefield_villain_sprite: AnimatedSprite2D = battlefield.get_node("Villain/AnimatedSprite2D")
 var battle_fall: bool = false
+var is_transition_disabled: bool = false
 
 @onready var speaker_sprite: AnimatedSprite2D = $SpeakerSprite
-@onready var text_label: RichTextLabel = $TextLabel
+@onready var scroll_container: ScrollContainer = $ScrollContainer
+@onready var horizontal_container: HBoxContainer = $ScrollContainer/HorizontalContainer
+@onready var block: Control = $ScrollContainer/HorizontalContainer/Block
+@onready var star_sign: RichTextLabel = $ScrollContainer/HorizontalContainer/StarSign
+@onready var lines_container: VBoxContainer = $ScrollContainer/HorizontalContainer/LinesContainer
 @onready var sound_player: AudioStreamPlayer = $SoundPlayer
 @onready var right_hand_animation_player: AnimationPlayer = owner.get_node("RightHand/AnimationPlayer")
 @onready var background: Node2D = owner.get_node("Background")
@@ -33,18 +40,24 @@ var battle_fall: bool = false
 @onready var walking_sound_effect: AudioStreamPlayer = owner.get_node("WalkingSoundEffect")
 @onready var eating_sound_effect: AudioStreamPlayer = owner.get_node("EatingSoundEffect")
 @onready var background_music_player: AudioStreamPlayer = owner.get_node("BackgroundMusicPlayer")
+@onready var options_handler: VBoxContainer = $ScrollContainer/HorizontalContainer/OptionsVerticalContainer
 
 func _ready() -> void:
 	battlefield = null
 	battlefield_player = null
 	soul.self_modulate = battlefield_player_color
 	hide()
-	text_label.text = ""
+	lines_container.text = ""
 	update_dialogue()
 
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("accept") and on_queue and skipable:
-		text_label.text = ""
+		work()
+	if Input.is_action_just_pressed("cancel"):
+		is_transition_disabled = true
+
+func work():
+		lines_container.text = ""
 		if stacked_dialogues.size() > 0:
 			set_dialogues(stacked_dialogues)
 		elif stacked_dialogues.size() == 0:
@@ -78,10 +91,12 @@ func _process(_delta) -> void:
 				
 				create_tween().tween_property(soul, "global_position", battlefield_player_origin, battle_fall_sound_length)
 				create_tween().tween_property(soul, "global_scale", battlefield_player_scale, battle_fall_sound_length)
-				create_tween().tween_property(face, "global_position", battlefield_villian_sprite.global_position, battle_fall_sound_length)
-				create_tween().tween_property(face, "global_rotation_degrees", battlefield_villian_sprite.global_rotation_degrees, battle_fall_sound_length)
-				create_tween().tween_property(face, "global_scale", battlefield_villian_sprite.global_scale, battle_fall_sound_length)
+				create_tween().tween_property(face, "global_position", battlefield_villain_sprite.global_position, battle_fall_sound_length)
+				create_tween().tween_property(face, "global_rotation_degrees", battlefield_villain_sprite.global_rotation_degrees, battle_fall_sound_length)
+				create_tween().tween_property(face, "global_scale", battlefield_villain_sprite.global_scale, battle_fall_sound_length)
 				await time.sleep(battle_fall_sound_length)
+				
+				Global.has_encountered_villain = true
 				
 				get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
@@ -89,15 +104,21 @@ func update_dialogue() -> void:
 	if unknown:
 		if speaker_sprite.visible:
 			speaker_sprite.hide()
-		text_label.size = Vector2(900, 180)
-		text_label.position = Vector2(32, 24)
+		block.custom_minimum_size.x = 0
+		
 	elif not unknown:
 		if not speaker_sprite.visible:
 			speaker_sprite.show()
-		text_label.size = Vector2(690, 180)
-		text_label.position = Vector2(200, 24)
+		block.custom_minimum_size.x = 176
 
 func set_dialogue(content: String, delay_time: float = 0.03) -> void:
+	var font_width: int
+	
+	if db.data.settings.language in [db.LANGUAGE.CHINESE, db.LANGUAGE.CLASSICAL_CHINESE, db.LANGUAGE.JAPANESE]:
+		font_width = lines_container.font_size
+	else:
+		font_width = 20
+	
 	on_queue = true
 	skipable = false
 	
@@ -113,12 +134,18 @@ func set_dialogue(content: String, delay_time: float = 0.03) -> void:
 	show()
 	
 	if unknown:
+		star_sign.show()
 		sound_player.stream = load("res://Sounds/snd_txt_unknown.ogg")
+		content = Autowrap.smart_autowrap(content, font_width, horizontal_container, star_sign.size.x)
 	else:
+		star_sign.hide()
 		sound_player.stream = load("res://Sounds/snd_txt_yifan.ogg")
+		content = Autowrap.smart_autowrap(content, font_width, horizontal_container, actived_block_size)
 	
-	for character in "* {content}".format({"content": content.replace("\n", "\n  ")}):
-		text_label.text += character
+	is_transition_disabled = false
+	
+	for character in "{content}".format({"content": content}):
+		lines_container.text += character
 		if not sound_player.playing and os.is_alpha(character):
 			sound_player.play()
 		elif sound_player.playing and not os.is_alpha(character):
@@ -129,7 +156,11 @@ func set_dialogue(content: String, delay_time: float = 0.03) -> void:
 				speaker_sprite.play("speaking")
 			elif speaker_sprite.is_playing() and not os.is_alpha(character):
 				speaker_sprite.stop()
-		await time.sleep(delay_time)
+		
+		if character != "\n" and not is_transition_disabled:
+			await time.sleep(delay_time)
+		else:
+			continue
 	
 	if sound_player.playing:
 		sound_player.stop()
@@ -137,6 +168,7 @@ func set_dialogue(content: String, delay_time: float = 0.03) -> void:
 		speaker_sprite.stop()
 	skipable = true
 	dialogue_index += 1
+	#print(dialogue_index)
 
 func set_dialogues(contents: PackedStringArray, delay_time: float = 0.03) -> void:
 	set_dialogue(contents[0], delay_time)
@@ -144,6 +176,8 @@ func set_dialogues(contents: PackedStringArray, delay_time: float = 0.03) -> voi
 	stacked_dialogues = contents
 
 func trigger_dialogue() -> void:
+	is_transition_disabled = false
+	
 	if dialogue_index == 0:
 		set_dialogue([
 			"Hohoho... Look who's here!",
@@ -154,7 +188,7 @@ func trigger_dialogue() -> void:
 		][db.data.settings.language])
 	elif dialogue_index == 1:
 		set_dialogue([
-			"To be honest, I didn't anticipate\nyou going this far...",
+			"To be honest, I didn't anticipate you going this far...",
 			"坦白说，我没预料到你会走到这么远。",
 			"諒真言，吾未預料尔能行至此般遠。",
 			"Secara jujurnya, saya tidak menjangka kamu dapat pergi sejauh ini.",
@@ -162,7 +196,7 @@ func trigger_dialogue() -> void:
 		][db.data.settings.language])
 	elif dialogue_index == 2:
 		set_dialogue([
-			"For such a long time, I've been\neagerly awaiting this moment.\nHuahahaha...",
+			"For such a long time, I've been eagerly awaiting this moment. Huahahaha...",
 			"我等这一刻，已经等了好久。哗哈哈哈。。。",
 			"吾候斯刻，已候久矣。哗哈哈哈。。。",
 			"Saya sudah menunggu momen ini begitu lama.",
@@ -171,14 +205,14 @@ func trigger_dialogue() -> void:
 	elif dialogue_index == 3:
 		set_dialogues([
 			[
-				"Consider this your final warning.\nTake a few more steps, and there\nwill be no turning back.",
+				"Consider this your final warning. Take a few more steps, and there will be no turning back.",
 				"...",
 				"If...",
-				"If by chance you have any\nunfinished buisness...",
+				"If by chance you have any unfinished buisness...",
 				"Please do what you must."
 			],
 			[
-				"不要说我没警告你，再走多几步就没有回头路了。",
+				"不要说我没警告你，再走多几步就没有回头路了 不要说我没警告你，再走多几步就没有回头路了。",
 				"。。。",
 				"如果。。。",
 				"如果说你现在还有未完成的事情。。。",
@@ -206,8 +240,10 @@ func trigger_dialogue() -> void:
 				"それらを先に終わらせてから戻ってきてください。"
 			]
 		][db.data.settings.language])
+		options_handler.activate_after_dialogues = true
 
 func backgound_appear_transition() -> void:
+	#print("IN")
 	create_tween().tween_property(main, "self_modulate:a", 1, 0.7)
 	create_tween().tween_property(background, "modulate:a", 1, 1.0)
 	right_hand_animation_player.play("take_super_ring")

@@ -1,0 +1,574 @@
+[gd_scene load_steps=63 format=3 uid="uid://5dyp3jj05jyf"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_7kmeb"]
+[ext_resource type="Texture2D" uid="uid://c30bytot8d5sc" path="res://Sprites/Uncategorized/battlefield.png" id="1_ksf4q"]
+[ext_resource type="Script" path="res://Scripts/battlefield.gd" id="2_4wb0e"]
+[ext_resource type="Texture2D" uid="uid://d25jolk10dh81" path="res://Sprites/Uncategorized/rope.png" id="3_w0vpv"]
+[ext_resource type="PackedScene" uid="uid://ce331k5k2onbo" path="res://Instances/player.tscn" id="3_xtc3i"]
+[ext_resource type="Script" path="res://Scripts/battlefield_collision.gd" id="4_d1xm4"]
+[ext_resource type="Script" path="res://Scripts/actions.gd" id="5_qnnb1"]
+[ext_resource type="Script" path="res://Scripts/stats.gd" id="6_qwkld"]
+[ext_resource type="Script" path="res://Scripts/description.gd" id="7_mrcu2"]
+[ext_resource type="AudioStream" uid="uid://bspq7dumurpk8" path="res://Sounds/snd_txt_typing.ogg" id="9_n7gds"]
+[ext_resource type="Texture2D" uid="uid://c2ifyq3tpkryt" path="res://Sprites/record.png" id="9_s8bko"]
+[ext_resource type="Texture2D" uid="uid://465cfy5oim3b" path="res://Sprites/rewind.png" id="10_6x37f"]
+[ext_resource type="Texture2D" uid="uid://c0pj2ixj20fls" path="res://Sprites/Actions/Chinese/fight.png" id="15_l5aa1"]
+[ext_resource type="Texture2D" uid="uid://cvq5vhmd35rqj" path="res://Sprites/Actions/English/fight.png" id="15_x58n7"]
+[ext_resource type="Texture2D" uid="uid://cvjyjh5xsclis" path="res://Sprites/Actions/English/fight_hovered.png" id="16_au5ud"]
+[ext_resource type="Texture2D" uid="uid://s8bndd2v6xhy" path="res://Sprites/Actions/Chinese/fight_hovered.png" id="16_r8y43"]
+[ext_resource type="Texture2D" uid="uid://d2n6xuybdhtfw" path="res://Sprites/Actions/English/act.png" id="17_un5wb"]
+[ext_resource type="FontFile" uid="uid://0ni3xtjq5btw" path="res://Fonts/Mars_Needs_Cunnilingus.ttf" id="18_304wy"]
+[ext_resource type="Script" path="res://Scripts/act_manager.gd" id="18_huxoq"]
+[ext_resource type="Texture2D" uid="uid://ixbrgxcxhv3i" path="res://Sprites/Actions/English/act_hovered.png" id="18_kjjyl"]
+[ext_resource type="Texture2D" uid="uid://b18t1oro3tdxj" path="res://Sprites/Actions/Japanese/fight.png" id="19_aad3o"]
+[ext_resource type="FontFile" uid="uid://ca6ob2ibtlxc2" path="res://Fonts/ut-hp-font.ttf" id="19_fsdbe"]
+[ext_resource type="Texture2D" uid="uid://rw406vpavma6" path="res://Sprites/Actions/English/item.png" id="20_0skx6"]
+[ext_resource type="Script" path="res://Scripts/health_bar.gd" id="20_5ykt5"]
+[ext_resource type="Texture2D" uid="uid://b2ipsf4ioq3rx" path="res://Sprites/Actions/Japanese/fight_hovered.png" id="20_6y6l8"]
+[ext_resource type="Texture2D" uid="uid://bui23k8wehvy8" path="res://Sprites/Actions/Malay/fight.png" id="21_3fv3a"]
+[ext_resource type="Texture2D" uid="uid://erphoawbup6k" path="res://Sprites/Actions/English/item_hovered.png" id="21_sehld"]
+[ext_resource type="Texture2D" uid="uid://d0gxtfu2ttakh" path="res://Sprites/Actions/Malay/fight_hovered.png" id="22_e0vvy"]
+[ext_resource type="Texture2D" uid="uid://bpmtgpugeiipu" path="res://Sprites/Actions/English/mercy.png" id="22_hymsg"]
+[ext_resource type="Texture2D" uid="uid://j0ich4b1s41s" path="res://Sprites/Actions/English/mercy_hovered.png" id="23_l04sp"]
+[ext_resource type="Texture2D" uid="uid://6bk7e0baykgt" path="res://Sprites/Actions/Chinese/act.png" id="23_lsfqg"]
+[ext_resource type="Script" path="res://Scripts/mercy_manager.gd" id="23_oimd1"]
+[ext_resource type="Texture2D" uid="uid://cvhj46cdn2vli" path="res://Sprites/Actions/Chinese/act_hovered.png" id="24_28o4l"]
+[ext_resource type="Script" path="res://Scripts/camera_manager.gd" id="25_qqqxs"]
+[ext_resource type="PackedScene" uid="uid://bnqguapi8ioxm" path="res://Instances/villian.tscn" id="25_tihkl"]
+[ext_resource type="Texture2D" uid="uid://kny5lflcu1ic" path="res://Sprites/Actions/Japanese/act.png" id="27_wslel"]
+[ext_resource type="AudioStream" uid="uid://saqlic0w1xof" path="res://Musics/mus_stop_syurga.ogg" id="28_n0cl3"]
+[ext_resource type="Texture2D" uid="uid://chkqee7y1s5ja" path="res://Sprites/Actions/Japanese/act_hovered.png" id="28_x6v5i"]
+[ext_resource type="Texture2D" uid="uid://36oae0035iyc" path="res://Sprites/Actions/Malay/act.png" id="29_uqjs0"]
+[ext_resource type="Texture2D" uid="uid://cvy3pguyecw80" path="res://Sprites/Actions/Malay/act_hovered.png" id="30_171jv"]
+[ext_resource type="Texture2D" uid="uid://d4m2k82s3s18b" path="res://Sprites/Actions/Chinese/item.png" id="32_57wji"]
+[ext_resource type="Texture2D" uid="uid://bqlwfoduqw5g4" path="res://Sprites/Actions/Chinese/item_hovered.png" id="33_le8yt"]
+[ext_resource type="Texture2D" uid="uid://bp401kt23dsp6" path="res://Sprites/Actions/Japanese/item.png" id="36_nc7o8"]
+[ext_resource type="Texture2D" uid="uid://bo4xpvqwdry7q" path="res://Sprites/Actions/Japanese/item_hovered.png" id="37_5lm6e"]
+[ext_resource type="Texture2D" uid="uid://dbrh6uv17aif" path="res://Sprites/Actions/Malay/item.png" id="38_ptbwi"]
+[ext_resource type="Texture2D" uid="uid://b681rtac6nl1s" path="res://Sprites/Actions/Malay/item_hovered.png" id="39_3gqth"]
+[ext_resource type="Texture2D" uid="uid://dkcdhm72y46jr" path="res://Sprites/Actions/Chinese/mercy.png" id="40_qq2w3"]
+[ext_resource type="Texture2D" uid="uid://bxrje3kby4qfr" path="res://Sprites/Actions/Chinese/mercy_hovered.png" id="41_ufxir"]
+[ext_resource type="Texture2D" uid="uid://bso0d8342x1ik" path="res://Sprites/Actions/Japanese/mercy.png" id="44_bgi2r"]
+[ext_resource type="Texture2D" uid="uid://b5ccgr3evhci5" path="res://Sprites/Actions/Japanese/mercy_hovered.png" id="45_76xma"]
+[ext_resource type="Texture2D" uid="uid://ccx3iydve1miy" path="res://Sprites/Actions/Malay/mercy.png" id="46_mm1fp"]
+[ext_resource type="Texture2D" uid="uid://b8ryyu53p8ww3" path="res://Sprites/Actions/Malay/mercy_hovered.png" id="47_1rlb1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jh7y1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_s8bko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6x37f")
+}],
+"loop": true,
+"name": &"signs",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1temx"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkjox"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqj0j"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0keq4"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bqx4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_l5aa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r8y43")
+}],
+"loop": true,
+"name": &"chinese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_x58n7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_au5ud")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_aad3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_6y6l8")
+}],
+"loop": true,
+"name": &"japanese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_3fv3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_e0vvy")
+}],
+"loop": true,
+"name": &"malay",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7sskc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_lsfqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_28o4l")
+}],
+"loop": true,
+"name": &"chinese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_un5wb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_kjjyl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_wslel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_x6v5i")
+}],
+"loop": true,
+"name": &"japanese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_uqjs0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_171jv")
+}],
+"loop": true,
+"name": &"malay",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tb17t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_57wji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_le8yt")
+}],
+"loop": true,
+"name": &"chinese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_0skx6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_sehld")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_nc7o8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_5lm6e")
+}],
+"loop": true,
+"name": &"japanese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_ptbwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_3gqth")
+}],
+"loop": true,
+"name": &"malay",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lhffn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_qq2w3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_ufxir")
+}],
+"loop": true,
+"name": &"chinese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_hymsg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_l04sp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_bgi2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_76xma")
+}],
+"loop": true,
+"name": &"japanese",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_mm1fp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_1rlb1")
+}],
+"loop": true,
+"name": &"malay",
+"speed": 5.0
+}]
+
+[sub_resource type="Environment" id="Environment_cvy5a"]
+background_mode = 3
+
+[node name="Main" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_7kmeb")
+
+[node name="Canvas" type="Control" parent="." groups=["canvas"]]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Battlefield" type="NinePatchRect" parent="Canvas" groups=["battlefield"]]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.667
+anchor_right = 0.5
+anchor_bottom = 0.667
+offset_left = -384.0
+offset_top = -96.216
+offset_right = 384.0
+offset_bottom = 96.784
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(384, 96.5)
+texture = ExtResource("1_ksf4q")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+script = ExtResource("2_4wb0e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Canvas/Battlefield"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Canvas/Battlefield/StaticBody2D"]
+position = Vector2(-8, -6.65383)
+polygon = PackedVector2Array(8, 6.65384, 8, 199.654, 776, 199.654, 776, 6.654, 768, 14.654, 768, 191.654, 16, 191.654, 16, 14.6538, 768, 14.654, 776, 6.654)
+script = ExtResource("4_d1xm4")
+
+[node name="Webs" type="Node2D" parent="Canvas/Battlefield" groups=["webs"]]
+visible = false
+
+[node name="Web1" type="ColorRect" parent="Canvas/Battlefield/Webs"]
+offset_left = 8.0
+offset_top = 47.0
+offset_right = 760.0
+offset_bottom = 49.0
+pivot_offset = Vector2(0, 1)
+color = Color(0.501961, 0, 0.501961, 1)
+
+[node name="Web2" type="ColorRect" parent="Canvas/Battlefield/Webs"]
+offset_left = 8.0
+offset_top = 95.0
+offset_right = 760.0
+offset_bottom = 97.0
+pivot_offset = Vector2(0, 1)
+color = Color(0.501961, 0, 0.501961, 1)
+
+[node name="Web3" type="ColorRect" parent="Canvas/Battlefield/Webs"]
+offset_left = 8.0
+offset_top = 143.0
+offset_right = 760.0
+offset_bottom = 145.0
+pivot_offset = Vector2(0, 1)
+color = Color(0.501961, 0, 0.501961, 1)
+
+[node name="Ropes" type="Node2D" parent="Canvas/Battlefield" groups=["ropes"]]
+visible = false
+position = Vector2(96, 96)
+
+[node name="Rope1" type="Sprite2D" parent="Canvas/Battlefield/Ropes"]
+position = Vector2(0, -48)
+scale = Vector2(0.129317, 0.117647)
+texture = ExtResource("3_w0vpv")
+
+[node name="Rope2" type="Sprite2D" parent="Canvas/Battlefield/Ropes"]
+scale = Vector2(0.129317, 0.117647)
+texture = ExtResource("3_w0vpv")
+
+[node name="Rope3" type="Sprite2D" parent="Canvas/Battlefield/Ropes"]
+position = Vector2(0, 48)
+scale = Vector2(0.129317, 0.117647)
+texture = ExtResource("3_w0vpv")
+
+[node name="RecorderSign" type="AnimatedSprite2D" parent="Canvas/Battlefield"]
+visible = false
+position = Vector2(768, 193)
+sprite_frames = SubResource("SpriteFrames_jh7y1")
+animation = &"signs"
+offset = Vector2(-56, -32)
+
+[node name="RisingSpearSpawnpoints" type="Node2D" parent="Canvas/Battlefield" groups=["rising_spear_spawnpoints"]]
+
+[node name="Spawnpoint1" type="Marker2D" parent="Canvas/Battlefield/RisingSpearSpawnpoints"]
+position = Vector2(19, 112)
+
+[node name="Spawnpoint2" type="Marker2D" parent="Canvas/Battlefield/RisingSpearSpawnpoints"]
+position = Vector2(43, 112)
+
+[node name="Spawnpoint3" type="Marker2D" parent="Canvas/Battlefield/RisingSpearSpawnpoints"]
+position = Vector2(67, 112)
+
+[node name="DescriptionManager" type="Node2D" parent="Canvas/Battlefield" groups=["description_manager"]]
+position = Vector2(48, 42)
+script = ExtResource("7_mrcu2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Canvas/Battlefield/DescriptionManager"]
+offset_left = -24.0
+offset_top = -18.0
+offset_right = 704.0
+offset_bottom = 127.0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="DescriptionListContainer" type="VBoxContainer" parent="Canvas/Battlefield/DescriptionManager/ScrollContainer"]
+custom_minimum_size = Vector2(720, 145)
+layout_mode = 2
+
+[node name="VillianHealthBar" type="ProgressBar" parent="Canvas/Battlefield/DescriptionManager"]
+visible = false
+offset_left = 6.0
+offset_top = -8.0
+offset_right = 134.0
+offset_bottom = 8.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1temx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gkjox")
+max_value = 10000.0
+value = 10000.0
+show_percentage = false
+
+[node name="TypingSoundEffect" type="AudioStreamPlayer" parent="Canvas/Battlefield/DescriptionManager"]
+stream = ExtResource("9_n7gds")
+
+[node name="Stats" type="HBoxContainer" parent="Canvas" groups=["stats"]]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 536.0
+offset_right = 960.0
+offset_bottom = 563.0
+script = ExtResource("6_qwkld")
+metadata/_edit_group_ = true
+
+[node name="Name" type="Label" parent="Canvas/Stats"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_304wy")
+theme_override_font_sizes/font_size = 24
+text = "Benjamin"
+vertical_alignment = 1
+
+[node name="Level" type="Label" parent="Canvas/Stats"]
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_304wy")
+theme_override_font_sizes/font_size = 24
+text = "LV 19"
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="Canvas/Stats"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("19_fsdbe")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="Canvas/Stats" groups=["health_bar"]]
+custom_minimum_size = Vector2(200, 24)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fqj0j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0keq4")
+max_value = 20.0
+value = 20.0
+show_percentage = false
+script = ExtResource("20_5ykt5")
+
+[node name="HealthLabel" type="Label" parent="Canvas/Stats"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_304wy")
+theme_override_font_sizes/font_size = 24
+text = "90 / 90"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="Node2D" parent="." groups=["actions"]]
+process_mode = 3
+position = Vector2(576, 597)
+script = ExtResource("5_qnnb1")
+
+[node name="Fight" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(-363.055, -1)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_bqx4b")
+offset = Vector2(39, 0)
+
+[node name="Act" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(-155.055, -0.999999)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_7sskc")
+offset = Vector2(39, 0)
+script = ExtResource("18_huxoq")
+
+[node name="Item" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(52.9454, -0.999999)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_tb17t")
+offset = Vector2(39, 0)
+
+[node name="Mercy" type="AnimatedSprite2D" parent="Actions"]
+position = Vector2(260.945, -0.999999)
+scale = Vector2(1.30909, 1.33333)
+sprite_frames = SubResource("SpriteFrames_lhffn")
+offset = Vector2(39, 0)
+script = ExtResource("23_oimd1")
+
+[node name="Villian" parent="." instance=ExtResource("25_tihkl")]
+show_behind_parent = true
+
+[node name="Player" parent="." instance=ExtResource("3_xtc3i")]
+position = Vector2(212.9, 596)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+script = ExtResource("25_qqqxs")
+
+[node name="WhiteSpearSpawnpoints" type="Node" parent="." groups=["white_spear_spawnpoints"]]
+
+[node name="Marker2D" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(408, 248)
+
+[node name="Marker2D2" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(736, 368)
+
+[node name="Marker2D17" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(768, 344)
+
+[node name="Marker2D18" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(408, 296)
+
+[node name="Marker2D19" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(392, 456)
+
+[node name="Marker2D7" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(352, 496)
+
+[node name="Marker2D8" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(376, 392)
+
+[node name="Marker2D9" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(368, 336)
+
+[node name="Marker2D10" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(760, 432)
+
+[node name="Marker2D11" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(728, 264)
+
+[node name="Marker2D12" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(768, 496)
+
+[node name="Marker2D21" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(736, 560)
+
+[node name="Marker2D15" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(464, 584)
+
+[node name="Marker2D16" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(400, 536)
+
+[node name="Marker2D13" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(648, 592)
+
+[node name="Marker2D14" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(592, 584)
+
+[node name="Marker2D3" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(720, 312)
+
+[node name="Marker2D4" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(680, 216)
+
+[node name="Marker2D20" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(608, 224)
+
+[node name="Marker2D5" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(568, 200)
+
+[node name="Marker2D6" type="Marker2D" parent="WhiteSpearSpawnpoints"]
+position = Vector2(488, 200)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cvy5a")
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_n0cl3")
+volume_db = -80.0
+
+[connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield" method="_on_resized"]
+[connection signal="resized" from="Canvas/Battlefield" to="Canvas/Battlefield/StaticBody2D/CollisionPolygon2D" method="_on_battlefield_resized"]

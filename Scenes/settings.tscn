@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ctguuxm3j6gq4"]
+[gd_scene load_steps=35 format=3 uid="uid://ctguuxm3j6gq4"]
 
 [ext_resource type="Script" path="res://Scripts/settings.gd" id="1_hsa0c"]
 [ext_resource type="Texture2D" uid="uid://dhghk623kxnqt" path="res://Sprites/settings.png" id="1_jw4u7"]
@@ -12,72 +12,67 @@
 [ext_resource type="Texture2D" uid="uid://hdbwbppesvdp" path="res://Sprites/sun_halo.png" id="10_cjbfh"]
 [ext_resource type="Texture2D" uid="uid://ccg3xyakj73p3" path="res://Sprites/withered_leaf.png" id="10_tu2q7"]
 [ext_resource type="Texture2D" uid="uid://m2go5b1bb5yg" path="res://Sprites/leaf.png" id="11_5vjvu"]
+[ext_resource type="Script" path="res://Scripts/audio_system.gd" id="13_pf1cf"]
+[ext_resource type="Texture2D" uid="uid://cj4l7df37kdrk" path="res://Sprites/slider_tick.png" id="14_ecwyd"]
+[ext_resource type="Script" path="res://Scripts/audio_volume_manager.gd" id="15_vx6tq"]
+[ext_resource type="PackedScene" uid="uid://cygclprfko7wg" path="res://Instances/input_map.tscn" id="16_76248"]
+[ext_resource type="Texture2D" uid="uid://bdn2wih5w7dra" path="res://Sprites/slider_grabber.png" id="16_yey6b"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5bole"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(500, 250, 1)
-particle_flag_disable_z = true
 direction = Vector3(1, 1, 0)
-gravity = Vector3(98, 98, 0)
 initial_velocity_max = 1000.0
 angular_velocity_min = 45.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(98, 98, 0)
 scale_max = 2.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_et1ng"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(500, 250, 1)
-particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
-gravity = Vector3(98, 98, 0)
 initial_velocity_max = 1000.0
 angular_velocity_min = 45.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(98, 98, 0)
 scale_max = 2.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhluv"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(500, 250, 1)
-particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
-gravity = Vector3(98, 98, 0)
 initial_velocity_max = 1000.0
 angular_velocity_min = 45.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(98, 98, 0)
 scale_min = 2.0
 scale_max = 3.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bspti"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(500, 250, 1)
-particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
-gravity = Vector3(98, 98, 0)
 initial_velocity_max = 1000.0
 angular_velocity_min = 45.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(98, 98, 0)
 scale_min = 2.0
 scale_max = 3.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mwvvq"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(500, 250, 1)
-particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
-gravity = Vector3(98, 98, 0)
 initial_velocity_max = 1000.0
 angular_velocity_min = 45.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(98, 98, 0)
 scale_min = 2.0
 scale_max = 3.0
 
@@ -192,64 +187,54 @@ _data = {
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_botoq"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(600, 1, 1)
-particle_flag_disable_z = true
-gravity = Vector3(49, 98, 0)
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(49, 98, 0)
 scale_min = 5.0
 scale_max = 10.0
 color = Color(1, 0.588235, 0.588235, 0.588235)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_offek"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(600, 1, 1)
-particle_flag_disable_z = true
-gravity = Vector3(49, 98, 0)
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(49, 98, 0)
 scale_min = 5.0
 scale_max = 10.0
 color = Color(1, 0.733333, 0.533333, 0.27451)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wdxfr"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(600, 1, 1)
-particle_flag_disable_z = true
-gravity = Vector3(49, 98, 0)
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(49, 98, 0)
 color = Color(1, 1, 1, 0.196078)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dhlrg"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(600, 1, 1)
-particle_flag_disable_z = true
-gravity = Vector3(49, 98, 0)
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(49, 98, 0)
 scale_min = 2.0
 scale_max = 2.0
 color = Color(1, 1, 1, 0.431373)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s186o"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(600, 1, 1)
-particle_flag_disable_z = true
-gravity = Vector3(49, 98, 0)
 angular_velocity_min = -90.0
 angular_velocity_max = 90.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(49, 98, 0)
 scale_min = 4.0
 scale_max = 4.0
 color = Color(1, 1, 1, 0.666667)
@@ -257,6 +242,18 @@ color = Color(1, 1, 1, 0.666667)
 [sub_resource type="FontVariation" id="FontVariation_kfvv7"]
 base_font = ExtResource("2_ds4j7")
 spacing_glyph = 1
+
+[sub_resource type="Gradient" id="Gradient_ci3bk"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_r0nvi"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_fbvk8"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1)
 
 [node name="Settings" type="Control"]
 texture_filter = 1
@@ -326,10 +323,10 @@ texture = ExtResource("9_tynqg")
 texture = ExtResource("10_cjbfh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SunOrigin/Sun"]
-autoplay = "sun"
 libraries = {
 "": SubResource("AnimationLibrary_5waec")
 }
+autoplay = "sun"
 
 [node name="Leaves" type="Node2D" parent="."]
 visible = false
@@ -421,9 +418,9 @@ uppercase = true
 script = ExtResource("1_hsa0c")
 
 [node name="Exit" type="Label" parent="Options"]
-offset_left = 198.0
+offset_left = 128.0
 offset_top = 106.0
-offset_right = 274.0
+offset_right = 204.0
 offset_bottom = 154.0
 theme_override_fonts/font = ExtResource("2_ds4j7")
 theme_override_font_sizes/font_size = 36
@@ -432,9 +429,9 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="Language" type="Label" parent="Options"]
-offset_left = 198.0
+offset_left = 128.0
 offset_top = 187.0
-offset_right = 350.0
+offset_right = 280.0
 offset_bottom = 235.0
 theme_override_fonts/font = ExtResource("2_ds4j7")
 theme_override_font_sizes/font_size = 36
@@ -454,3 +451,179 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"bgm"
+
+[node name="AudioSystem" type="Node2D" parent="."]
+script = ExtResource("13_pf1cf")
+
+[node name="Master" type="Label" parent="AudioSystem"]
+offset_left = 128.0
+offset_top = 264.0
+offset_right = 312.0
+offset_bottom = 312.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 36
+text = "Main"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Slider" type="TextureRect" parent="AudioSystem/Master" node_paths=PackedStringArray("volume_display_label")]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.625377
+anchor_top = -0.141975
+anchor_right = -0.625377
+anchor_bottom = -0.141975
+offset_left = 235.069
+offset_top = 22.8148
+offset_right = 311.069
+offset_bottom = 38.8148
+texture = ExtResource("14_ecwyd")
+script = ExtResource("15_vx6tq")
+gradient = SubResource("Gradient_ci3bk")
+volume_display_label = NodePath("../Volume")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="Grabber" type="TextureButton" parent="AudioSystem/Master/Slider"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = -4.0
+offset_right = 78.0
+offset_bottom = 16.0
+texture_normal = ExtResource("16_yey6b")
+metadata/_edit_use_anchors_ = true
+
+[node name="Volume" type="Label" parent="AudioSystem/Master"]
+layout_mode = 0
+offset_left = 216.0
+offset_right = 295.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 30
+text = "100%"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Bgm" type="Label" parent="AudioSystem"]
+offset_left = 128.0
+offset_top = 328.0
+offset_right = 312.0
+offset_bottom = 376.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 36
+text = "Music"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Slider" type="TextureRect" parent="AudioSystem/Bgm" node_paths=PackedStringArray("volume_display_label")]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.641562
+anchor_top = -0.092592
+anchor_right = -0.641562
+anchor_bottom = -0.0925919
+offset_left = 238.047
+offset_top = 20.4444
+offset_right = 314.047
+offset_bottom = 36.4444
+texture = ExtResource("14_ecwyd")
+script = ExtResource("15_vx6tq")
+bus_channel = 1
+gradient = SubResource("Gradient_r0nvi")
+volume_display_label = NodePath("../Volume")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="Grabber" type="TextureButton" parent="AudioSystem/Bgm/Slider"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = -4.0
+offset_right = 78.0
+offset_bottom = 16.0
+texture_normal = ExtResource("16_yey6b")
+metadata/_edit_use_anchors_ = true
+
+[node name="Volume" type="Label" parent="AudioSystem/Bgm"]
+layout_mode = 0
+offset_left = 216.0
+offset_right = 295.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 30
+text = "100%"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Sfx" type="Label" parent="AudioSystem"]
+offset_left = 128.0
+offset_top = 392.0
+offset_right = 312.0
+offset_bottom = 440.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 36
+text = "Sound"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Slider" type="TextureRect" parent="AudioSystem/Sfx" node_paths=PackedStringArray("volume_display_label")]
+modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.641562
+anchor_top = -0.0432105
+anchor_right = -0.641562
+anchor_bottom = -0.0432105
+offset_left = 238.047
+offset_top = 18.0741
+offset_right = 314.047
+offset_bottom = 34.0741
+texture = ExtResource("14_ecwyd")
+script = ExtResource("15_vx6tq")
+bus_channel = 2
+gradient = SubResource("Gradient_fbvk8")
+volume_display_label = NodePath("../Volume")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="Grabber" type="TextureButton" parent="AudioSystem/Sfx/Slider"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = -4.0
+offset_right = 78.0
+offset_bottom = 16.0
+texture_normal = ExtResource("16_yey6b")
+metadata/_edit_use_anchors_ = true
+
+[node name="Volume" type="Label" parent="AudioSystem/Sfx"]
+layout_mode = 0
+offset_left = 216.0
+offset_right = 295.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_ds4j7")
+theme_override_font_sizes/font_size = 30
+text = "100%"
+vertical_alignment = 1
+uppercase = true
+
+[node name="InputMap" parent="." instance=ExtResource("16_76248")]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 128.0
+offset_right = 1056.0
+offset_bottom = 512.0
+
+[node name="BlockingMask" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[connection signal="button_down" from="AudioSystem/Master/Slider/Grabber" to="AudioSystem/Master/Slider" method="_on_grabber_down"]
+[connection signal="button_up" from="AudioSystem/Master/Slider/Grabber" to="AudioSystem/Master/Slider" method="_on_grabber_up"]
+[connection signal="button_down" from="AudioSystem/Bgm/Slider/Grabber" to="AudioSystem/Bgm/Slider" method="_on_grabber_down"]
+[connection signal="button_up" from="AudioSystem/Bgm/Slider/Grabber" to="AudioSystem/Bgm/Slider" method="_on_grabber_up"]
+[connection signal="button_down" from="AudioSystem/Sfx/Slider/Grabber" to="AudioSystem/Sfx/Slider" method="_on_grabber_down"]
+[connection signal="button_up" from="AudioSystem/Sfx/Slider/Grabber" to="AudioSystem/Sfx/Slider" method="_on_grabber_up"]

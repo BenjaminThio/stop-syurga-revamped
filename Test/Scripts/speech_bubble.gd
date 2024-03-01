@@ -56,7 +56,7 @@ func _on_label_resized():
 				resized_direction = DIRECTION.BOTH
 			elif resized_direction != DIRECTION.HORIZONTAL:
 				resized_direction = DIRECTION.VERTICAL
-		print(DIRECTION.keys()[resized_direction].capitalize())
+		#print(DIRECTION.keys()[resized_direction].capitalize())
 
 func _on_test_resized():
 	bubble.size += test.size - label_original_size

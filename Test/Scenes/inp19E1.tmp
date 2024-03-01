@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cygclprfko7wg"]
+
+[ext_resource type="Script" path="res://Test/Scripts/input_map.gd" id="1_h4tds"]
+
+[node name="InputMap" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_h4tds")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 576.0
+offset_bottom = 576.0
+
+[node name="ColumnContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8

@@ -1,5 +1,7 @@
 extends VBoxContainer
 
+@export var default_font: FontFile = preload("res://Fonts/DTM-Mono.otf")
+
 var menu: CustomMenu
 var player_coord: Vector2i = Vector2i.ZERO
 var page_index: int = 0
@@ -7,9 +9,10 @@ var page_index: int = 0
 @onready var action_buttons: Node2D = get_tree().get_first_node_in_group("actions")
 @onready var health_bar: ProgressBar = get_tree().get_first_node_in_group("health_bar")
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
-@onready var description_label: RichTextLabel = get_tree().get_first_node_in_group("description_label")
+@onready var description_manager: Node2D = get_tree().get_first_node_in_group("description_manager")
 
 func _ready() -> void:
+	update_font()
 	menu = CustomMenu.new()
 	
 	if State.current_state == State.MAIN_STATE.ACT:
@@ -62,19 +65,44 @@ func _process(_delta) -> void:
 			action_buttons.reset()
 			item.fulfill_effect(health_bar)
 			PlayerData.items.pop_at((page_index * (menu.width * menu.height)) + (player_coord.y * menu.width) + player_coord.x)
-			description_label.upcoming_event = queue_free
-			description_label.set_statements([
+			description_manager.upcoming_event = queue_free
+			description_manager.set_statements([
 				[
-					"You ate the {item_name}.".format({item_name = item.item_name}),
+					[
+						"You ate the {item_name}.".format({item_name = item.item_name}),
+						"你吃了{item_name}。".format({item_name = item.item_name}),
+						"尔食{item_name}。".format({item_name = item.item_name}),
+						"Kamu telah makan {item_name}.".format({item_name = item.item_name}),
+						"あなたは{item_name}を食べました。".format({item_name = item.item_name})
+					][db.data.settings.language]
 				]
 			])
 			if PlayerData.health < PlayerData.max_health:
-				description_label.statements[0].append("You recovered {heal_value} HP!".format({heal_value = item.heal_value}))
+				description_manager.statements[0].append([
+					"You recovered {heal_value} HP!".format({heal_value = item.heal_value}),
+					"你恢复了{heal_value}点生命值！".format({heal_value = item.heal_value}),
+					"尔恢復矣{heal_value}點生命值！".format({heal_value = item.heal_value}),
+					"Kamu telah memulihkan {heal_value} HP.".format({heal_value = item.heal_value}),
+					"あなたは{heal_value}ポイントの体力を回復しました！".format({heal_value = item.heal_value})
+				][db.data.settings.language])
 			elif PlayerData.health == PlayerData.max_health:
-				description_label.statements[0].append("Your HP was maxed out.")
+				description_manager.statements[0].append([
+					"Your HP was maxed out.",
+					"你的生命值已满。",
+					"尔之生命值已满。",
+					"HP kamu telah penuh.",
+					"あなたのエイチピーが満タンです。"
+				][db.data.settings.language])
 			Audio.play_sound("heal")
 		
 		Audio.play_sound("select")
+
+func update_font():
+	var font: FontFile = Global.get_font(default_font)
+	
+	for row in get_children():
+		for option in row.get_children():
+			option.set("theme_override_fonts/normal_font", font)
 
 func move_up() -> void:
 	if player_coord.y - 1 >= 0:
@@ -123,14 +151,14 @@ func move(move_function: Callable) -> void:
 		move_function.call()
 
 func update_player_position() -> void:
-	var act_label: Label = get_child(player_coord.y).get_child(player_coord.x)
+	var act_label: RichTextLabel = get_child(player_coord.y).get_child(player_coord.x)
 	
 	player.global_position = Vector2(act_label.global_position.x - 50, act_label.global_position.y + (act_label.size.y / 2))
 
 func render_menu() -> void:
 	for row_index in range(menu.height):
 		for option_index in range(menu.width):
-			var option_label: Label = get_child(row_index).get_child(option_index)
+			var option_label: RichTextLabel = get_child(row_index).get_child(option_index)
 			
 			if not is_option_null(Vector2i(option_index, row_index)):
 				var option: String = get_option(Vector2i(option_index, row_index))
@@ -141,9 +169,10 @@ func render_menu() -> void:
 			
 	if menu.paged:
 		var last_row: HBoxContainer = get_child(get_child_count() - 1)
-		var page_label: Label = last_row.get_child(last_row.get_child_count() - 1)
+		var page_label: RichTextLabel = last_row.get_child(last_row.get_child_count() - 1)
 		
-		page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		#page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		page_label.text_direction = Control.TEXT_DIRECTION_RTL
 		page_label.text = "PAGE {page_number}".format({"page_number": page_index + 1})
 
 func is_option_null(option_coord: Vector2i) -> bool:

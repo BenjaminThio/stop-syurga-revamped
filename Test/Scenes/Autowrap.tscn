@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://m06hrnm6jykt"]
+
+[ext_resource type="Script" path="res://Test/Scripts/autowrap.gd" id="1_h4a7j"]
+[ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="2_pys6s"]
+
+[node name="Autowrap" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_h4a7j")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 96.0
+offset_bottom = 648.0
+color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("2_pys6s")
+theme_override_font_sizes/font_size = 27

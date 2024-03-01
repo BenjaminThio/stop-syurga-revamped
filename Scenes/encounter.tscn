@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cvl52eqcpbnie"]
+[gd_scene load_steps=62 format=3 uid="uid://cvl52eqcpbnie"]
 
 [ext_resource type="Script" path="res://Scripts/encounter.gd" id="1_8llko"]
 [ext_resource type="Texture2D" uid="uid://ckjmq1d7l4xd2" path="res://Gimp/Zip/data/023.png" id="2_6qg2d"]
@@ -23,16 +23,20 @@
 [ext_resource type="Texture2D" uid="uid://duafacfasco3m" path="res://Gimp/Zip/data/007.png" id="6_wvyhc"]
 [ext_resource type="Texture2D" uid="uid://dtwd6ht36qvjn" path="res://Gimp/Zip/data/shard.png" id="8_w4dko"]
 [ext_resource type="Texture2D" uid="uid://d11xmx4d8vahg" path="res://Gimp/Zip/data/009.png" id="9_aekp8"]
-[ext_resource type="Texture2D" uid="uid://bru36cl6prpor" path="res://Sprites/Uncategorized/villian.png" id="11_blj83"]
+[ext_resource type="Texture2D" uid="uid://bru36cl6prpor" path="res://Sprites/Uncategorized/villain.png" id="11_blj83"]
 [ext_resource type="Texture2D" uid="uid://dop0dk1tye0rq" path="res://Gimp/Zip/data/014.png" id="13_afwll"]
 [ext_resource type="Texture2D" uid="uid://dgkopwwh158cu" path="res://Gimp/Zip/data/013.png" id="14_3fme0"]
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="23_gbuwd"]
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="24_7e8jl"]
 [ext_resource type="Texture2D" uid="uid://cxballbtr12s" path="res://Sprites/PlayerHeart/Default/000.png" id="28_cl4sa"]
+[ext_resource type="Script" path="res://Scripts/dialogue_manager.gd" id="30_6lbhp"]
+[ext_resource type="PackedScene" uid="uid://5im46ixx3o6" path="res://Instances/star_sign.tscn" id="30_c4aq1"]
 [ext_resource type="AudioStream" uid="uid://dfm28jykoueff" path="res://Musics/mus_void.ogg" id="30_l8ae2"]
 [ext_resource type="AudioStream" uid="uid://baf8cnj2xmsd5" path="res://Sounds/snd_txt_unknown.ogg" id="30_uth7w"]
+[ext_resource type="Script" path="res://Scripts/dialogue_options_handler.gd" id="31_1tb6k"]
 [ext_resource type="AudioStream" uid="uid://bi7euknl5gks8" path="res://Sounds/snd_walking.ogg" id="31_mpoct"]
 [ext_resource type="AudioStream" uid="uid://ct5bp57k1bpi7" path="res://Sounds/snd_eating.ogg" id="32_5jb8c"]
+[ext_resource type="Texture2D" uid="uid://vhmx3kt76fjx" path="res://Gimp/exit.png" id="33_7x6tc"]
 
 [sub_resource type="Animation" id="Animation_bm2d7"]
 length = 0.001
@@ -107,6 +111,42 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0.1, 0.1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Exit:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -21)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../Exit:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Exit:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_y7wst"]
@@ -209,10 +249,51 @@ tracks/6/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_x0xax"]
+resource_name = "walking_towards_exit"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Exit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -21), Vector2(0, -130)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Exit:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(5.15, 5.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Exit:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y5wjl"]
 _data = {
 "RESET": SubResource("Animation_bm2d7"),
-"walking": SubResource("Animation_y7wst")
+"walking": SubResource("Animation_y7wst"),
+"walking_towards_exit": SubResource("Animation_x0xax")
 }
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_64st3"]
@@ -242,20 +323,18 @@ animations = [{
 size = Vector2(0.833298, 3.70371)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0stiq"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(17, 1, 1)
-particle_flag_disable_z = true
+angle_min = -360.0
+angle_max = 360.0
 direction = Vector3(0, 1, 0)
 spread = 145.0
-gravity = Vector3(0, 98, 0)
 initial_velocity_min = 100.0
 initial_velocity_max = 100.0
 angular_velocity_min = -360.0
 angular_velocity_max = 360.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-angle_min = -360.0
-angle_max = 360.0
+gravity = Vector3(0, 98, 0)
 
 [sub_resource type="Animation" id="Animation_w12ho"]
 length = 0.001
@@ -315,6 +394,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_ehrb6"]
 resource_name = "eating"
 length = 1.2
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -525,20 +605,18 @@ _data = {
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aqoe6"]
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(30, 1, 1)
-particle_flag_disable_z = true
+angle_max = 360.0
 direction = Vector3(0, -1, 0)
 spread = 50.0
 flatness = 1.0
-gravity = Vector3(0, 300, 0)
 initial_velocity_min = 150.0
 initial_velocity_max = 200.0
 angular_velocity_min = -360.0
 angular_velocity_max = 360.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-angle_max = 360.0
+gravity = Vector3(0, 300, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iyy62"]
 shader = ExtResource("4_acg8f")
@@ -557,11 +635,6 @@ animations = [{
 "name": &"speaking",
 "speed": 10.0
 }]
-
-[sub_resource type="FontVariation" id="FontVariation_r101s"]
-base_font = ExtResource("23_gbuwd")
-spacing_glyph = 1
-spacing_bottom = 10
 
 [node name="Encounter" type="Node2D"]
 texture_filter = 1
@@ -583,7 +656,6 @@ texture = ExtResource("2_usutj")
 [node name="Main" type="Node2D" parent="."]
 position = Vector2(576, 328)
 script = ExtResource("5_acp4d")
-metadata/_edit_group_ = true
 
 [node name="Flashlight" type="Sprite2D" parent="Main"]
 self_modulate = Color(1, 1, 1, 0.196078)
@@ -602,13 +674,17 @@ self_modulate = Color(1, 1, 1, 0.196078)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_xsm2g")
 
+[node name="Exit" type="Sprite2D" parent="Main"]
+position = Vector2(0, -21)
+texture = ExtResource("33_7x6tc")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Main"]
 process_mode = 4
 root_node = NodePath("../Obstacles")
-autoplay = "walking"
 libraries = {
 "": SubResource("AnimationLibrary_y5wjl")
 }
+autoplay = "walking_towards_exit"
 
 [node name="Main2" type="Sprite2D" parent="."]
 visible = false
@@ -720,12 +796,6 @@ process_material = SubResource("ParticleProcessMaterial_aqoe6")
 texture = ExtResource("14_3fme0")
 lifetime = 2.0
 
-[node name="Soul" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(576, 448)
-scale = Vector2(5, 5)
-texture = ExtResource("28_cl4sa")
-
 [node name="Canvas" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -750,6 +820,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Dialogue" type="NinePatchRect" parent="Canvas"]
+clip_contents = true
 layout_mode = 0
 offset_left = 184.0
 offset_top = 440.0
@@ -763,23 +834,68 @@ patch_margin_bottom = 8
 script = ExtResource("24_7e8jl")
 
 [node name="SpeakerSprite" type="AnimatedSprite2D" parent="Canvas/Dialogue"]
+visible = false
 position = Vector2(104, 96)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_jkwgj")
 animation = &"speaking"
 
-[node name="TextLabel" type="RichTextLabel" parent="Canvas/Dialogue"]
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="Canvas/Dialogue"]
+stream = ExtResource("30_uth7w")
+bus = &"sfx"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Canvas/Dialogue"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 24.0
-offset_right = 932.0
-offset_bottom = 204.0
-scale = Vector2(0.8, 0.8)
-theme_override_fonts/normal_font = SubResource("FontVariation_r101s")
-theme_override_font_sizes/normal_font_size = 40
+offset_right = 760.0
+offset_bottom = 168.0
+follow_focus = true
+horizontal_scroll_mode = 0
+metadata/_edit_group_ = true
 
-[node name="SoundPlayer" type="AudioStreamPlayer" parent="Canvas/Dialogue"]
-stream = ExtResource("30_uth7w")
+[node name="HorizontalContainer" type="HBoxContainer" parent="Canvas/Dialogue/ScrollContainer"]
+custom_minimum_size = Vector2(720, 144)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Block" type="Control" parent="Canvas/Dialogue/ScrollContainer/HorizontalContainer"]
+layout_mode = 2
+
+[node name="StarSign" parent="Canvas/Dialogue/ScrollContainer/HorizontalContainer" instance=ExtResource("30_c4aq1")]
+custom_minimum_size = Vector2(40, 42)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 34
+
+[node name="LinesContainer" type="VBoxContainer" parent="Canvas/Dialogue/ScrollContainer/HorizontalContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("30_6lbhp")
+
+[node name="OptionsVerticalContainer" type="VBoxContainer" parent="Canvas/Dialogue/ScrollContainer/HorizontalContainer"]
+visible = false
+custom_minimum_size = Vector2(720, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+script = ExtResource("31_1tb6k")
+
+[node name="HorizontalContainer" type="HBoxContainer" parent="Canvas/Dialogue/ScrollContainer/HorizontalContainer/OptionsVerticalContainer"]
+layout_mode = 2
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="Option1" type="Label" parent="Canvas/Dialogue/ScrollContainer/HorizontalContainer/OptionsVerticalContainer/HorizontalContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_gbuwd")
+theme_override_font_sizes/font_size = 34
+text = "Continue"
+
+[node name="Option2" type="Label" parent="Canvas/Dialogue/ScrollContainer/HorizontalContainer/OptionsVerticalContainer/HorizontalContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_gbuwd")
+theme_override_font_sizes/font_size = 34
+text = "Go Back"
 
 [node name="HintsLabel" type="Label" parent="Canvas"]
 layout_mode = 1
@@ -796,7 +912,22 @@ Press F key to switch on flashlight."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-clip_text = true
+
+[node name="HintsLabel2" type="Label" parent="Canvas"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -2104.0
+offset_top = 152.0
+offset_right = -2080.0
+offset_bottom = 200.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("23_gbuwd")
+theme_override_font_sizes/font_size = 40
+text = "P"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DistanceLabel" type="Label" parent="Canvas"]
 layout_mode = 1
@@ -814,6 +945,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="DebugLabel" type="Label" parent="Canvas"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -830,20 +962,28 @@ vertical_alignment = 1
 autowrap_mode = 3
 clip_text = true
 
+[node name="Soul" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 448)
+scale = Vector2(5, 5)
+texture = ExtResource("28_cl4sa")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
 ignore_rotation = false
 
 [node name="WalkingSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_mpoct")
-bus = &"Echo"
+bus = &"sfx_echo"
 
 [node name="EatingSoundEffect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_5jb8c")
+bus = &"sfx"
 
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("30_l8ae2")
 autoplay = true
+bus = &"bgm"
 
 [connection signal="area_entered" from="Face/Mouth/DetectionArea" to="." method="_on_mouth_area_entered"]
 [connection signal="area_entered" from="Snack/Package/DetectionArea" to="." method="_on_snack_package_area_entered"]

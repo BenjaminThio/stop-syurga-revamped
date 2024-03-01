@@ -29,9 +29,9 @@ var hurt_value_pop_up_animation_scene: PackedScene = preload("res://Instances/hu
 @onready var point2: Marker2D = $Background/Point2
 @onready var animation_player: AnimationPlayer = $Background/AnimationPlayer
 @onready var main: Node2D = get_tree().get_root().get_node("Main")
-@onready var villian: Node2D = get_tree().get_first_node_in_group("villian")
-@onready var villian_animated_sprite: Node2D = villian.get_node("AnimatedSprite2D")
-@onready var villian_health_bar: ProgressBar = villian.get_node("HealthBar")
+@onready var villain: Node2D = get_tree().get_first_node_in_group("villain")
+@onready var villain_animated_sprite: Node2D = villain.get_node("AnimatedSprite2D")
+@onready var villain_health_bar: ProgressBar = villain.get_node("HealthBar")
 @onready var actions: Node2D = get_tree().get_first_node_in_group("actions")
 @onready var speech: Node2D = get_tree().get_first_node_in_group("speech")
 @onready var background_music_player: AudioStreamPlayer = main.get_node("BackgroundMusicPlayer")
@@ -66,44 +66,44 @@ func _process(_delta) -> void:
 		tween.kill()
 		slider.play("slider_flashing")
 		
-		villian.add_child(weapon)
-		weapon.global_position = villian.global_position
+		villain.add_child(weapon)
+		weapon.global_position = villain.global_position
 		await time.sleep(ModifiedSpriteFrames.get_animation_absolute_duration(slay_animation, 0), weapon.queue_free)
 		
-		villian_animated_sprite.frame = 1
-		villian_animated_sprite.scale = Vector2(0.7, 0.7)
-		villian_health_bar.show()
-		villian.deal_damage(damage)
-		villian.set_rotate(false)
+		villain_animated_sprite.frame = 1
+		villain_animated_sprite.scale = Vector2(0.7, 0.7)
+		villain_health_bar.show()
+		villain.deal_damage(damage)
+		villain.is_rotating = false
 		
-		villian.add_child(hurt_value_label)
+		villain.add_child(hurt_value_label)
 		hurt_value_label.text = str(round(damage))
 		hurt_value_label.self_modulate = Color.RED
 		hurt_value_animation_player.play("pop_up")
 		
-		villian_animated_sprite.rotation_degrees = 0
+		villain_animated_sprite.rotation_degrees = 0
 		
-		if villian.health > 0:
-			villian.shake()
+		if villain.health > 0:
+			villain.shake()
 			Audio.play_sound("damage")
 			
 			await time.sleep(pause_time)
 			
-			villian.set_rotate(true)
-			villian_health_bar.hide()
+			villain.is_rotating = true
+			villain_health_bar.hide()
 			hurt_value_label.queue_free()
 			slider.stop()
-			villian_animated_sprite.frame = 0
-			villian_animated_sprite.scale = Vector2(0.3, 0.3)
+			villain_animated_sprite.frame = 0
+			villain_animated_sprite.scale = Vector2(0.3, 0.3)
 			await enemy_turn()
-		elif villian.health == 0:
-			villian.shake(20)
+		elif villain.health == 0:
+			villain.shake(20)
 			Audio.play_sound("damage")
 			background_music_player.stop()
 			
 			await time.sleep(pause_time)
 			
-			villian_health_bar.hide()
+			villain_health_bar.hide()
 			hurt_value_label.queue_free()
 			slider.stop()
 			slider.queue_free()
@@ -154,8 +154,8 @@ func _process(_delta) -> void:
 				]
 			][db.data.settings.language], 0.1)
 			#actions.reset()
-			villian_animated_sprite.frame = 0
-			villian_animated_sprite.scale = Vector2(0.3, 0.3)
+			villain_animated_sprite.frame = 0
+			villain_animated_sprite.scale = Vector2(0.3, 0.3)
 			queue_free()
 
 func slide_slider() -> void:
@@ -173,7 +173,7 @@ func enemy_turn() -> void:
 		var hurt_value_animation_player: AnimationPlayer = hurt_value_label.get_node("AnimationPlayer")
 		
 		missed = true
-		villian.add_child(hurt_value_label)
+		villain.add_child(hurt_value_label)
 		hurt_value_label.text = [
 			"MISS",
 			"描边",

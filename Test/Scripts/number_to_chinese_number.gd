@@ -26,11 +26,6 @@ var chinese_place_value: PackedStringArray = [
 ]
 
 func _ready():
-	var spear = load("res://Instances/spear.tscn").instantiate()
-	
-	await time.sleep(3.0)
-	spear.direction = 1
-	$Marker2D.add_child(spear)
 	print(number_to_chinese_number(101001))
 
 func number_to_chinese_number(number: int):

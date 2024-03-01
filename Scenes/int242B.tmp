@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://dccg5oar6pr1d"]
+
+[ext_resource type="Script" path="res://Scripts/intro.gd" id="1_odop8"]
+[ext_resource type="Texture2D" uid="uid://be5hby0oqp4fe" path="res://Sprites/Intro/intro1.png" id="2_utael"]
+[ext_resource type="AudioStream" uid="uid://d2hupf2bq8ber" path="res://Musics/mus_intro.ogg" id="3_5lv1a"]
+[ext_resource type="Script" path="res://Scripts/intro_text_manager.gd" id="4_xxcof"]
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_odop8")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.269
+anchor_right = 0.5
+anchor_bottom = 0.269
+offset_left = -200.0
+offset_top = -154.312
+offset_right = 200.0
+offset_bottom = 145.688
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_utael")
+expand_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 384.0
+offset_right = 904.0
+offset_bottom = 576.0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="LinesContainer" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(640, 192)
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_xxcof")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5lv1a")
+pitch_scale = 1.02
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)

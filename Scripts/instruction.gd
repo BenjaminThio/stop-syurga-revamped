@@ -1,108 +1,78 @@
 extends Control
 
-@onready var instruction: Label = $Title/TitleText
-@onready var instruction1_keys: Label = $Instructions/Instruction1/Keys
-@onready var instruction1_description: Label = $Instructions/Instruction1/Description
-@onready var instruction2_keys: Label = $Instructions/Instruction2/Keys
-@onready var instruction2_description: Label = $Instructions/Instruction2/Description
-@onready var instruction3_keys: Label = $Instructions/Instruction3/Keys
-@onready var instruction3_description1: Label = $Instructions/Instruction3/Description/DescriptionText1
-@onready var instruction3_description_linking_char: Label = $Instructions/Instruction3/Description/LinkingChar
-@onready var instruction3_description2: Label = $Instructions/Instruction3/Description/DescriptionText2
-@onready var instruction4_description: Label = $Instructions/Instruction4/Description
-@onready var instruction5_key: Label = $Instructions/Instruction5/Key
-@onready var instruction5_description: Label = $Instructions/Instruction5/Description
-@onready var instruction6: Label = $Instructions/Instruction6
+@export var default_font: FontFile = preload("res://Fonts/DTM-Sans.otf")
+
+@onready var title: Label = $Title
+@onready var instructions: Node2D = $Instructions
+@onready var confirm: Label = $Instructions/Confirm
+@onready var cancel: Label = $Instructions/Cancel
+@onready var fullscreen: Label = $Instructions/Fullscreen
+@onready var quit: Label = $Instructions/Quit
+@onready var hint: Label = $Instructions/Hint
+@onready var options: Node2D = $Options
 @onready var begin_game_option: Label = $Options/BeginGame
 @onready var settings_option: Label = $Options/Settings
+@onready var font: FontFile = Global.get_font(default_font)
 
 func _ready():
-	instruction.text = [
+	#var accept_action_events: Array[InputEvent] = InputMap.action_get_events("accept")
+	#var cancel_action_events: Array[InputEvent] = InputMap.action_get_events("cancel")
+	var accept_events_name: Array[StringName] = []
+	var cancel_events_name: Array[StringName] = []
+	var fullscreen_event: StringName = Global.translate_input(InputMap.action_get_events("fullscreen")[0].as_text().replace(" (Physical)", "").to_lower())
+	var quit_event: StringName = Global.translate_input(InputMap.action_get_events("quit")[0].as_text().replace(" (Physical)", "").to_lower())
+	
+	for accept_action_event in InputMap.action_get_events("accept") as Array[InputEvent]:
+		accept_events_name.append(Global.translate_input(accept_action_event.as_text().replace(" (Physical)", "").to_lower()))
+	
+	for cancel_action_event in InputMap.action_get_events("cancel") as Array[InputEvent]:
+		cancel_events_name.append(Global.translate_input(cancel_action_event.as_text().replace(" (Physical)", "").to_lower()))
+	
+	title.add_theme_font_override("font", font)
+	
+	for category_node in [instructions, options] as Array[Node]:
+		for label in category_node.get_children() as Array[Label]:
+			label.add_theme_font_override("font", font)
+	
+	title.text = "--- "
+	title.text += [
 		"Instruction",
 		"指示",
 		"教示",
 		"Arahan",
 		"指示"
 	][db.data.settings.language]
-	instruction1_keys.text = [
-		"[Z or ENTER]",
-		"[Z 或 ENTER]",
-		"[Z 或 ENTER]",
-		"[Z atau ENTER]",
-		"[Z もしくは ENTER]"
+	title.text += " ---"
+	confirm.text = [
+		"[{first_accept_event} or {second_accept_event}] - Confirm".format({first_accept_event = accept_events_name[0], second_accept_event = accept_events_name[1]}),
+		"[{first_accept_event} 或 {second_accept_event}] - 确定".format({first_accept_event = accept_events_name[0], second_accept_event = accept_events_name[1]}),
+		"[{first_accept_event} 或 {second_accept_event}] - 確定".format({first_accept_event = accept_events_name[0], second_accept_event = accept_events_name[1]}),
+		"[{first_accept_event} atau {second_accept_event}] - Memasti".format({first_accept_event = accept_events_name[0], second_accept_event = accept_events_name[1]}),
+		"[{first_accept_event} もしくは {second_accept_event}] - 確定する".format({first_accept_event = accept_events_name[0], second_accept_event = accept_events_name[1]})
 	][db.data.settings.language]
-	instruction1_description.text = [
-		"Confirm",
-		"确定",
-		"確定",
-		"Memasti",
-		"確定する"
+	cancel.text = [
+		"[{first_cancel_event} or {second_cancel_event}] - Cancel".format({first_cancel_event = cancel_events_name[0], second_cancel_event = cancel_events_name[1]}),
+		"[{first_cancel_event} 或 {second_cancel_event}] - 取消".format({first_cancel_event = cancel_events_name[0], second_cancel_event = cancel_events_name[1]}),
+		"[{first_cancel_event} 或 {second_cancel_event}] - 罷免".format({first_cancel_event = cancel_events_name[0], second_cancel_event = cancel_events_name[1]}),
+		"[{first_cancel_event} atau {second_cancel_event}] - Batal".format({first_cancel_event = cancel_events_name[0], second_cancel_event = cancel_events_name[1]}),
+		"[{first_cancel_event} もしくは {second_cancel_event}] - キャンセルする".format({first_cancel_event = cancel_events_name[0], second_cancel_event = cancel_events_name[1]})
 	][db.data.settings.language]
-	"""
-	instruction1_description.text = [
-		"Confirm",
-		"确认",
-		"證實",
-		"Mengesah",
-		"確認する"
-	][db.data.settings.language]
-	"""
-	instruction2_keys.text = [
-		"[X or SHIFT]",
-		"[X 或 SHIFT]",
-		"[X 或 SHIFT]",
-		"[X atau SHIFT]",
-		"[X もしくは SHIFT]"
-	][db.data.settings.language]
-	instruction2_description.text = [
-		"Cancel",
-		"取消",
-		"罷免",
-		"Batal",
-		"キャンセルする"
-	][db.data.settings.language]
-	instruction3_keys.text = [
-		"[C or CTRL]",
-		"[C 或 CTRL]",
-		"[C 或 CTRL]",
-		"[C atau CTRL]",
-		"[C もしくは CTRL]"
-	][db.data.settings.language]
-	instruction3_description1.text = [
-		"Menu (In",
-		"菜单 (游戏中)",
-		"菜單 (遊戲之中)",
-		"Menu (Dalam permainan)",
-		"メニュー (ゲーム中)"
-	][db.data.settings.language]
-	if db.data.settings.language == db.LANGUAGE.ENGLISH:
-		instruction3_description_linking_char.show()
-		instruction3_description2.show()
-	else:
-		instruction3_description_linking_char.hide()
-		instruction3_description2.hide()
-	instruction4_description.text = [
+	fullscreen.text = "[{fullscreen_event}] - ".format({fullscreen_event=fullscreen_event})
+	fullscreen.text += [
 		"Fullscreen",
 		"全屏",
 		"滿屏",
 		"Skrin penuh",
 		"フルスクリーン"
 	][db.data.settings.language]
-	instruction5_key.text = [
-		"[Hold ESC]",
-		"[长按 ESC]",
-		"[長按 ESC]",
-		"[Tekan dan tahan ESC]",
-		"[ESC を長押しする]"
+	quit.text = [
+		"[Hold {quit_event}] - Quit".format({quit_event=quit_event}),
+		"[长按 {quit_event}] - 退出".format({quit_event=quit_event}),
+		"[長按 {quit_event}] - 辍".format({quit_event=quit_event}),
+		"[Tekan dan tahan {quit_event}] - Keluar".format({quit_event=quit_event}),
+		"[{quit_event} を長押しする] - 辞める".format({quit_event=quit_event})
 	][db.data.settings.language]
-	instruction5_description.text = [
-		"Quit",
-		"退出",
-		"辍",
-		"Keluar",
-		"辞める"
-	][db.data.settings.language]
-	instruction6.text = [
+	hint.text = [
 		"When HP is 0, you lose.",
 		"当你的生命值归零时，游戏结束。",
 		"當尔之生命值歸零時，遊戲終止。",

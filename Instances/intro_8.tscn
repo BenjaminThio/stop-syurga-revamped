@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnbve4dwae8nr"]
+
+[ext_resource type="Script" path="res://Scripts/intro_8.gd" id="1_gw0au"]
+[ext_resource type="Texture2D" uid="uid://cx6yc7psrqpee" path="res://Sprites/Intro/intro8.png" id="1_v5do6"]
+[ext_resource type="Texture2D" uid="uid://dyo6osspoc2cq" path="res://Sprites/Intro/question_mark.png" id="2_82bq6"]
+[ext_resource type="Texture2D" uid="uid://dfxxiquwkfa37" path="res://Sprites/Intro/old_galaxy.png" id="3_vmj8n"]
+
+[node name="Intro8" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+script = ExtResource("1_gw0au")
+
+[node name="Galaxy" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(200, 150)
+scale = Vector2(2, 2)
+texture = ExtResource("1_v5do6")
+
+[node name="OldGalaxy" type="Sprite2D" parent="."]
+position = Vector2(200, 150)
+scale = Vector2(2, 2)
+texture = ExtResource("3_vmj8n")
+
+[node name="QuestionMark" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(200, 150)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_82bq6")

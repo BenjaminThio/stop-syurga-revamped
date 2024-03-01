@@ -1,16 +1,22 @@
 extends Control
 
-var is_fading_out: bool = false
-
-@onready var image: TextureRect = $Image
-@onready var text_label: RichTextLabel = $Text
-@onready var typing_sound_effect: AudioStreamPlayer = $TypingSoundEffect
-@onready var background_music: AudioStreamPlayer = $BackgroundMusic
-
 @export var image_transition_time: float = 0.5
 @export var image_invisible_time: float = 1.5
 @export var label_reset_time: float = 0.5
 @export var music_fade_out_time: float = 10.0
+
+var is_fading_out: bool = false
+var intro_8_packed_scene: PackedScene = preload("res://Instances/intro_8.tscn")
+var intro_9_packed_scene: PackedScene = preload("res://Instances/intro_9.tscn")
+var animated_intro: Dictionary = {
+	intro_8 = intro_8_packed_scene.instantiate(),
+	intro_9 = intro_9_packed_scene.instantiate()
+}
+
+@onready var control: Control = $Control
+@onready var image: TextureRect = $Control/Image
+@onready var lines_container: VBoxContainer = $ScrollContainer/LinesContainer
+@onready var background_music: AudioStreamPlayer = $BackgroundMusic
 
 var storylines: Array[PackedStringArray] = [
 	[
@@ -18,56 +24,56 @@ var storylines: Array[PackedStringArray] = [
 		"很久很久以前，有一个叫奕凡的家伙。",
 		"昔日遥远，有一人名奕凡。",
 		"Pada suatu masa dahulu, terdapat seorang lelaki bernama Yi Fan.",
-		"昔々、ある男性が住んでいました。その男性の名前は奕凡でした。"
+		"昔々、ある男性が住んでいました。その男性の名前はエキファンでした。"
 	],
 	[
 		"Yi Fan himself was a gay, and he developed romantic feelings for his close male friend, Zen Thye.",
-		"奕凡本身是个男同，而且他还喜欢上了他的好兄弟—程泰。",
+		"奕凡本身是个男同，而且他还喜欢上了他的好兄弟一程泰。",
 		"奕凡本身性倾向同性，且对其亲密友人程泰心生爱慕。",
 		"Yi Fan sendiri adalah seorang homoseksual, dan dia cinta akan sahabat karibnya, Zen Thye.",
-		"奕凡は男同性愛者であり、さらに彼は親友である程泰に恋心を抱いています。"
+		"エキファンは男同性愛者であり、さらに彼は親友であるチョウタイに恋心を抱いています。"
 	],
 	[
 		"After a period of observation, Yi Fan discovered that Zen Thye also shared the same sexual orientation. As a result, they quickly became a couple.",
-		"经过一番观察， 奕凡发现程泰也是是个男同。 于是，他们很快就在一起了。",
+		"经过一番观察，奕凡发现程泰也是个男同。于是，他们很快就在一起了。",
 		"观察片刻，奕凡见程泰亦为同性之倾向。遂二人亦速成一对。",
 		"Setelah pemerhatian dalam suatu tempoh, Yi Fan mengetahui bahawa Zen Thye juga seorang homoseksual. Maka, mereka menjadi pasangan tidak lama selepas itu.",
-		"綿密な観察の後、奕凡は程泰も同性愛者であることに気付きました。その結果、彼らは迅速にカップルとなりました。"
+		"綿密な観察の後、エキファンはチョウタイも同性愛者であること に気付きました。その結果、彼らは迅速にカップルとなりました。"
 	],
 	[
 		"Although Yi Fan never cares how others judge their relationship,",
-		"尽管奕凡从不在意别人对他们之间关系的看法，",
-		"奕凡纵然不顾他人观瞻，",
+		"尽管奕凡从不在意别人对他们之间关系的看法,",
+		"奕凡纵然不顾他人观瞻,",
 		"Walaupun Yi Fan tidak mempedulikan pendapat orang lain mengenai hubungan mereka,",
-		"奕凡は他らの関係について他人の見解を気にすることはなかったが、"
+		"エキファンは他らの関係について他人の見解を気にすることはなかったが、"
 	],
 	[
 		"but the world proved to be harsh, societal discrimination pushed Zen Thye to the brink of mental collapse.",
-		"但是世界是残酷的， 来自社会的歧视让程泰破防了。",
+		"但是世界是残酷的，来自社会的歧视让程泰破防了。",
 		"然斯世残酷，社会偏见使程泰心灵崩溃之境地。",
 		"tetapi dunia ini kejam, diskriminasi sosial telah menyebabkan Zen Thye hampir terhanyut dalam kegelapan mental.",
-		"しかし、世界は残酷であり、社会からの差別が程泰の精神を崩壊させました。"
+		"しかし、世界は残酷であり、社会からの差別がチョウタイの精神を崩壊させました。"
 	],
 	[
 		"One fateful day, Yi Fan uncovered Zen Thye's betrayal.",
-		"一天， 奕凡发现程泰给自己带绿帽。",
+		"一天，奕凡发现程泰给自己带绿帽。",
 		"一日，奕凡见程泰行背叛之事。",
 		"Pada suatu hari yang takdirnya tertentu, Yi Fan terbongkar akan pengkhianatan Zen Thye.",
-		"ある日、奕凡は程泰が浮気をしていることに気付きました。"
+		"ある日、エキファンはチョウタイが浮気をしていることに気付きました。"
 	],
 	[
 		"Initially, Yi Fan was overcome with unprecedented sorrow, but soon his love turned into hatred, and he resolved to seek revenge against Zen Thye.",
-		"起初，奕凡只是感到前所未有的伤心，但很快，他因为爱生恨，决定对程泰进行报复。",
+		"起初，奕凡只是感到前所未有的伤心，但很快，他因爱生恨，决定对程泰进行报复。",
 		"初时，奕凡感触前所未有之伤痛，然转瞬间，因爱生恨，决意报复程泰。",
 		"Pada mulanya, Yi Fan diliputi kesedihan yang tiada tandingan, namun segera perasaan cintanya berubah menjadi kebencian, dan dia berazam untuk membalas dendam terhadap Zen Thye.",
-		"最初、奕凡は前例のないほど傷心を感じただけでしたが、やがて彼は愛から憎しみが生まれ、程泰に対して復讐することを決意しました。"
+		"最初、エキファンは前例のないほど傷心を感じただけでしたが、やがて彼は愛から憎しみが生まれ、チョウタイに対して復讐することを決意しました。"
 	],
 	[
 		"So, how will Yi Fan navigate this challenging destiny?",
 		"那么，奕凡将如面对这个坎坷的命运呢？",
 		"然则，奕凡将如何应对此困境之命运？",
 		"Bagaimanakah Yi Fan akan menempuh takdir yang penuh cabaran ini? ",
-		"では、奕凡はこの困難な運命にどのように立ち向かうのでしょうか？"
+		"では、エキファンはこの困難な運命にどのように立ち向かうのでしょうか？"
 	],
 	[
 		"No one knows, it appears that only time can unravel the truth.",
@@ -79,27 +85,59 @@ var storylines: Array[PackedStringArray] = [
 ]
 
 func _ready() -> void:
+	var font_width: int
+	
+	if db.data.settings.language in [db.LANGUAGE.CHINESE, db.LANGUAGE.CLASSICAL_CHINESE, db.LANGUAGE.JAPANESE]:
+		font_width = lines_container.font_size
+	else:
+		font_width = 18
+	
 	image.self_modulate.a = 0
 	background_music.play()
 	
-	for storylineIndex in range(len(storylines)):
-		image.texture = load("res://Sprites/Intro/intro{imageIndex}.png".format({"imageIndex": storylineIndex + 1}))
-		create_tween().tween_property(image, "self_modulate:a", 1, image_transition_time)
-		for character in storylines[storylineIndex][db.data.settings.language]:
-			text_label.text += character
-			if not typing_sound_effect.playing and os.is_alpha(character):
-				typing_sound_effect.play()
-			elif typing_sound_effect.playing and not os.is_alpha(character):
-				typing_sound_effect.stop()
-			await time.sleep(get_calculated_char_appear_gap_time())
-		if typing_sound_effect.playing:
-			typing_sound_effect.stop()
+	for storyline_index in range(len(storylines)):
+		var intro_name: String = "intro_" + str(storyline_index + 1)
+		
+		if intro_name in animated_intro:
+			control.add_child(animated_intro[intro_name])
+		else:
+			image.texture = load("res://Sprites/Intro/intro{imageIndex}.png".format({"imageIndex": storyline_index + 1}))
+			
+			create_tween().tween_property(image, "self_modulate:a", 1, image_transition_time)
+			
+		for character in Autowrap.smart_autowrap(storylines[storyline_index][db.data.settings.language], font_width, lines_container):
+			lines_container.text += character
+			if os.is_alpha(character):
+				Audio.play_sound("txt_typing")
+				#typing_sound_effect.play()
+			#elif typing_sound_effect.playing and not os.is_alpha(character):
+				#typing_sound_effect.stop()
+			if character != "\n":
+				await time.sleep(get_calculated_char_appear_gap_time())
+			else:
+				continue
+		#if typing_sound_effect.playing:
+			#typing_sound_effect.stop()
 		await time.sleep(image_invisible_time)
-		create_tween().tween_property(image, "self_modulate:a", 0, image_transition_time)
-		await time.sleep(label_reset_time)
-		text_label.text = ""
+		
+		if intro_name in animated_intro:
+			if storyline_index == 8:
+				await time.sleep(label_reset_time)
+				
+				lines_container.text = ""
+				
+				await time.sleep(12.5 - (storylines[storyline_index][db.data.settings.language].length() * get_calculated_char_appear_gap_time()) - label_reset_time)
+				
+			create_tween().tween_property(animated_intro[intro_name], "modulate:a", 0, image_transition_time).finished.connect(animated_intro[intro_name].queue_free)
+		else:
+			create_tween().tween_property(image, "self_modulate:a", 0, image_transition_time)
+		
+		if storyline_index != 8:
+			await time.sleep(label_reset_time)
+			
+			lines_container.text = ""
 	
-	await time.sleep(5)
+	await time.sleep(2)
 	
 	fade_out()
 

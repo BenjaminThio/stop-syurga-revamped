@@ -25,7 +25,7 @@ enum DIRECTION {
 @export var transition_duration: float = 0.8
 @export var transition_type: Tween.TransitionType = Tween.TransitionType.TRANS_SINE
 @onready var leg_area: Area2D = $Area
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 var tween: Tween = null
 var move_speed: float
 
@@ -67,4 +67,4 @@ func _on_leg_area_entered(area):
 
 func _on_leg_body_entered(body):
 	if not Engine.is_editor_hint() and body.is_in_group("player"):
-		body.deal_damage(villian.attack * damage_multiplier)
+		body.deal_damage(villain.attack * damage_multiplier)

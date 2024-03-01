@@ -8,7 +8,7 @@ const LIGHT_SPAWNPOINT_ROTATE_DEGREES: float = 72.0 #360.0 / 5.0 #const LIGHT_SP
 @export var damage_multiplier: int = 2
 @onready var disco_ball_animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var light_spawnpoint: Node2D = $LightSpawnpoint
-@onready var villian: Area2D = get_tree().get_first_node_in_group("villian")
+@onready var villain: Area2D = get_tree().get_first_node_in_group("villain")
 var light_spawnpoint_rotating: bool = false
 
 func _process(_delta):
@@ -39,7 +39,7 @@ func _on_area_entered(area):
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		body.deal_damage(villian.attack * damage_multiplier)
+		body.deal_damage(villain.attack * damage_multiplier)
 
 func _on_light_detection_area_entered(area):
 	if area.is_in_group("light"):

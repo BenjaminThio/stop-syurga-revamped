@@ -1,13 +1,15 @@
 extends Control
 
+@export var default_font: FontFile = preload("res://Fonts/8-BIT WONDER.TTF")
+
 var on_queue: bool = false
 var phases: int = 0
 
 @onready var quotes: PackedStringArray = [
 	[
-		"The future depends\non you!",
+		"The future depends on you!",
 		"Don't lose hope!",
-		"You cannot give\nup just yet..."
+		"You cannot give up just yet..."
 	],
 	[
 		"未来取决于你！",
@@ -32,7 +34,7 @@ var phases: int = 0
 ][db.data.settings.language]
 @onready var main: Node2D = get_tree().get_root().get_node("Main")
 @onready var game_over_label: Label = $Title
-@onready var quote_label: Label = $Quote
+@onready var quote_manager: VBoxContainer = $ScrollContainer/LinesContainer
 
 func _ready() -> void:
 	game_over_label.text = [
@@ -43,9 +45,10 @@ func _ready() -> void:
 		"ゲーム\nオーバー"
 	][db.data.settings.language]
 	game_over_label.self_modulate.a = 0
-	quote_label.text = ""
+	quote_manager.text = ""
 	main.background_music_player.volume_db = 0.0
 	main.background_music_player.pitch_scale = 1.08
+	game_over_label.add_theme_font_override("font", Global.get_font(default_font))
 	
 	main.play_audio("res://Musics/mus_game_over.ogg")
 	
@@ -61,7 +64,7 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("accept") and not on_queue:
 		phases += 1
-		quote_label.text = ""
+		quote_manager.text = ""
 		if phases == 1:
 			await asgore_say([
 				"{name}!\nStay determined.".format({"name": db.data.player.name}),
@@ -78,15 +81,27 @@ func _process(_delta) -> void:
 			await time.sleep(1.5)
 			on_queue = false
 			
-			get_tree().change_scene_to_file("res://Scenes/main_manu.tscn")
+			get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func asgore_say(quote: String) -> void:
+	var font_width: int
+	
 	on_queue = true
 	
+	if db.data.settings.language in [db.LANGUAGE.CHINESE, db.LANGUAGE.CLASSICAL_CHINESE, db.LANGUAGE.JAPANESE]:
+		font_width = quote_manager.font_size
+	else:
+		font_width = 21
+	
+	quote = Autowrap.smart_autowrap(quote, font_width + quote_manager.SPACING_GLYPH, quote_manager, 0, true)
+	
 	for character in quote:
-		quote_label.text += character
+		quote_manager.text += character
 		if os.is_alpha(character):
 			Audio.play_sound("txt_asgore")
-		await time.sleep(0.07)
+		if character != "\n":
+			await time.sleep(0.07)
+		else:
+			continue
 	
 	on_queue = false

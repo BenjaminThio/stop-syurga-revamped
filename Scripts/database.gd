@@ -7,7 +7,7 @@ enum LANGUAGE {
 	MALAY,
 	JAPANESE
 }
-var save_path: String = "user://save.save"
+var save_path: String = "user://stop_syurga.save" #stop_syurga.save
 var default_data: Dictionary = {
 	player = {
 		name = null,
@@ -16,10 +16,15 @@ var default_data: Dictionary = {
 		exp = 10000,
 		gold = 0,
 		playtime = 0,
-		location_index = 0
+		location_index = 0,
+		seen_credits = false
 	},
 	settings = {
-		language = LANGUAGE.ENGLISH
+		language = LANGUAGE.ENGLISH,
+		master_volume = 1,
+		bgm_volume = 1,
+		sfx_volume = 1,
+		input_map = {}
 	}
 }
 var data: Dictionary = default_data.duplicate(true)
@@ -47,13 +52,22 @@ var exp_to_level: Array[int] = [
 ]
 
 func _ready():
+	default_data.settings.input_map = Global.get_input_map()
+	data.settings.input_map = default_data.settings.input_map
 	load_data()
 	level_define_all()
 
 func load_data() -> Dictionary:
 	if FileAccess.file_exists(save_path):
 		var file: FileAccess = FileAccess.open(save_path, FileAccess.READ)
-		data = file.get_var()
+		data = file.get_var(true)
+		for action in data.settings.input_map:
+			for input_event in InputMap.action_get_events(action):
+				InputMap.action_erase_event(action, input_event)
+			
+			for input_event in data.settings.input_map[action]:
+				#print(data.settings.input_map[action])
+				InputMap.action_add_event(action, input_event)
 	else:
 		save_data()
 	return data
@@ -61,7 +75,7 @@ func load_data() -> Dictionary:
 func save_data() -> void:
 	var file: FileAccess = FileAccess.open(save_path, FileAccess.WRITE)
 	
-	file.store_var(data)
+	file.store_var(data, true)
 
 func get_player_level() -> int:
 	for level_index in range(exp_to_level.size()):

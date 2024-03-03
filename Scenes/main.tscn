@@ -491,6 +491,7 @@ script = ExtResource("23_oimd1")
 
 [node name="Villain" parent="." instance=ExtResource("49_nne3d")]
 show_behind_parent = true
+health = 28900
 
 [node name="Player" parent="." instance=ExtResource("3_xtc3i")]
 position = Vector2(212.9, 596)

@@ -1,8 +1,1 @@
-res://Scenes/intro.tscn
-res://StyleBoxes/normal_key_button.tres
-res://StyleBoxes/normal_pressed_key_button.tres
-res://StyleBoxes/disabled_key_button.tres
-res://StyleBoxes/hover_key_button.tres
-res://StyleBoxes/pressed_key_button.tres
-res://Test/Scripts/audio_loader.gd
-res://Scenes/main.tscn
+res://default_bus_layout.tres

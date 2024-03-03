@@ -1,5 +1,10 @@
 extends Node2D
 
+enum AUDIO_LOAD_AS {
+	BUILT_IN,
+	NON_BUILT_IN
+}
+
 var disabled_process_mode: bool = false
 var cheat_mode_activated: bool = false
 var game_over_screen: PackedScene = preload("res://Instances/game_over.tscn")
@@ -20,8 +25,11 @@ func play_background_music():
 	else:
 		loop_audio()
 
-func play_audio(path: String = "", loop: bool = true) -> void:
-	if path != "": background_music_player.stream = AudioLoader.load_file(path)
+func play_audio(path: String = "", loop: bool = true, audio_load_as: AUDIO_LOAD_AS = AUDIO_LOAD_AS.NON_BUILT_IN) -> void:
+	if audio_load_as == AUDIO_LOAD_AS.NON_BUILT_IN:
+		if path != "": background_music_player.stream = AudioLoader.load_file(path)
+	elif audio_load_as == AUDIO_LOAD_AS.BUILT_IN:
+		background_music_player.stream = load(path)
 	
 	if not background_music_player.playing and not background_music_player.autoplay:
 		background_music_player.play()

@@ -101,8 +101,11 @@ func update_font():
 	var font: FontFile = Global.get_font(default_font)
 	
 	for row in get_children():
-		for option in row.get_children():
+		for option in row.get_children() as Array[RichTextLabel]:
 			option.set("theme_override_fonts/normal_font", font)
+			
+			if db.data.settings.language in [db.LANGUAGE.ENGLISH, db.LANGUAGE.MALAY]:
+				option.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
 func move_up() -> void:
 	if player_coord.y - 1 >= 0:

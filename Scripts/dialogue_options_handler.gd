@@ -5,8 +5,7 @@ enum OPTION {
 	GO_BACK
 }
 
-const font_width: int = 20
-
+@export var default_font: FontFile = preload("res://Fonts/DTM-Mono.otf")
 @export var pause_duration: float = 0.5
 
 var selected_option: OPTION = OPTION.CONTINUE
@@ -20,16 +19,47 @@ var is_transition_playing: bool = false
 @onready var dialogue: NinePatchRect = canvas.get_node("Dialogue")
 @onready var unknown_sound_effect: AudioStreamPlayer = dialogue.get_node("SoundPlayer")
 @onready var star_sign: RichTextLabel = dialogue.get_node("ScrollContainer/HorizontalContainer/StarSign")
+@onready var continue_translation: String = [
+	"Continue",
+	"继续",
+	"續",
+	"Teruskan",
+	"続ける"
+][db.data.settings.language]
+@onready var go_back_translation: String = [
+	"Go Back",
+	"回去",
+	"歸返",
+	"Pulang",
+	"戻る"
+][db.data.settings.language]
+@onready var options: Array[String] = [
+	continue_translation,
+	go_back_translation
+]
 
 func _ready():
 	clean_options()
+	update_font()
 	early_update_options_width()
 
+func update_font():
+	var font: FontFile = Global.get_font(default_font)
+	
+	for option in horizontal_container.get_children() as Array[Label]:
+		option.add_theme_font_override("font", font)
+
 func early_update_options_width():
-	for option_index in range(OPTION.size()) as Array[int]:
+	for option_index in range(options.size()) as Array[int]:
 		var option: Label = horizontal_container.get_child(option_index)
+		var font_width: int
 		
-		option.custom_minimum_size.x = OPTION.find_key(option_index).length() * font_width
+		if db.data.settings.language in [db.LANGUAGE.CHINESE, db.LANGUAGE.CLASSICAL_CHINESE, db.LANGUAGE.JAPANESE]:
+			font_width = option.get_theme_font_size("font_size")
+		else:
+			font_width = 20
+		
+		option.custom_minimum_size.x = options[option_index].length() * font_width
 
 func _process(_delta):
 	if activate_after_dialogues and not dialogue.on_queue:
@@ -81,14 +111,14 @@ func _process(_delta):
 		Audio.play_sound("select")
 
 func render_options(required_transition: bool = false, transition_duration: float = 0.05):
-	for option_index in range(OPTION.size()) as Array[int]:
+	for option_index in range(options.size()) as Array[int]:
 		var option: Label = horizontal_container.get_child(option_index)
 		
 		if required_transition:
 			is_transition_playing = true
 			unknown_sound_effect.play()
 			
-			for character in OPTION.find_key(option_index).capitalize():
+			for character in options[option_index]:
 				option.text += character
 				
 				await time.sleep(transition_duration)
@@ -99,7 +129,7 @@ func render_options(required_transition: bool = false, transition_duration: floa
 			
 			is_transition_playing = false
 		else:
-			option.text = OPTION.find_key(option_index).capitalize()
+			option.text = options[option_index]
 
 func update_soul():
 	if is_activated:

@@ -2,21 +2,32 @@ class_name Autowrap extends Node
 
 const space: String = " "
 
-static func smart_autowrap(text: String, font_width: int, container: Control, container_width_shrink: float = 0, required_autowrapped_text_optimization: bool = true) -> String:
+static func smart_autowrap(text: String, font_width: int, container_or_container_width, container_width_shrink: float = 0, required_autowrapped_text_optimization: bool = true, custom_minimum_width_as_width: bool = false) -> String:
 	var split_space_text: PackedStringArray = text.split(" ")
+	var container_width: float
+	
+	if container_or_container_width.is_class("Control"):
+		if not custom_minimum_width_as_width:
+			container_width = container_or_container_width.size.x
+		else:
+			container_width = container_or_container_width.custom_minimum_size.x
+	elif typeof(container_or_container_width) == TYPE_INT:
+		container_width = container_or_container_width
 	
 	for word_index in range(split_space_text.size()):
-		if word_index < split_space_text.size() - 1 and (split_space_text[word_index] + space).length() * font_width != container.size.x - abs(container_width_shrink):
+		if word_index < split_space_text.size() - 1:
 			split_space_text[word_index] += space
+		#if word_index < split_space_text.size() - 1 and (split_space_text[word_index] + space).length() * font_width != container_width - abs(container_width_shrink):
+		#	split_space_text[word_index] += space
 	
-	return get_smart_autowrap_text(split_space_text, font_width, container.size.x - abs(container_width_shrink), required_autowrapped_text_optimization)
+	return get_smart_autowrap_text(split_space_text, font_width, container_width - abs(container_width_shrink), required_autowrapped_text_optimization)
 
 static func get_smart_autowrap_text(split_space_text: PackedStringArray, font_width: int, container_width: float, required_autowrapped_text_optimization: bool) -> String:
 	var line_width: int = 0
 	var smart_autowrap_text: String = ""
 	
 	for word in split_space_text:
-		var previous_line_width: int = line_width
+		#var previous_line_width: int = line_width
 		
 		if "\n" in word:
 			var split_line_break_text: PackedStringArray = word.split("\n")
@@ -38,9 +49,11 @@ static func get_smart_autowrap_text(split_space_text: PackedStringArray, font_wi
 					line_width += sub_word_width
 				
 					if line_width > container_width:
+						"""
 						if previous_line_width + ((sub_word.replace(space, "")).length() * font_width) <= container_width:
 							smart_autowrap_text += sub_word.replace(space, "")
 							continue
+						"""
 						
 						smart_autowrap_text += "\n"
 						line_width = sub_word.length() * font_width
@@ -66,9 +79,12 @@ static func get_smart_autowrap_text(split_space_text: PackedStringArray, font_wi
 				line_width += word_width
 			
 				if line_width > container_width:
+					"""
 					if previous_line_width + ((word.replace(space, "")).length() * font_width) <= container_width:
+						print(word)
 						smart_autowrap_text += word.replace(space, "")
 						continue
+					"""
 					
 					smart_autowrap_text += "\n"
 					line_width = word.length() * font_width

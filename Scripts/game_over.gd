@@ -50,7 +50,7 @@ func _ready() -> void:
 	main.background_music_player.pitch_scale = 1.08
 	game_over_label.add_theme_font_override("font", Global.get_font(default_font))
 	
-	main.play_audio("res://Musics/mus_game_over.ogg")
+	main.play_audio("res://Musics/mus_game_over.ogg", true, main.AUDIO_LOAD_AS.BUILT_IN)
 	
 	on_queue = true
 	create_tween().tween_property(game_over_label, "self_modulate:a", 1, 1.5)

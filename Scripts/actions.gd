@@ -165,9 +165,9 @@ func generate_description(transition_time: float = 0.03) -> void:
 	description_list_container.add_child(description_container)
 	
 	if db.data.settings.language in [db.LANGUAGE.CHINESE, db.LANGUAGE.CLASSICAL_CHINESE, db.LANGUAGE.JAPANESE]:
-		font_width = 27
-	else:
 		font_width = description_manager.font_width
+	else:
+		font_width = 27
 	
 	global_coroutine_id += 1
 	

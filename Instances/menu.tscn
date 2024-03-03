@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3o70w1548x62"]
+[gd_scene load_steps=4 format=3 uid="uid://c3o70w1548x62"]
 
 [ext_resource type="FontFile" uid="uid://bmyqsxw0abb7v" path="res://Fonts/DTM-Mono.otf" id="1_34riu"]
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_jt5vx"]
+[ext_resource type="FontFile" uid="uid://c4gchfahghvw5" path="res://Fonts/fusion-pixel-12px-monospaced-zh_hans.otf" id="2_n44qf"]
 
 [node name="Menu" type="VBoxContainer" groups=["menu"]]
 offset_left = 24.0
@@ -20,7 +21,7 @@ alignment = 2
 [node name="Option1" type="RichTextLabel" parent="Row1"]
 custom_minimum_size = Vector2(264, 37)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("1_34riu")
+theme_override_fonts/normal_font = ExtResource("2_n44qf")
 theme_override_font_sizes/normal_font_size = 27
 autowrap_mode = 1
 

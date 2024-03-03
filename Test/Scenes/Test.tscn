@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://tgrgjofqhrvu"]
+[gd_scene load_steps=3 format=3 uid="uid://tgrgjofqhrvu"]
 
-[ext_resource type="Script" path="res://Test/Scripts/audio_loader.gd" id="1_ke7xk"]
+[ext_resource type="Script" path="res://Test/Scripts/test.gd" id="1_tfhma"]
+[ext_resource type="FontFile" uid="uid://c4gchfahghvw5" path="res://Fonts/fusion-pixel-12px-monospaced-zh_hans.otf" id="2_msci1"]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_ke7xk")
+script = ExtResource("1_tfhma")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 300.0
+offset_bottom = 448.0
+color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 1.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("2_msci1")
+theme_override_font_sizes/font_size = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_top = 128.0
+offset_right = 64.0
+offset_bottom = 192.0

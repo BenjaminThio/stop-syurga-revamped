@@ -112,6 +112,11 @@ func update_font():
 	
 	for label in [exit_label, language_title_label, language_label, master_label, bgm_label, sfx_label] as Array[Label]:
 		label.add_theme_font_override("font", font)
+	
+	for audio_category in audio_system.get_children():
+		var volume_label: Label = audio_category.get_node("Volume")
+		
+		volume_label.add_theme_font_override("font", font)
 
 func language_left():
 	if db.data.settings.language - 1 >= 0:
@@ -176,6 +181,7 @@ func update_language():
 		"音效"
 	][db.data.settings.language]
 	update_font()
+	PlayerData.items_reset()
 
 func delay_update_input_settings_language():
 	await get_tree().process_frame

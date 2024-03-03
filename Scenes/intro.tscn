@@ -44,12 +44,12 @@ layout_mode = 0
 offset_left = 256.0
 offset_top = 384.0
 offset_right = 904.0
-offset_bottom = 576.0
+offset_bottom = 648.0
 follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="LinesContainer" type="VBoxContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(640, 192)
+custom_minimum_size = Vector2(640, 264)
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("4_xxcof")

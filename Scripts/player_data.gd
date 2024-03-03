@@ -16,39 +16,46 @@ var gold: int = 0
 var items: Array[Item]
 var weapon: String
 var armor: String
+var thye_hot_dog_translation: String
+var syurga_fruit_translation: String
+var super_ring_translation: String
+var bing_chilling_translation: String
 
-@onready var thye_hot_dog_translation: String = [
-	"Thye's Hot Dog",
-	"泰式热狗",
-	"程泰之香腸",
-	"Anjing Panas Zen Thye",
-	"チョウタイのソーセージ"
-][db.data.settings.language]
-@onready var syurga_fruit_translation: String = [
-	"Syurga Fruit",
-	"天堂果实",
-	"天果",
-	"Buah Syurga",
-	"ヘブンフルーツ"
-][db.data.settings.language]
-@onready var super_ring_translation: String = [
-	"Super Ring",
-	"超级芝士圈",
-	"超凡芝士環",
-	"Super Ring",
-	"スーパーリングのチーズ味スナック菓子"
-][db.data.settings.language]
-@onready var bing_chilling_translation: String = [
-	"Bing Chilling",
-	"冰淇淋",
-	"冰酪",
-	"Bing Chilling",
-	"ビング・チリング"
-][db.data.settings.language]
+func _ready():
+	items_reset()
 
-func _ready(): items_reset()
+func update_language():
+	thye_hot_dog_translation = [
+		"Thye's Hot Dog",
+		"泰式热狗",
+		"程泰之香腸",
+		"Anjing Panas Zen Thye",
+		"チョウタイのソーセージ"
+	][db.data.settings.language]
+	syurga_fruit_translation = [
+		"Syurga Fruit",
+		"天堂果实",
+		"天果",
+		"Buah Syurga",
+		"ヘブンフルーツ"
+	][db.data.settings.language]
+	super_ring_translation = [
+		"Super Ring",
+		"超级芝士圈",
+		"超凡芝士環",
+		"Super Ring",
+		"スーパーリングのチーズ味スナック菓子"
+	][db.data.settings.language]
+	bing_chilling_translation = [
+		"Bing Chilling",
+		"冰淇淋",
+		"冰酪",
+		"Bing Chilling",
+		"ビング・チリング"
+	][db.data.settings.language]
 
 func items_reset():
+	update_language()
 	items = [
 		Item.new(thye_hot_dog_translation, 100),
 		Item.new(syurga_fruit_translation, 60),
